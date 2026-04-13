@@ -22,7 +22,6 @@ import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.Slog;
 
 
-@ScanClass(VpnCommonProxy.class)
 public class IConnectivityManagerProxy extends BinderInvocationStub {
     public static final String TAG = "IConnectivityManagerProxy";
 
@@ -148,7 +147,6 @@ public class IConnectivityManagerProxy extends BinderInvocationStub {
                 addCapabilityMethod.invoke(nc, android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED);
                 addCapabilityMethod.invoke(nc, android.net.NetworkCapabilities.NET_CAPABILITY_TRUSTED);
                 addCapabilityMethod.invoke(nc, android.net.NetworkCapabilities.NET_CAPABILITY_NOT_RESTRICTED);
-                addCapabilityMethod.invoke(nc, android.net.NetworkCapabilities.NET_CAPABILITY_NOT_VPN);
                 addCapabilityMethod.invoke(nc, android.net.NetworkCapabilities.NET_CAPABILITY_NOT_CONGESTED);
             } catch (Exception e) {
                 Slog.w(TAG, "Could not add capabilities: " + e.getMessage());
