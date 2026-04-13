@@ -19,3 +19,5 @@
 .cxx
 local.properties
 /app/release/
+*.jks
+*.base64
