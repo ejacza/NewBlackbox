@@ -16,7 +16,6 @@ import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.Slog;
 import top.niunaijun.blackbox.app.BActivityThread;
 
-
 public class GoogleAccountManagerProxy extends ClassInvocationStub {
     public static final String TAG = "GoogleAccountManagerProxy";
 
@@ -39,7 +38,7 @@ public class GoogleAccountManagerProxy extends ClassInvocationStub {
 
     @Override
     protected void inject(Object baseInvocation, Object proxyInvocation) {
-        
+
     }
 
     @Override
@@ -53,8 +52,7 @@ public class GoogleAccountManagerProxy extends ClassInvocationStub {
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
             try {
                 Slog.d(TAG, "GoogleAccountManager: Handling getAccounts call");
-                
-                
+
                 Object result = method.invoke(who, args);
                 if (result != null && result instanceof Account[]) {
                     Account[] accounts = (Account[]) result;
@@ -63,11 +61,10 @@ public class GoogleAccountManagerProxy extends ClassInvocationStub {
                         return result;
                     }
                 }
-                
-                
+
                 Slog.d(TAG, "GoogleAccountManager: No real accounts found, returning mock account");
                 return createMockGoogleAccounts();
-                
+
             } catch (Exception e) {
                 Slog.w(TAG, "GoogleAccountManager: GetAccounts error, returning mock accounts", e);
                 return createMockGoogleAccounts();
@@ -81,21 +78,19 @@ public class GoogleAccountManagerProxy extends ClassInvocationStub {
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
             try {
                 Slog.d(TAG, "GoogleAccountManager: Handling getAccountsByType call");
-                
+
                 if (args != null && args.length > 0) {
                     String accountType = (String) args[0];
                     Slog.d(TAG, "GoogleAccountManager: Requesting accounts of type: " + accountType);
-                    
-                    
+
                     if ("com.google".equals(accountType)) {
                         Slog.d(TAG, "GoogleAccountManager: Returning mock Google accounts");
                         return createMockGoogleAccounts();
                     }
                 }
-                
-                
+
                 return method.invoke(who, args);
-                
+
             } catch (Exception e) {
                 Slog.w(TAG, "GoogleAccountManager: GetAccountsByType error, returning mock accounts", e);
                 return createMockGoogleAccounts();
@@ -140,7 +135,7 @@ public class GoogleAccountManagerProxy extends ClassInvocationStub {
                 return method.invoke(who, args);
             } catch (Exception e) {
                 Slog.w(TAG, "GoogleAccountManager: AddAccount error, returning mock result", e);
-                
+
                 Bundle result = new Bundle();
                 result.putString("authAccount", "mock@gmail.com");
                 result.putString("accountType", "com.google");
@@ -158,7 +153,7 @@ public class GoogleAccountManagerProxy extends ClassInvocationStub {
                 return method.invoke(who, args);
             } catch (Exception e) {
                 Slog.w(TAG, "GoogleAccountManager: RemoveAccount error, returning true", e);
-                return true; 
+                return true;
             }
         }
     }
@@ -172,7 +167,7 @@ public class GoogleAccountManagerProxy extends ClassInvocationStub {
                 return method.invoke(who, args);
             } catch (Exception e) {
                 Slog.w(TAG, "GoogleAccountManager: HasFeatures error, returning true", e);
-                return true; 
+                return true;
             }
         }
     }
@@ -270,7 +265,7 @@ public class GoogleAccountManagerProxy extends ClassInvocationStub {
                 return method.invoke(who, args);
             } catch (Exception e) {
                 Slog.w(TAG, "GoogleAccountManager: IsAccountPresent error, returning true", e);
-                return true; 
+                return true;
             }
         }
     }
@@ -289,29 +284,25 @@ public class GoogleAccountManagerProxy extends ClassInvocationStub {
         }
     }
 
-    
     private static Account[] createMockGoogleAccounts() {
         try {
             List<Account> accounts = new ArrayList<>();
-            
-            
+
             Account primaryAccount = new Account("mock.user@gmail.com", "com.google");
             accounts.add(primaryAccount);
-            
-            
+
             Account secondaryAccount = new Account("virtual.user@gmail.com", "com.google");
             accounts.add(secondaryAccount);
-            
+
             Slog.d(TAG, "GoogleAccountManager: Created " + accounts.size() + " mock Google accounts");
             return accounts.toArray(new Account[0]);
-            
+
         } catch (Exception e) {
             Slog.e(TAG, "GoogleAccountManager: Failed to create mock accounts", e);
             return new Account[0];
         }
     }
 
-    
     private static boolean isGoogleApp() {
         try {
             Context context = BlackBoxCore.getContext();

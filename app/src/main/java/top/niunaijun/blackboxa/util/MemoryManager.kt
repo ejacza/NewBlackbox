@@ -3,15 +3,12 @@ package top.niunaijun.blackboxa.util
 import android.util.Log
 import java.lang.Runtime
 
-
-
 object MemoryManager {
 
     private const val TAG = "MemoryManager"
-    private const val MEMORY_THRESHOLD = 0.8 
-    private const val CRITICAL_MEMORY_THRESHOLD = 0.9 
+    private const val MEMORY_THRESHOLD = 0.8
+    private const val CRITICAL_MEMORY_THRESHOLD = 0.9
 
-    
     fun isMemorySafe(): Boolean {
         return try {
             val runtime = Runtime.getRuntime()
@@ -22,11 +19,10 @@ object MemoryManager {
             memoryUsage < MEMORY_THRESHOLD
         } catch (e: Exception) {
             Log.e(TAG, "Error checking memory: ${e.message}")
-            true 
+            true
         }
     }
 
-    
     fun isMemoryCritical(): Boolean {
         return try {
             val runtime = Runtime.getRuntime()
@@ -37,11 +33,10 @@ object MemoryManager {
             memoryUsage > CRITICAL_MEMORY_THRESHOLD
         } catch (e: Exception) {
             Log.e(TAG, "Error checking critical memory: ${e.message}")
-            false 
+            false
         }
     }
 
-    
     fun getMemoryUsagePercentage(): Int {
         return try {
             val runtime = Runtime.getRuntime()
@@ -56,7 +51,6 @@ object MemoryManager {
         }
     }
 
-    
     fun forceGarbageCollectionIfNeeded(): Boolean {
         return try {
             if (isMemoryCritical()) {
@@ -65,7 +59,7 @@ object MemoryManager {
                         "Memory usage critical (${getMemoryUsagePercentage()}%), forcing garbage collection"
                 )
                 System.gc()
-                Thread.sleep(100) 
+                Thread.sleep(100)
                 true
             } else {
                 false
@@ -76,7 +70,6 @@ object MemoryManager {
         }
     }
 
-    
     fun optimizeMemoryForRecyclerView() {
         try {
             val memoryUsage = getMemoryUsagePercentage()
@@ -84,10 +77,8 @@ object MemoryManager {
             if (memoryUsage > 70) {
                 Log.d(TAG, "Memory usage high (${memoryUsage}%), optimizing for RecyclerView")
 
-                
                 System.gc()
 
-                
                 try {
                     val runtime = Runtime.getRuntime()
                     runtime.gc()
@@ -100,18 +91,16 @@ object MemoryManager {
         }
     }
 
-    
     fun shouldSkipIconLoading(): Boolean {
         return try {
             val memoryUsage = getMemoryUsagePercentage()
-            memoryUsage > 75 
+            memoryUsage > 75
         } catch (e: Exception) {
             Log.e(TAG, "Error checking if should skip icon loading: ${e.message}")
             false
         }
     }
 
-    
     fun getMemoryInfo(): String {
         return try {
             val runtime = Runtime.getRuntime()

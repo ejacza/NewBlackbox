@@ -14,7 +14,6 @@ import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.Reflector;
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class IAudioServiceProxy extends BinderInvocationStub {
     public static final String TAG = "AudioServiceProxy";
 
@@ -29,24 +28,21 @@ public class IAudioServiceProxy extends BinderInvocationStub {
             Slog.e(TAG, "Failed to get AUDIO_SERVICE binder");
             return null;
         }
-        
+
         try {
-            
+
             Object iface = null;
-            
-            
+
             try {
                 iface = Reflector.on("android.media.IAudioService$Stub").call("asInterface", binder);
             } catch (Exception e1) {
                 Slog.d(TAG, "Failed Android 16+ path, trying alternative: " + e1.getMessage());
-                
-                
+
                 try {
                     iface = Reflector.on("android.media.IAudioService").call("asInterface", binder);
                 } catch (Exception e2) {
                     Slog.d(TAG, "Failed alternative path: " + e2.getMessage());
-                    
-                    
+
                     try {
                         Class<?> stubClass = Class.forName("android.media.IAudioService$Stub");
                         Method asInterfaceMethod = stubClass.getMethod("asInterface", IBinder.class);
@@ -57,7 +53,7 @@ public class IAudioServiceProxy extends BinderInvocationStub {
                     }
                 }
             }
-            
+
             if (iface != null) {
                 Slog.d(TAG, "Successfully obtained IAudioService interface");
                 return (IInterface) iface;
@@ -65,7 +61,7 @@ public class IAudioServiceProxy extends BinderInvocationStub {
                 Slog.e(TAG, "Reflection succeeded but returned null interface");
                 return null;
             }
-            
+
         } catch (Exception e) {
             Slog.e(TAG, "Failed to get IAudioService interface", e);
             return null;
@@ -82,7 +78,6 @@ public class IAudioServiceProxy extends BinderInvocationStub {
         return false;
     }
 
-    
     @ProxyMethod("isMicrophoneMuted")
     public static class IsMicrophoneMuted extends MethodHook {
         @Override
@@ -92,21 +87,19 @@ public class IAudioServiceProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("setMicrophoneMute")
     public static class SetMicrophoneMute extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
             Slog.d(TAG, "AudioService: setMicrophoneMute called, forcing unmute");
-            
+
             if (args != null && args.length > 0) {
-                args[0] = false; 
+                args[0] = false;
             }
             return method.invoke(who, args);
         }
     }
 
-    
     @ProxyMethod("startRecording")
     public static class StartRecording extends MethodHook {
         @Override
@@ -116,7 +109,6 @@ public class IAudioServiceProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("stopRecording")
     public static class StopRecording extends MethodHook {
         @Override
@@ -126,7 +118,6 @@ public class IAudioServiceProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("isRecordingActive")
     public static class IsRecordingActive extends MethodHook {
         @Override
@@ -136,7 +127,6 @@ public class IAudioServiceProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("getRecordingState")
     public static class GetRecordingState extends MethodHook {
         @Override
@@ -146,7 +136,6 @@ public class IAudioServiceProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("isMicrophoneMutedForUser")
     public static class IsMicrophoneMutedForUser extends MethodHook {
         @Override
@@ -156,21 +145,19 @@ public class IAudioServiceProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("setMicrophoneMuteForUser")
     public static class SetMicrophoneMuteForUser extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
             Slog.d(TAG, "AudioService: setMicrophoneMuteForUser called, forcing unmute");
-            
+
             if (args != null && args.length > 1) {
-                args[1] = false; 
+                args[1] = false;
             }
             return method.invoke(who, args);
         }
     }
 
-    
     @ProxyMethod("getRecordingStateForUser")
     public static class GetRecordingStateForUser extends MethodHook {
         @Override
@@ -180,7 +167,6 @@ public class IAudioServiceProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("requestAudioFocus")
     public static class RequestAudioFocus extends MethodHook {
         @Override
@@ -190,7 +176,6 @@ public class IAudioServiceProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("registerAudioFocusClient")
     public static class RegisterAudioFocusClient extends MethodHook {
         @Override
@@ -200,7 +185,6 @@ public class IAudioServiceProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("unregisterAudioFocusClient")
     public static class UnregisterAudioFocusClient extends MethodHook {
         @Override
@@ -210,7 +194,6 @@ public class IAudioServiceProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("abandonAudioFocus")
     public static class AbandonAudioFocus extends MethodHook {
         @Override

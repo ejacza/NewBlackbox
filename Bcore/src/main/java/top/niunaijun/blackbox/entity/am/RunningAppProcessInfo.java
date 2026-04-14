@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class RunningAppProcessInfo implements Parcelable {
     public List<ActivityManager.RunningAppProcessInfo> mAppProcessInfoList;
 

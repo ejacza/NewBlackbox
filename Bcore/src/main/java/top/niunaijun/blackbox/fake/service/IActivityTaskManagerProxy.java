@@ -14,7 +14,6 @@ import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.fake.hook.ScanClass;
 import top.niunaijun.blackbox.utils.compat.TaskDescriptionCompat;
 
-
 @ScanClass(ActivityManagerCommonProxy.class)
 public class IActivityTaskManagerProxy extends BinderInvocationStub {
     public static final String TAG = "ActivityTaskManager";
@@ -41,7 +40,6 @@ public class IActivityTaskManagerProxy extends BinderInvocationStub {
         return false;
     }
 
-    
     @ProxyMethod("setTaskDescription")
     public static class SetTaskDescription extends MethodHook {
         @Override

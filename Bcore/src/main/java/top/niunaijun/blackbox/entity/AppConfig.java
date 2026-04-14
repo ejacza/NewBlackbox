@@ -4,13 +4,12 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
-
 public class AppConfig implements Parcelable {
     public static final String KEY = "BlackBox_client_config";
 
     public String packageName;
     public String processName;
+    public String injectPath;
     public int bpid;
     public int buid;
     public int uid;
@@ -27,6 +26,7 @@ public class AppConfig implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.packageName);
         dest.writeString(this.processName);
+        dest.writeString(this.injectPath);
         dest.writeInt(this.bpid);
         dest.writeInt(this.buid);
         dest.writeInt(this.uid);
@@ -41,6 +41,7 @@ public class AppConfig implements Parcelable {
     protected AppConfig(Parcel in) {
         this.packageName = in.readString();
         this.processName = in.readString();
+        this.injectPath = in.readString();
         this.bpid = in.readInt();
         this.buid = in.readInt();
         this.uid = in.readInt();

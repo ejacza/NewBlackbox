@@ -14,7 +14,6 @@ import top.niunaijun.blackbox.fake.hook.BinderInvocationStub;
 import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 
-
 public class IWifiManagerProxy extends BinderInvocationStub {
     public static final String TAG = "IWifiManagerProxy";
 
@@ -39,7 +38,7 @@ public class IWifiManagerProxy extends BinderInvocationStub {
 
     @ProxyMethod("getConnectionInfo")
     public static class GetConnectionInfo extends MethodHook {
-        
+
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
             WifiInfo wifiInfo = (WifiInfo) method.invoke(who, args);
@@ -57,13 +56,13 @@ public class IWifiManagerProxy extends BinderInvocationStub {
         }
 
         public static int ip2Int(String ipString) {
-            
+
             String[] ipSlices = ipString.split("\\.");
             int rs = 0;
             for (int i = 0; i < ipSlices.length; i++) {
-                
+
                 int intSlice = Integer.parseInt(ipSlices[i]) << 8 * i;
-                
+
                 rs = rs | intSlice;
             }
             return rs;

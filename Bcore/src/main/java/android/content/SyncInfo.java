@@ -1,50 +1,38 @@
-
-
 package android.content;
 
 import android.accounts.Account;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
 public class SyncInfo implements Parcelable {
-    
+
     private static final Account REDACTED_ACCOUNT = new Account("*****", "*****");
 
-    
     public final int authorityId;
 
-    
     public final Account account;
 
-    
     public final String authority;
 
-    
     public final long startTime;
 
-    
     public static SyncInfo createAccountRedacted(
         int authorityId, String authority, long startTime) {
         throw new RuntimeException("Stub!");
     }
 
-    
     public SyncInfo(int authorityId, Account account, String authority, long startTime) {
         throw new RuntimeException("Stub!");
     }
 
-    
     public SyncInfo(SyncInfo other) {
         throw new RuntimeException("Stub!");
     }
 
-    
     public int describeContents() {
         return 0;
     }
 
-    
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeInt(authorityId);
         parcel.writeParcelable(account, flags);

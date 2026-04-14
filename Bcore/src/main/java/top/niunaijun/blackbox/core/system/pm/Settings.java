@@ -24,7 +24,6 @@ import top.niunaijun.blackbox.utils.FileUtils;
 import top.niunaijun.blackbox.utils.Slog;
 import top.niunaijun.blackbox.utils.compat.PackageParserCompat;
 
-
  class Settings {
     public static final String TAG = "Settings";
 
@@ -80,14 +79,11 @@ import top.niunaijun.blackbox.utils.compat.PackageParserCompat;
             Slog.d(TAG, p.pkg.packageName + " sharedUserId = " + sharedUserId + ", setAppId = " + p.appId);
         }
         if (p.appId == 0) {
-            
+
             p.appId = acquireAndRegisterNewAppIdLPw(p);
         }
         if (p.appId < 0) {
             createdNew = false;
-
-
-
 
         } else {
             createdNew = true;
@@ -98,7 +94,7 @@ import top.niunaijun.blackbox.utils.compat.PackageParserCompat;
     }
 
     private int acquireAndRegisterNewAppIdLPw(BPackageSettings obj) {
-        
+
         Integer integer = mAppIds.get(obj.pkg.packageName);
         if (integer != null)
             return integer;
@@ -141,10 +137,10 @@ import top.niunaijun.blackbox.utils.compat.PackageParserCompat;
         try {
             byte[] uidBytes = FileUtils.toByteArray(BEnvironment.getUidConf());
             if (uidBytes == null || uidBytes.length == 0) {
-                
+
                 return;
             }
-            
+
             parcel.unmarshall(uidBytes, 0, uidBytes.length);
             parcel.setDataPosition(0);
 
@@ -155,15 +151,14 @@ import top.niunaijun.blackbox.utils.compat.PackageParserCompat;
                 mAppIds.putAll(hashMap);
             }
         } catch (Exception e) {
-            
+
             try {
-                
+
                 BEnvironment.getUidConf().delete();
             } catch (Exception deleteException) {
-                
+
             }
-            
-            
+
             mCurrUid = 0;
             synchronized (mAppIds) {
                 mAppIds.clear();
@@ -209,7 +204,7 @@ import top.niunaijun.blackbox.utils.compat.PackageParserCompat;
                 PackageInfo packageInfo = BlackBoxCore.getPackageManager().getPackageInfo(packageName, PackageManager.GET_META_DATA);
                 String currPackageSourcePath = packageInfo.applicationInfo.sourceDir;
                 if (!currPackageSourcePath.equals(bPackageSettings.pkg.baseCodePath)) {
-                    
+
                     BProcessManagerService.get().killAllByPackageName(bPackageSettings.pkg.packageName);
                     BPackageSettings newPkg = reInstallBySystem(packageInfo, bPackageSettings.installOption);
                     bPackageSettings.pkg = newPkg.pkg;
@@ -222,7 +217,7 @@ import top.niunaijun.blackbox.utils.compat.PackageParserCompat;
             Slog.d(TAG, "loaded Package: " + packageName);
         } catch (Throwable e) {
             e.printStackTrace();
-            
+
             FileUtils.deleteDir(app);
             removePackage(packageName);
             BProcessManagerService.get().killAllByPackageName(packageName);

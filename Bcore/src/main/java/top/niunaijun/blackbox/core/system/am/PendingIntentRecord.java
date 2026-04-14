@@ -2,7 +2,6 @@ package top.niunaijun.blackbox.core.system.am;
 
 import java.util.Objects;
 
-
 public class PendingIntentRecord {
     public int uid;
     public String packageName;

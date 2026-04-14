@@ -10,16 +10,12 @@ HOOK_JNI(jobject, openDexFileNative, JNIEnv *env, jobject obj,jstring sourceName
     ALOGD("openDexFileNative: %s", sourceNameC);
     if(strstr(sourceNameC,"/blackbox/") != nullptr){
 
-
-
-
         DexFileHook::setFileReadonly(sourceNameC);
     }
     jobject orig = orig_openDexFileNative(env, obj,sourceName,outputName,flags,loader,elements);
     env->ReleaseStringUTFChars(sourceName, sourceNameC);
     return orig;
 }
-
 
 void DexFileHook::init(JNIEnv *env) {
     if (BoxCore::getApiLevel() >= __ANDROID_API_U__) {
@@ -32,14 +28,11 @@ void DexFileHook::init(JNIEnv *env) {
 void DexFileHook::setFileReadonly(const char* filePath) {
     struct stat fileStat;
 
-    
     if (stat(filePath, &fileStat) != 0) {
         ALOGD("DexFileHook::setFileReadonly: %s 不存在",filePath);
         return;
     }
 
-    
-    
     if (chmod(filePath, S_IRUSR) != 0) {
         ALOGD("DexFileHook::setFileReadonly: 设置文件 %s 为只读时出错",filePath);
     } else {

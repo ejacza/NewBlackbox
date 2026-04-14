@@ -5,7 +5,6 @@
 #include <dlfcn.h>
 #include <shadowhook.h>
 
-
 #define LOG_TAG "VirtualSpoof"
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
 
@@ -33,12 +32,10 @@ SpoofedProp spoofed_props[] = {
         {"ro.kernel.android.qemud", ""},
         {"ro.hardware.egl", "adreno"},
         {"ro.boot.qemu", "0"},
-    {nullptr, nullptr} 
+    {nullptr, nullptr}
 };
 
-
 static int (*orig_system_property_get)(const char *name, char *value) = nullptr;
-
 
 int my_system_property_get(const char *name, char *value) {
     for (int i = 0; spoofed_props[i].key != nullptr; ++i) {
@@ -70,7 +67,6 @@ void install_property_get_hook() {
     }
 
 }
-
 
 __attribute__((constructor)) void init_virtual_spoof()
 {

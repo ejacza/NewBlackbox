@@ -28,7 +28,6 @@ import top.niunaijun.blackbox.core.system.ISystemService;
 import top.niunaijun.blackbox.core.system.ProcessRecord;
 import top.niunaijun.blackbox.utils.compat.BuildCompat;
 
-
 public class BNotificationManagerService extends IBNotificationManagerService.Stub implements ISystemService {
     private final static BNotificationManagerService sService = new BNotificationManagerService();
     public static final String CHANNEL_BLACK = "@black-";
@@ -48,7 +47,6 @@ public class BNotificationManagerService extends IBNotificationManagerService.St
     public void systemReady() {
         mNotificationChannelManager = NotificationChannelManager.get();
     }
-
 
     private NotificationRecord getNotificationRecord(String packageName, int userId) {
         String key = packageName + "-" + userId;
@@ -175,12 +173,12 @@ public class BNotificationManagerService extends IBNotificationManagerService.St
 
         if (BuildCompat.isOreo()) {
             NotificationOContext notificationOContext = BRNotificationO.get(notification);
-            
+
             if (notificationOContext._check_mChannelId() != null) {
                 String blackChannelId = getBlackChannelId(notificationOContext.mChannelId(), userId);
                 notificationOContext._set_mChannelId(blackChannelId);
             }
-            
+
             if (notificationOContext._check_mGroupKey() != null) {
                 String blackGroupId = getBlackGroupId(notificationOContext.mGroupKey(), userId);
                 notificationOContext._set_mGroupKey(blackGroupId);

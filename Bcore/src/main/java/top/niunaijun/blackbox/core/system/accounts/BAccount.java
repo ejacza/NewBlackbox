@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-
 public class BAccount implements Parcelable {
     public Account account;
     public String password;

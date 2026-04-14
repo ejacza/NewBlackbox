@@ -1,6 +1,5 @@
 package top.niunaijun.blackbox.core.system.pm.installer;
 
-
 import java.io.File;
 import java.io.IOException;
 
@@ -9,7 +8,6 @@ import top.niunaijun.blackbox.core.system.pm.BPackageSettings;
 import top.niunaijun.blackbox.entity.pm.InstallOption;
 import top.niunaijun.blackbox.utils.FileUtils;
 import top.niunaijun.blackbox.utils.NativeUtils;
-
 
 public class CopyExecutor implements Executor {
 
@@ -24,7 +22,7 @@ public class CopyExecutor implements Executor {
             return -1;
         }
         if (option.isFlag(InstallOption.FLAG_STORAGE)) {
-            
+
             File origFile = new File(ps.pkg.baseCodePath);
             File newFile = BEnvironment.getBaseApkDir(ps.pkg.packageName);
             try {
@@ -37,14 +35,14 @@ public class CopyExecutor implements Executor {
                     FileUtils.copyFile(origFile, newFile);
                 }
                 newFile.setReadOnly();
-                
+
                 ps.pkg.baseCodePath = newFile.getAbsolutePath();
             } catch (IOException e) {
                 e.printStackTrace();
                 return -1;
             }
         } else if (option.isFlag(InstallOption.FLAG_SYSTEM)) {
-            
+
         }
         return 0;
     }

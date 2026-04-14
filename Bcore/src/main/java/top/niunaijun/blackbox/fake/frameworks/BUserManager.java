@@ -12,7 +12,6 @@ import top.niunaijun.blackbox.core.system.user.BUserInfo;
 import top.niunaijun.blackbox.core.system.user.IBUserManagerService;
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class BUserManager extends BlackManager<IBUserManagerService> {
     private static final String TAG = "BUserManager";
     private static final BUserManager sUserManager = new BUserManager();

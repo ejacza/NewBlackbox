@@ -15,7 +15,6 @@ import top.niunaijun.blackbox.BlackBoxCore;
 import top.niunaijun.blackbox.app.BActivityThread;
 import top.niunaijun.blackbox.proxy.record.ProxyBroadcastRecord;
 
-
 public class InnerReceiverDelegate extends IIntentReceiver.Stub {
     public static final String TAG = "InnerReceiverDelegate";
 

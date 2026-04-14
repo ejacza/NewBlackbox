@@ -16,7 +16,6 @@ import top.niunaijun.blackbox.fake.service.base.PkgMethodProxy;
 import top.niunaijun.blackbox.utils.MethodParameterUtils;
 import top.niunaijun.blackbox.utils.compat.ParceledListSliceCompat;
 
-
 public class IShortcutManagerProxy extends BinderInvocationStub {
 
     public IShortcutManagerProxy() {

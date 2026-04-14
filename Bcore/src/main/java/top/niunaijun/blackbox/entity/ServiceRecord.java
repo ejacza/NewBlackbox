@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-
 public class ServiceRecord {
     private Service mService;
     private Map<Intent.FilterComparison, BoundInfo> mBounds = new HashMap<>();

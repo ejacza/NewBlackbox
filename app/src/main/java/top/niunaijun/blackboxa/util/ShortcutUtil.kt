@@ -15,11 +15,8 @@ import top.niunaijun.blackboxa.bean.AppInfo
 import top.niunaijun.blackboxa.util.ContextUtil.openAppSystemSettings
 import top.niunaijun.blackboxa.view.main.ShortcutActivity
 
-
 object ShortcutUtil {
 
-
-    
     fun createShortcut(context: Context,userID: Int, info: AppInfo) {
 
         if (ShortcutManagerCompat.isRequestPinShortcutSupported(context)) {

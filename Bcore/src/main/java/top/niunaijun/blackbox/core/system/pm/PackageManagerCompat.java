@@ -33,7 +33,6 @@ import top.niunaijun.blackbox.utils.ArrayUtils;
 import top.niunaijun.blackbox.utils.FileUtils;
 import top.niunaijun.blackbox.utils.compat.BuildCompat;
 
-
 @SuppressLint({"SdCardPath", "NewApi"})
 public class PackageManagerCompat {
 
@@ -123,7 +122,7 @@ public class PackageManagerCompat {
                 final ServiceInfo[] res = new ServiceInfo[N];
                 for (int i = 0; i < N; i++) {
                     final BPackage.Service s = p.services.get(i);
-                    
+
                     ServiceInfo serviceInfo = generateServiceInfo(s, flags, state, userId);
                     if(serviceInfo == null) continue;
                     if ((flags & PackageManager.GET_META_DATA) != 0) {
@@ -181,10 +180,6 @@ public class PackageManagerCompat {
                 for (int i = 0; i < N; i++) {
                     final String perm = p.requestedPermissions.get(i);
                     pi.requestedPermissions[i] = perm;
-                    
-
-
-
 
                 }
             }
@@ -219,7 +214,7 @@ public class PackageManagerCompat {
         if (!checkUseInstalledOrHidden(flags, state, a.info.applicationInfo)) {
             return null;
         }
-        
+
         ActivityInfo ai = new ActivityInfo(a.info);
         ai.metaData = a.metaData;
         ai.processName = BPackageManagerService.fixProcessName(ai.packageName, ai.processName);
@@ -231,7 +226,7 @@ public class PackageManagerCompat {
         if (!checkUseInstalledOrHidden(flags, state, s.info.applicationInfo)) {
             return null;
         }
-        
+
         ServiceInfo si = new ServiceInfo(s.info);
         si.metaData = s.metaData;
         si.processName = BPackageManagerService.fixProcessName(si.packageName, si.processName);
@@ -243,7 +238,7 @@ public class PackageManagerCompat {
         if (!checkUseInstalledOrHidden(flags, state, p.info.applicationInfo)) {
             return null;
         }
-        
+
         ProviderInfo pi = new ProviderInfo(p.info);
         if (pi.authority == null)
             return null;
@@ -306,7 +301,6 @@ public class PackageManagerCompat {
         ai.sourceDir = sourceDir;
         ai.uid = p.mExtras.appId;
 
-
         if (BuildCompat.isL()) {
             BRApplicationInfoL.get(ai)._set_primaryCpuAbi(Build.CPU_ABI);
             BRApplicationInfoL.get(ai)._set_scanPublicSourceDir(BRApplicationInfoL.get(baseApplication).scanPublicSourceDir());
@@ -336,7 +330,7 @@ public class PackageManagerCompat {
                                                      ApplicationInfo appInfo) {
         if (AppSystemEnv.isBlackPackage(appInfo.packageName))
             return false;
-        
+
         if (!state.installed || state.hidden) {
             return false;
         }
@@ -356,10 +350,6 @@ public class PackageManagerCompat {
         } else {
             sharedLibraryFileList.add(APACHE_LEGACY_JAR);
         }
-
-
-
-
 
         info.sharedLibraryFiles = sharedLibraryFileList.toArray(new String[]{});
     }

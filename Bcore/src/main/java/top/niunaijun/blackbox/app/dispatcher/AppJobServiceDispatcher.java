@@ -11,7 +11,6 @@ import top.niunaijun.blackbox.BlackBoxCore;
 import top.niunaijun.blackbox.app.BActivityThread;
 import top.niunaijun.blackbox.entity.JobRecord;
 
-
 public class AppJobServiceDispatcher {
     private static final AppJobServiceDispatcher sServiceDispatcher = new AppJobServiceDispatcher();
     private final Map<Integer, JobRecord> mJobRecords = new HashMap<>();
@@ -53,10 +52,6 @@ public class AppJobServiceDispatcher {
     }
 
     public void onDestroy() {
-
-
-
-
 
     }
 

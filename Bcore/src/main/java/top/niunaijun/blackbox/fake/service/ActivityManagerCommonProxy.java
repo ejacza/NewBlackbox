@@ -24,7 +24,6 @@ import top.niunaijun.blackbox.utils.compat.StartActivityCompat;
 
 import static android.content.pm.PackageManager.GET_META_DATA;
 
-
 public class ActivityManagerCommonProxy {
     public static final String TAG = "CommonStub";
 
@@ -36,15 +35,13 @@ public class ActivityManagerCommonProxy {
             Intent intent = getIntent(args);
             Slog.d(TAG, "Hook in : " + intent);
             assert intent != null;
-            
-            
+
             if (intent.getParcelableExtra("_B_|_target_") != null) {
                 return method.invoke(who, args);
             }
             if (ComponentUtils.isRequestInstall(intent)) {
                 File file = FileProviderHandler.convertFile(BActivityThread.getApplication(), intent.getData());
-                
-                
+
                 if (file != null && file.exists()) {
                     try {
                         PackageInfo packageInfo = BlackBoxCore.getPackageManager().getPackageArchiveInfo(file.getAbsolutePath(), 0);
@@ -53,7 +50,7 @@ public class ActivityManagerCommonProxy {
                             String hostPackageName = BlackBoxCore.getHostPkg();
                             if (packageName.equals(hostPackageName)) {
                                 Slog.w(TAG, "Blocked attempt to install BlackBox app from within BlackBox: " + packageName);
-                                
+
                                 return 0;
                             }
                         }
@@ -61,7 +58,7 @@ public class ActivityManagerCommonProxy {
                         Slog.w(TAG, "Could not verify if this is BlackBox app: " + e.getMessage());
                     }
                 }
-                
+
                 if (BlackBoxCore.get().requestInstallPackage(file, BActivityThread.getUserId())) {
                     return 0;
                 }
@@ -95,7 +92,6 @@ public class ActivityManagerCommonProxy {
                     return method.invoke(who, args);
                 }
             }
-
 
             intent.setExtrasClassLoader(who.getClass().getClassLoader());
             intent.setComponent(new ComponentName(resolveInfo.activityInfo.packageName, resolveInfo.activityInfo.name));
@@ -138,7 +134,7 @@ public class ActivityManagerCommonProxy {
             String[] resolvedTypes = (String[]) args[index++];
             IBinder resultTo = (IBinder) args[index++];
             Bundle options = (Bundle) args[index];
-            
+
             if (!ComponentUtils.isSelf(intents)) {
                 return method.invoke(who, args);
             }

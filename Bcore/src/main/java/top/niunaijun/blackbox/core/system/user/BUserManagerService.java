@@ -20,7 +20,6 @@ import top.niunaijun.blackbox.core.system.pm.BPackageManagerService;
 import top.niunaijun.blackbox.utils.CloseUtils;
 import top.niunaijun.blackbox.utils.FileUtils;
 
-
 public class BUserManagerService extends IBUserManagerService.Stub implements ISystemService {
     private static BUserManagerService sService = new BUserManagerService();
     public final HashMap<Integer, BUserInfo> mUsers = new HashMap<>();

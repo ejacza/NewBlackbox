@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 #include <cstring>
 #include "VMClassLoaderHook.h"
 #import "JniHook/JniHook.h"

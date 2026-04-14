@@ -36,7 +36,6 @@ public class ArrayUtils {
 		return false;
 	}
 
-	
 	public static <T> int indexOf(T[] array, T value) {
 		if (array == null) return -1;
 		for (int i = 0; i < array.length; i++) {
@@ -79,7 +78,6 @@ public class ArrayUtils {
 		return -1;
 	}
 
-
 	public static int indexOfObject(Object[] array, Class<?> type, int sequence) {
 		if (array == null) {
 			return -1;
@@ -92,7 +90,6 @@ public class ArrayUtils {
 		}
 		return -1;
 	}
-
 
 	public static int indexOf(Object[] array, Class<?> type, int sequence) {
 		if (!isEmpty(array)) {
@@ -133,7 +130,6 @@ public class ArrayUtils {
 		}
 		return null;
 	}
-
 
 	public static void checkOffsetAndCount(int arrayLength, int offset, int count) throws ArrayIndexOutOfBoundsException {
 		if ((offset | count) < 0 || offset > arrayLength || arrayLength - offset < count) {

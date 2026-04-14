@@ -9,7 +9,6 @@ import java.util.List;
 import top.niunaijun.blackbox.BlackBoxCore;
 import top.niunaijun.blackbox.utils.compat.BuildCompat;
 
-
 public class AppSystemEnv {
     private static final List<String> sSystemPackages = new ArrayList<>();
     private static final List<String> sSuPackages = new ArrayList<>();
@@ -27,17 +26,12 @@ public class AppSystemEnv {
         sSystemPackages.add("com.android.talkback");
         sSystemPackages.add("com.miui.gallery");
 
-        
         sSystemPackages.add("com.google.android.inputmethod.latin");
-        
 
-        
         sSystemPackages.add("com.huawei.webview");
 
-        
         sSystemPackages.add("com.coloros.safecenter");
 
-        
         sSuPackages.add("com.noshufou.android.su");
         sSuPackages.add("com.noshufou.android.su.elite");
         sSuPackages.add("eu.chainfire.supersu");
@@ -45,11 +39,8 @@ public class AppSystemEnv {
         sSuPackages.add("com.thirdparty.superuser");
         sSuPackages.add("com.yellowes.su");
 
-
-
-        
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && Build.VERSION.SDK_INT < 29){
-            
+
         }else{
 
         }

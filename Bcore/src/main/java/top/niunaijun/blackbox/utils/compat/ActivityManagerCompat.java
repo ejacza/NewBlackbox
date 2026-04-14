@@ -12,50 +12,21 @@ import black.android.app.BRIActivityManagerL;
 import black.android.app.BRIActivityManagerN;
 
 public class ActivityManagerCompat {
-	
+
 	public static final int SERVICE_DONE_EXECUTING_ANON = 0;
-	
+
 	public static final int SERVICE_DONE_EXECUTING_START = 1;
-	
+
 	public static final int SERVICE_DONE_EXECUTING_STOP = 2;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
 	public static final int INTENT_SENDER_BROADCAST = 1;
 
-	
 	public static final int INTENT_SENDER_ACTIVITY = 2;
 
-	
 	public static final int INTENT_SENDER_ACTIVITY_RESULT = 3;
 
-	
 	public static final int INTENT_SENDER_SERVICE = 4;
 
-	
 	public static final int USER_OP_SUCCESS = 0;
 
 	public static final int START_FLAG_DEBUG = 1<<1;
@@ -73,13 +44,12 @@ public class ActivityManagerCompat {
 		return false;
 	}
 
-
     public static void setActivityOrientation(Activity activity, int orientation) {
         try {
             activity.setRequestedOrientation(orientation);
         } catch (Throwable e) {
             e.printStackTrace();
-            
+
             Activity parent =  BRActivity.get(activity).mParent();
             while (true) {
 				Activity tmp = BRActivity.get(parent).mParent();

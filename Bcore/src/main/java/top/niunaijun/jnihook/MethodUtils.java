@@ -1,7 +1,5 @@
 package top.niunaijun.jnihook;
 
-
-
 import androidx.annotation.Keep;
 
 import java.lang.reflect.Method;
@@ -9,17 +7,14 @@ import java.lang.reflect.Method;
 @Keep
 public class MethodUtils {
 
-    
     public static String getDeclaringClass(final Method method) {
         return method.getDeclaringClass().getName().replace(".", "/");
     }
 
-    
     public static String getMethodName(final Method method) {
         return method.getName();
     }
 
-    
     public static String getDesc(final Method method) {
         final StringBuffer buf = new StringBuffer();
         buf.append("(");

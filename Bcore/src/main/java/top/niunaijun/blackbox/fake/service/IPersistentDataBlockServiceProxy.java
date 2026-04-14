@@ -1,11 +1,9 @@
 package top.niunaijun.blackbox.fake.service;
 
-
 import black.android.os.BRServiceManager;
 import black.android.service.persistentdata.BRIPersistentDataBlockServiceStub;
 import top.niunaijun.blackbox.fake.hook.BinderInvocationStub;
 import top.niunaijun.blackbox.fake.service.base.ValueMethodProxy;
-
 
 public class IPersistentDataBlockServiceProxy extends BinderInvocationStub {
 

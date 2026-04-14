@@ -1,6 +1,5 @@
 package top.niunaijun.blackbox.core.system.pm;
 
-
 public interface PackageMonitor {
     void onPackageUninstalled(String packageName, boolean isRemove, int userId);
 

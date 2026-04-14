@@ -14,25 +14,19 @@ import java.util.List;
 
 import top.niunaijun.blackbox.utils.Slog;
 
-
-
 public class ComponentResolver {
     public static final String TAG = "ComponentResolver";
 
     private final Object mLock = new Object();
 
-    
     private final ActivityIntentResolver mActivities = new ActivityIntentResolver();
 
-    
     private final ProviderIntentResolver mProviders = new ProviderIntentResolver();
 
-    
     private final ActivityIntentResolver mReceivers = new ActivityIntentResolver();
 
-    
     private final ServiceIntentResolver mServices = new ServiceIntentResolver();
-    
+
     private final ArrayMap<String, BPackage.Provider> mProvidersByAuthority = new ArrayMap<>();
 
     public ComponentResolver() {
@@ -71,9 +65,7 @@ public class ComponentResolver {
             BPackage.Provider p = pkg.providers.get(i);
             mProviders.removeProvider(p);
             if (p.info.authority == null) {
-                
-                
-                
+
                 continue;
             }
             String[] names = p.info.authority.split(";");
@@ -166,29 +158,24 @@ public class ComponentResolver {
         }
     }
 
-
-    
     BPackage.Activity getActivity(ComponentName component) {
         synchronized (mLock) {
             return mActivities.mActivities.get(component);
         }
     }
 
-    
     BPackage.Provider getProvider(ComponentName component) {
         synchronized (mLock) {
             return mProviders.mProviders.get(component);
         }
     }
 
-    
     BPackage.Activity getReceiver(ComponentName component) {
         synchronized (mLock) {
             return mReceivers.mActivities.get(component);
         }
     }
 
-    
     BPackage.Service getService(ComponentName component) {
         synchronized (mLock) {
             return mServices.mServices.get(component);
@@ -238,7 +225,7 @@ public class ComponentResolver {
                 if (processName != null && (!p.info.processName.equals(processName))) {
                     continue;
                 }
-                
+
                 if (metaDataKey != null
                         && (p.metaData == null || !p.metaData.containsKey(metaDataKey))) {
                     continue;
@@ -247,8 +234,6 @@ public class ComponentResolver {
                 if (info == null) {
                     continue;
                 }
-
-
 
                 providerList.add(info);
             }
@@ -292,7 +277,6 @@ public class ComponentResolver {
             return mServices.queryIntentForPackage(intent, resolvedType, flags, services, userId);
         }
     }
-
 
     private static final class ServiceIntentResolver extends IntentResolver<BPackage.ServiceIntentInfo, ResolveInfo> {
 
@@ -390,11 +374,9 @@ public class ComponentResolver {
             return res;
         }
 
-        
         private final ArrayMap<ComponentName, BPackage.Service> mServices = new ArrayMap<>();
         private int mFlags;
     }
-
 
     private static final class ActivityIntentResolver extends IntentResolver<BPackage.ActivityIntentInfo, ResolveInfo> {
 
@@ -486,8 +468,7 @@ public class ComponentResolver {
             }
             res.priority = info.intentFilter.getPriority();
             res.preferredOrder = activity.owner.mPreferredOrder;
-            
-            
+
             res.match = match;
             res.isDefault = info.hasDefault;
             res.labelRes = info.labelRes;
@@ -496,7 +477,6 @@ public class ComponentResolver {
             return res;
         }
 
-        
         private final ArrayMap<ComponentName, BPackage.Activity> mActivities =
                 new ArrayMap<>();
         private int mFlags;

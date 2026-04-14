@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class InstallResult implements Parcelable {
     public static final String TAG = "InstallResult";
 

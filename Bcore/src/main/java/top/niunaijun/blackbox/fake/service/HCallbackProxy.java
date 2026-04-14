@@ -36,8 +36,6 @@ import top.niunaijun.blackbox.proxy.record.ProxyActivityRecord;
 import top.niunaijun.blackbox.utils.Slog;
 import top.niunaijun.blackbox.utils.compat.BuildCompat;
 
-
-
 public class HCallbackProxy implements IInjectHook, Handler.Callback {
     public static final String TAG = "HCallbackStub";
     private Handler.Callback mOtherCallback;
@@ -119,10 +117,10 @@ public class HCallbackProxy implements IInjectHook, Handler.Callback {
     private boolean handleLaunchActivity(Object client) {
         Object r;
         if (BuildCompat.isPie()) {
-            
+
             r = getLaunchActivityItem(client);
         } else {
-            
+
             r = client;
         }
         if (r == null)
@@ -162,7 +160,7 @@ public class HCallbackProxy implements IInjectHook, Handler.Callback {
                 }
                 return true;
             }
-            
+
             if (!BActivityThread.currentActivityThread().isInit()) {
                 BActivityThread.currentActivityThread().bindApplication(activityInfo.packageName,
                         activityInfo.processName);

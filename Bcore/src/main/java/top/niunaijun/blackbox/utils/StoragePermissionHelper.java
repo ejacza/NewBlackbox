@@ -13,54 +13,49 @@ import android.provider.Settings;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-
 public class StoragePermissionHelper {
-    
+
     private static final String TAG = "StoragePermissionHelper";
-    
+
     public static final int REQUEST_CODE_STORAGE_PERMISSION = 1001;
     public static final int REQUEST_CODE_MANAGE_STORAGE = 1002;
-    
-    
+
     public static boolean hasAllFilesAccess() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             return Environment.isExternalStorageManager();
         } else {
-            
+
             return true;
         }
     }
-    
-    
+
     public static boolean hasStoragePermission(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            
-            return ContextCompat.checkSelfPermission(context, 
+
+            return ContextCompat.checkSelfPermission(context,
                     Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED ||
-                   ContextCompat.checkSelfPermission(context, 
+                   ContextCompat.checkSelfPermission(context,
                     Manifest.permission.READ_MEDIA_VIDEO) == PackageManager.PERMISSION_GRANTED ||
-                   ContextCompat.checkSelfPermission(context, 
+                   ContextCompat.checkSelfPermission(context,
                     Manifest.permission.READ_MEDIA_AUDIO) == PackageManager.PERMISSION_GRANTED;
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            
+
             return Environment.isExternalStorageManager() ||
-                   ContextCompat.checkSelfPermission(context, 
+                   ContextCompat.checkSelfPermission(context,
                     Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
         } else {
-            
-            return ContextCompat.checkSelfPermission(context, 
+
+            return ContextCompat.checkSelfPermission(context,
                     Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
-                   ContextCompat.checkSelfPermission(context, 
+                   ContextCompat.checkSelfPermission(context,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
         }
     }
-    
-    
+
     public static boolean hasFullFileAccess(Context context) {
         return hasAllFilesAccess() && hasStoragePermission(context);
     }
-    
-    
+
     public static void requestAllFilesAccess(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (!Environment.isExternalStorageManager()) {
@@ -69,15 +64,14 @@ public class StoragePermissionHelper {
                     intent.setData(Uri.parse("package:" + activity.getPackageName()));
                     activity.startActivityForResult(intent, REQUEST_CODE_MANAGE_STORAGE);
                 } catch (Exception e) {
-                    
+
                     Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
                     activity.startActivityForResult(intent, REQUEST_CODE_MANAGE_STORAGE);
                 }
             }
         }
     }
-    
-    
+
     public static void requestAllFilesAccessForPackage(Activity activity, String packageName) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             try {
@@ -85,17 +79,16 @@ public class StoragePermissionHelper {
                 intent.setData(Uri.parse("package:" + packageName));
                 activity.startActivityForResult(intent, REQUEST_CODE_MANAGE_STORAGE);
             } catch (Exception e) {
-                
+
                 Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
                 activity.startActivityForResult(intent, REQUEST_CODE_MANAGE_STORAGE);
             }
         }
     }
-    
-    
+
     public static void requestStoragePermission(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            
+
             ActivityCompat.requestPermissions(activity,
                     new String[]{
                             Manifest.permission.READ_MEDIA_IMAGES,
@@ -104,7 +97,7 @@ public class StoragePermissionHelper {
                     },
                     REQUEST_CODE_STORAGE_PERMISSION);
         } else {
-            
+
             ActivityCompat.requestPermissions(activity,
                     new String[]{
                             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -113,32 +106,28 @@ public class StoragePermissionHelper {
                     REQUEST_CODE_STORAGE_PERMISSION);
         }
     }
-    
-    
+
     public static void requestFullFileAccess(Activity activity) {
-        
+
         if (!hasStoragePermission(activity)) {
             requestStoragePermission(activity);
         }
-        
-        
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
             requestAllFilesAccess(activity);
         }
     }
-    
-    
+
     public static boolean shouldShowStorageRationale(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            return ActivityCompat.shouldShowRequestPermissionRationale(activity, 
+            return ActivityCompat.shouldShowRequestPermissionRationale(activity,
                     Manifest.permission.READ_MEDIA_IMAGES);
         } else {
-            return ActivityCompat.shouldShowRequestPermissionRationale(activity, 
+            return ActivityCompat.shouldShowRequestPermissionRationale(activity,
                     Manifest.permission.READ_EXTERNAL_STORAGE);
         }
     }
-    
-    
+
     public static String getPermissionRationale() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             return "This app needs access to all files to properly manage sandboxed applications. " +
@@ -148,12 +137,11 @@ public class StoragePermissionHelper {
                    "Please grant storage permission.";
         }
     }
-    
-    
-    public static boolean handlePermissionResult(Activity activity, int requestCode, 
+
+    public static boolean handlePermissionResult(Activity activity, int requestCode,
             String[] permissions, int[] grantResults) {
         if (requestCode == REQUEST_CODE_STORAGE_PERMISSION) {
-            
+
             for (int result : grantResults) {
                 if (result == PackageManager.PERMISSION_GRANTED) {
                     Slog.d(TAG, "Storage permission granted");
@@ -165,8 +153,7 @@ public class StoragePermissionHelper {
         }
         return false;
     }
-    
-    
+
     public static boolean handleAllFilesAccessResult(int requestCode) {
         if (requestCode == REQUEST_CODE_MANAGE_STORAGE) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

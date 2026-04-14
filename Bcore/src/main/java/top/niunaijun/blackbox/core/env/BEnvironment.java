@@ -7,7 +7,6 @@ import top.niunaijun.blackbox.BlackBoxCore;
 import top.niunaijun.blackbox.app.BActivityThread;
 import top.niunaijun.blackbox.utils.FileUtils;
 
-
 public class BEnvironment {
     private static final File sVirtualRoot = new File(BlackBoxCore.getContext().getCacheDir().getParent(), "blackbox");
     private static final File sExternalVirtualRoot = BlackBoxCore.getContext().getExternalFilesDir("blackbox");
@@ -83,7 +82,6 @@ public class BEnvironment {
         return new File(getExternalUserDir(userId), String.format(Locale.CHINA, "Android/obb/%s", packageName));
     }
 
-
     public static File getDeDataDir(String packageName, int userId) {
         return new File(sVirtualRoot, String.format(Locale.CHINA, "data/user_de/%d/%s", userId, packageName));
     }
@@ -91,7 +89,6 @@ public class BEnvironment {
     public static File getExternalDataDir(String packageName, int userId) {
         return new File(getExternalUserDir(userId), String.format(Locale.CHINA, "Android/data/%s", packageName));
     }
-
 
     public static File getDataDir(String packageName, int userId) {
         return new File(sVirtualRoot, String.format(Locale.CHINA, "data/user/%d/%s", userId, packageName));

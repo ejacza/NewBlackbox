@@ -7,29 +7,26 @@ import java.lang.reflect.Method;
 
 import black.android.os.BRServiceManager;
 
-
 public class StubHelper {
     private static final String TAG = "StubHelper";
 
-    
     public static Object getServiceInterface(String serviceName, String stubClassName, String realStubClassName) {
         try {
-            
+
             Class<?> stubClass = Class.forName(stubClassName);
             Method getMethod = stubClass.getMethod("get");
             Object stub = getMethod.invoke(null);
-            
-            
+
             Method asInterfaceMethod = null;
             try {
-                
+
                 asInterfaceMethod = stubClass.getMethod("asInterface", IBinder.class);
             } catch (NoSuchMethodException e1) {
                 try {
-                    
+
                     asInterfaceMethod = stubClass.getMethod("asInterface", Object.class);
                 } catch (NoSuchMethodException e2) {
-                    
+
                     Method[] methods = stubClass.getMethods();
                     for (Method method : methods) {
                         if (method.getName().equals("asInterface") && method.getParameterCount() == 1) {
@@ -39,7 +36,7 @@ public class StubHelper {
                     }
                 }
             }
-            
+
             if (asInterfaceMethod != null) {
                 IBinder binder = BRServiceManager.get().getService(serviceName);
                 return asInterfaceMethod.invoke(stub, binder);
@@ -49,8 +46,7 @@ public class StubHelper {
         } catch (Exception e) {
             Log.w(TAG, "Failed to use generated stub class: " + stubClassName, e);
         }
-        
-        
+
         try {
             IBinder binder = BRServiceManager.get().getService(serviceName);
             Class<?> stubClass = Class.forName(realStubClassName);
@@ -62,25 +58,23 @@ public class StubHelper {
         }
     }
 
-    
     public static Object getServiceInterface(String serviceName, String stubClassName, String realStubClassName, IBinder binder) {
         try {
-            
+
             Class<?> stubClass = Class.forName(stubClassName);
             Method getMethod = stubClass.getMethod("get");
             Object stub = getMethod.invoke(null);
-            
-            
+
             Method asInterfaceMethod = null;
             try {
-                
+
                 asInterfaceMethod = stubClass.getMethod("asInterface", IBinder.class);
             } catch (NoSuchMethodException e1) {
                 try {
-                    
+
                     asInterfaceMethod = stubClass.getMethod("asInterface", Object.class);
                 } catch (NoSuchMethodException e2) {
-                    
+
                     Method[] methods = stubClass.getMethods();
                     for (Method method : methods) {
                         if (method.getName().equals("asInterface") && method.getParameterCount() == 1) {
@@ -90,7 +84,7 @@ public class StubHelper {
                     }
                 }
             }
-            
+
             if (asInterfaceMethod != null) {
                 IBinder serviceBinder = binder != null ? binder : BRServiceManager.get().getService(serviceName);
                 return asInterfaceMethod.invoke(stub, serviceBinder);
@@ -100,8 +94,7 @@ public class StubHelper {
         } catch (Exception e) {
             Log.w(TAG, "Failed to use generated stub class: " + stubClassName, e);
         }
-        
-        
+
         try {
             IBinder serviceBinder = binder != null ? binder : BRServiceManager.get().getService(serviceName);
             Class<?> stubClass = Class.forName(realStubClassName);

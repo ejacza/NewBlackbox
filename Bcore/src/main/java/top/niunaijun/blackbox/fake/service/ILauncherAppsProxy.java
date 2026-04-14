@@ -9,7 +9,6 @@ import black.android.os.BRServiceManager;
 import top.niunaijun.blackbox.fake.hook.BinderInvocationStub;
 import top.niunaijun.blackbox.utils.MethodParameterUtils;
 
-
 public class ILauncherAppsProxy extends BinderInvocationStub {
 
     public ILauncherAppsProxy() {
@@ -39,7 +38,7 @@ public class ILauncherAppsProxy extends BinderInvocationStub {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         MethodParameterUtils.replaceFirstAppPkg(args);
-        
+
         return super.invoke(proxy, method, args);
     }
 

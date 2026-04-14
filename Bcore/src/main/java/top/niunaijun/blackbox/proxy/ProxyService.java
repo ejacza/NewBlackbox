@@ -12,7 +12,6 @@ import top.niunaijun.blackbox.BlackBoxCore;
 import top.niunaijun.blackbox.app.dispatcher.AppServiceDispatcher;
 import top.niunaijun.blackbox.utils.compat.BuildCompat;
 
-
 public class ProxyService extends Service {
     public static final String TAG = "StubService";
 

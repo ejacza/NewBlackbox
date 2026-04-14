@@ -1,7 +1,3 @@
-
-
-
-
 #include <jni.h>
 #include <stdio.h>
 #include "HexDump.h"

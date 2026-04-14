@@ -1,4 +1,3 @@
-
 #ifndef BLACKBOX2_HIDDEN_API_H
 #define BLACKBOX2_HIDDEN_API_H
 
@@ -7,4 +6,4 @@
 bool disable_hidden_api(JNIEnv*);
 bool disable_resource_loading();
 
-#endif 
+#endif

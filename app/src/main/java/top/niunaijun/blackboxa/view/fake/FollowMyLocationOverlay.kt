@@ -1,6 +1,5 @@
 package top.niunaijun.blackboxa.view.fake
 
-
 import android.app.Activity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
@@ -18,8 +17,6 @@ import top.niunaijun.blackboxa.databinding.ActivityOsmdroidBinding
 import top.niunaijun.blackboxa.util.inflate
 import top.niunaijun.blackboxa.util.toast
 
-
-
 class FollowMyLocationOverlay : AppCompatActivity() {
     val TAG: String = "FollowMyLocationOverlay"
 
@@ -32,19 +29,8 @@ class FollowMyLocationOverlay : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        
-
-        
-        
         Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this))
-        
-        
-        
-        
-        
-        
 
-        
         setContentView(binding.root)
 
         val location: BLocation? = intent.getParcelableExtra("location")
@@ -54,7 +40,6 @@ class FollowMyLocationOverlay : AppCompatActivity() {
         } else {
             GeoPoint(location.latitude, location.longitude)
         }
-
 
         val startMarker = Marker(binding.map)
         startMarker.position = startPoint
@@ -89,20 +74,14 @@ class FollowMyLocationOverlay : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        
-        
-        
-        
-        binding.map.onResume() 
+
+        binding.map.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        
-        
-        
-        
-        binding.map.onPause()  
+
+        binding.map.onPause()
     }
 
     override fun onRequestPermissionsResult(

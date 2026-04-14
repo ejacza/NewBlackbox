@@ -54,6 +54,12 @@ public class ProcessRecord extends Binder {
         config.callingBUid = callingBUid;
         config.userId = userId;
         config.token = this;
+
+        top.niunaijun.blackbox.core.system.pm.BPackageSettings ps = top.niunaijun.blackbox.BlackBoxCore.getBPackageManager().getPackageSetting(info.packageName);
+        if (ps != null) {
+            top.niunaijun.blackbox.core.system.pm.BPackageUserState state = ps.readUserState(userId);
+            config.injectPath = state.injectPath;
+        }
         return config;
     }
 

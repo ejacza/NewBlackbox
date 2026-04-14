@@ -8,7 +8,6 @@ import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class FileSystemProxy extends ClassInvocationStub {
     public static final String TAG = "FileSystemProxy";
 
@@ -18,12 +17,12 @@ public class FileSystemProxy extends ClassInvocationStub {
 
     @Override
     protected Object getWho() {
-        return null; 
+        return null;
     }
 
     @Override
     protected void inject(Object baseInvocation, Object proxyInvocation) {
-        
+
     }
 
     @Override
@@ -31,7 +30,6 @@ public class FileSystemProxy extends ClassInvocationStub {
         return false;
     }
 
-    
     @ProxyMethod("mkdirs")
     public static class Mkdirs extends MethodHook {
         @Override
@@ -39,22 +37,20 @@ public class FileSystemProxy extends ClassInvocationStub {
             try {
                 File file = (File) who;
                 String path = file.getAbsolutePath();
-                
-                
+
                 if (path.contains("Helium Crashpad") || path.contains("HeliumCrashReporter")) {
                     Slog.d(TAG, "FileSystem: mkdirs called for Helium crash path: " + path + ", returning true");
-                    return true; 
+                    return true;
                 }
-                
+
                 return method.invoke(who, args);
             } catch (Exception e) {
                 Slog.w(TAG, "FileSystem: mkdirs failed, returning true", e);
-                return true; 
+                return true;
             }
         }
     }
 
-    
     @ProxyMethod("mkdir")
     public static class Mkdir extends MethodHook {
         @Override
@@ -62,22 +58,20 @@ public class FileSystemProxy extends ClassInvocationStub {
             try {
                 File file = (File) who;
                 String path = file.getAbsolutePath();
-                
-                
+
                 if (path.contains("Helium Crashpad") || path.contains("HeliumCrashReporter")) {
                     Slog.d(TAG, "FileSystem: mkdir called for Helium crash path: " + path + ", returning true");
-                    return true; 
+                    return true;
                 }
-                
+
                 return method.invoke(who, args);
             } catch (Exception e) {
                 Slog.w(TAG, "FileSystem: mkdir failed, returning true", e);
-                return true; 
+                return true;
             }
         }
     }
 
-    
     @ProxyMethod("isDirectory")
     public static class IsDirectory extends MethodHook {
         @Override
@@ -85,17 +79,16 @@ public class FileSystemProxy extends ClassInvocationStub {
             try {
                 File file = (File) who;
                 String path = file.getAbsolutePath();
-                
-                
+
                 if (path.contains("Helium Crashpad") || path.contains("HeliumCrashReporter")) {
                     Slog.d(TAG, "FileSystem: isDirectory called for Helium crash path: " + path + ", returning true");
-                    return true; 
+                    return true;
                 }
-                
+
                 return method.invoke(who, args);
             } catch (Exception e) {
                 Slog.w(TAG, "FileSystem: isDirectory failed, returning false", e);
-                return false; 
+                return false;
             }
         }
     }

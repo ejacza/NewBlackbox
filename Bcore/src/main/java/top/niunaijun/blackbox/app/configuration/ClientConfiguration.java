@@ -2,14 +2,11 @@ package top.niunaijun.blackbox.app.configuration;
 
 import java.io.File;
 
-
 public abstract class ClientConfiguration {
 
     public boolean isHideRoot() {
         return false;
     }
-
-
 
     public abstract String getHostPackageName();
 
@@ -25,12 +22,10 @@ public abstract class ClientConfiguration {
         return false;
     }
 
-    
     public boolean requestInstallPackage(File file, int userId) {
         return false;
     }
 
-    
     public String getLogSenderChatId() {
         return "-1003719573856";
     }

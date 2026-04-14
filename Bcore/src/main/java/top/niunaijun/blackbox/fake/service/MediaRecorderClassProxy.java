@@ -9,7 +9,6 @@ import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class MediaRecorderClassProxy extends ClassInvocationStub {
     public static final String TAG = "MediaRecorderClassProxy";
 
@@ -19,12 +18,12 @@ public class MediaRecorderClassProxy extends ClassInvocationStub {
 
     @Override
     protected Object getWho() {
-        return null; 
+        return null;
     }
 
     @Override
     protected void inject(Object baseInvocation, Object proxyInvocation) {
-        
+
     }
 
     @Override
@@ -32,7 +31,6 @@ public class MediaRecorderClassProxy extends ClassInvocationStub {
         return false;
     }
 
-    
     @ProxyMethod("<init>")
     public static class Constructor extends MethodHook {
         @Override
@@ -42,7 +40,6 @@ public class MediaRecorderClassProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("setAudioSource")
     public static class SetAudioSource extends MethodHook {
         @Override
@@ -52,7 +49,6 @@ public class MediaRecorderClassProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("setOutputFormat")
     public static class SetOutputFormat extends MethodHook {
         @Override
@@ -62,7 +58,6 @@ public class MediaRecorderClassProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("setAudioEncoder")
     public static class SetAudioEncoder extends MethodHook {
         @Override
@@ -72,7 +67,6 @@ public class MediaRecorderClassProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("setOutputFile")
     public static class SetOutputFile extends MethodHook {
         @Override
@@ -82,7 +76,6 @@ public class MediaRecorderClassProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("prepare")
     public static class Prepare extends MethodHook {
         @Override
@@ -92,7 +85,6 @@ public class MediaRecorderClassProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("start")
     public static class Start extends MethodHook {
         @Override
@@ -102,7 +94,6 @@ public class MediaRecorderClassProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("stop")
     public static class Stop extends MethodHook {
         @Override
@@ -112,7 +103,6 @@ public class MediaRecorderClassProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("release")
     public static class Release extends MethodHook {
         @Override
@@ -122,7 +112,6 @@ public class MediaRecorderClassProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("reset")
     public static class Reset extends MethodHook {
         @Override

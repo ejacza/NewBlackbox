@@ -9,7 +9,6 @@ import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.MethodParameterUtils;
 
-
 public class ITelephonyRegistryProxy extends BinderInvocationStub {
     public ITelephonyRegistryProxy() {
         super(BRServiceManager.get().getService("telephony.registry"));

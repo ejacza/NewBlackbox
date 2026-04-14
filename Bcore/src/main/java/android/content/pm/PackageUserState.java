@@ -2,13 +2,12 @@ package android.content.pm;
 
 import android.util.ArraySet;
 
-
 public class PackageUserState {
 
     public boolean stopped;
     public boolean notLaunched;
     public boolean installed;
-    public boolean hidden; 
+    public boolean hidden;
     public int enabled;
     public boolean blockUninstall;
 

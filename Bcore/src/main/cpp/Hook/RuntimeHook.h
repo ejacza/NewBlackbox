@@ -1,10 +1,5 @@
-
-
-
-
 #ifndef BLACKBOX_RUNTIMEHOOK_H
 #define BLACKBOX_RUNTIMEHOOK_H
-
 
 #include "BaseHook.h"
 #include <jni.h>
@@ -14,5 +9,4 @@ public:
     static void init(JNIEnv *env);
 };
 
-
-#endif 
+#endif

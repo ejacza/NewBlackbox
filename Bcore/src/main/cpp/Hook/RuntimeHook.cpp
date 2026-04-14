@@ -1,7 +1,3 @@
-
-
-
-
 #include "RuntimeHook.h"
 #import "JniHook/JniHook.h"
 #include "BoxCore.h"

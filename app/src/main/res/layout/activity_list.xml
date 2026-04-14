@@ -28,7 +28,6 @@
 
     </FrameLayout>
 
-
     <com.github.nukc.stateview.StateView
             android:id="@+id/stateView"
             android:layout_width="match_parent"
@@ -39,6 +38,5 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
 
 </LinearLayout>

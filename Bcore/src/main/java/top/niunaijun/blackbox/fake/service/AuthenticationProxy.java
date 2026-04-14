@@ -7,7 +7,6 @@ import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class AuthenticationProxy extends ClassInvocationStub {
     public static final String TAG = "AuthenticationProxy";
 
@@ -169,7 +168,6 @@ public class AuthenticationProxy extends ClassInvocationStub {
         }
     }
 
-    
     private static Object createMockSignInResult() {
         try {
             Class<?> bundleClass = Class.forName("android.os.Bundle");
@@ -192,7 +190,7 @@ public class AuthenticationProxy extends ClassInvocationStub {
 
     private static Object createMockUser() {
         try {
-            
+
             Class<?> userClass = Class.forName("android.os.Bundle");
             return userClass.newInstance();
         } catch (Exception e) {

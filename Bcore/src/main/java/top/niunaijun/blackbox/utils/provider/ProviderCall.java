@@ -10,7 +10,6 @@ import java.io.Serializable;
 import top.niunaijun.blackbox.BlackBoxCore;
 import top.niunaijun.blackbox.utils.compat.ContentProviderCompat;
 
-
 public class ProviderCall {
     public static Bundle callSafely(String authority, String methodName, String arg, Bundle bundle) {
         try {

@@ -11,7 +11,6 @@ import androidx.annotation.RequiresApi;
 
 import top.niunaijun.blackbox.BlackBoxCore;
 
-
 public class NotificationChannelManager {
     private final static NotificationChannelManager sManager = new NotificationChannelManager();
 

@@ -8,7 +8,6 @@ import top.niunaijun.blackbox.entity.location.BLocation
 import top.niunaijun.blackbox.fake.frameworks.BLocationManager
 import top.niunaijun.blackboxa.bean.FakeLocationBean
 
-
 class FakeLocationRepository {
     val TAG: String = "FakeLocationRepository"
 
@@ -35,15 +34,8 @@ class FakeLocationRepository {
         val installedList = mutableListOf<FakeLocationBean>()
         val installedApplications: List<ApplicationInfo> =
             BlackBoxCore.get().getInstalledApplications(0, userID)
-        
+
         for (installedApplication in installedApplications) {
-
-
-
-
-
-
-
 
             val info = FakeLocationBean(
                 userID,

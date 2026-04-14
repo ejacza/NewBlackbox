@@ -21,14 +21,7 @@ public class TaskDescriptionCompat {
             return td;
 
         label = getTaskDescriptionLabel(BlackBoxCore.getUserId(), getApplicationLabel());
-        
-        
-        
-        
 
-        
-        
-        
         td = new ActivityManager.TaskDescription(label, null, td.getPrimaryColor());
         return td;
     }
@@ -48,7 +41,7 @@ public class TaskDescriptionCompat {
 
     private static Drawable getApplicationIcon() {
         try {
-            
+
             return null;
         } catch (Exception ignore) {
             return null;

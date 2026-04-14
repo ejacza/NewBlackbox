@@ -9,7 +9,6 @@ import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class AudioRecordProxy extends ClassInvocationStub {
     public static final String TAG = "AudioRecordProxy";
 
@@ -19,12 +18,12 @@ public class AudioRecordProxy extends ClassInvocationStub {
 
     @Override
     protected Object getWho() {
-        return null; 
+        return null;
     }
 
     @Override
     protected void inject(Object baseInvocation, Object proxyInvocation) {
-        
+
     }
 
     @Override
@@ -32,7 +31,6 @@ public class AudioRecordProxy extends ClassInvocationStub {
         return false;
     }
 
-    
     @ProxyMethod("<init>")
     public static class Constructor extends MethodHook {
         @Override
@@ -42,7 +40,6 @@ public class AudioRecordProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("startRecording")
     public static class StartRecording extends MethodHook {
         @Override
@@ -52,7 +49,6 @@ public class AudioRecordProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("stop")
     public static class Stop extends MethodHook {
         @Override
@@ -62,7 +58,6 @@ public class AudioRecordProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("read")
     public static class Read extends MethodHook {
         @Override
@@ -72,7 +67,6 @@ public class AudioRecordProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("release")
     public static class Release extends MethodHook {
         @Override
@@ -82,7 +76,6 @@ public class AudioRecordProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("getState")
     public static class GetState extends MethodHook {
         @Override

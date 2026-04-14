@@ -13,7 +13,6 @@ import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.Reflector;
 
-
 public class OsStub extends ClassInvocationStub {
     public static final String TAG = "OsStub";
     private Object mBase;
@@ -50,8 +49,6 @@ public class OsStub extends ClassInvocationStub {
                 if (args[i] instanceof String && ((String) args[i]).startsWith("/")) {
                     String orig = (String) args[i];
                     args[i] = IOCore.get().redirectPath(orig);
-
-
 
                 }
             }

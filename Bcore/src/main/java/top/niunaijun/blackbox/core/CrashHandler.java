@@ -2,7 +2,6 @@ package top.niunaijun.blackbox.core;
 
 import top.niunaijun.blackbox.BlackBoxCore;
 
-
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
     private Thread.UncaughtExceptionHandler mDefaultHandler;
 

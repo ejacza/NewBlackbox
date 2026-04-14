@@ -14,7 +14,6 @@ import top.niunaijun.blackbox.BlackBoxCore;
 import top.niunaijun.blackbox.app.BActivityThread;
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class ContextCompat {
     public static final String TAG = "ContextCompat";
 
@@ -32,12 +31,12 @@ public class ContextCompat {
 
     public static void fix(Context context) {
         try {
-            
+
             if (context == null) {
                 Slog.w(TAG, "Context is null, skipping ContextCompat.fix");
                 return;
             }
-            
+
             int deep = 0;
             while (context instanceof ContextWrapper) {
                 context = ((ContextWrapper) context).getBaseContext();
@@ -46,13 +45,12 @@ public class ContextCompat {
                     return;
                 }
             }
-            
-            
+
             if (context == null) {
                 Slog.w(TAG, "Base context is null after unwrapping, skipping ContextCompat.fix");
                 return;
             }
-            
+
             BRContextImpl.get(context)._set_mPackageManager(null);
             try {
                 context.getPackageManager();
@@ -62,7 +60,7 @@ public class ContextCompat {
 
             BRContextImpl.get(context)._set_mBasePackageName(BlackBoxCore.getHostPkg());
             BRContextImplKitkat.get(context)._set_mOpPackageName(BlackBoxCore.getHostPkg());
-            
+
             try {
                 BRContentResolver.get(context.getContentResolver())._set_mPackageName(BlackBoxCore.getHostPkg());
             } catch (Exception e) {
@@ -71,8 +69,7 @@ public class ContextCompat {
 
             if (BuildCompat.isS()) {
                 try {
-                    
-                    
+
                     fixAttributionSourceState(BRContextImpl.get(context).getAttributionSource(), BlackBoxCore.getHostUid());
                 } catch (Exception e) {
                     Slog.w(TAG, "Failed to fix attribution source state: " + e.getMessage());

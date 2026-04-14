@@ -7,7 +7,6 @@ import black.android.os.BRServiceManager;
 import top.niunaijun.blackbox.fake.hook.BinderInvocationStub;
 import top.niunaijun.blackbox.fake.service.base.ValueMethodProxy;
 
-
 public class IPowerManagerProxy extends BinderInvocationStub {
     public IPowerManagerProxy() {
         super(BRServiceManager.get().getService(Context.POWER_SERVICE));

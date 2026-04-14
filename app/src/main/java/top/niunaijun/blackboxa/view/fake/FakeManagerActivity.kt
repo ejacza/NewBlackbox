@@ -22,19 +22,16 @@ import top.niunaijun.blackboxa.util.inflate
 import top.niunaijun.blackboxa.util.toast
 import top.niunaijun.blackboxa.view.base.BaseActivity
 
-
 class FakeManagerActivity : BaseActivity() {
     val TAG: String = "FakeManagerActivity"
 
     private val viewBinding: ActivityListBinding by inflate()
 
-    
     private lateinit var mAdapter: RVAdapter<FakeLocationBean>
 
     private lateinit var viewModel: FakeLocationViewModel
 
     private var appList: List<FakeLocationBean> = ArrayList()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +52,6 @@ class FakeManagerActivity : BaseActivity() {
             }
 
         viewBinding.recyclerView.layoutManager = LinearLayoutManager(this)
-
 
         initSearchView()
         initViewModel()
@@ -140,7 +136,6 @@ class FakeManagerActivity : BaseActivity() {
             }
         }
 
-
     private fun filterApp(newText: String) {
         val newList = this.appList.filter {
             it.name.contains(newText, true) or it.packageName.contains(newText, true)
@@ -158,7 +153,6 @@ class FakeManagerActivity : BaseActivity() {
         finish()
     }
 
-
     override fun onBackPressed() {
         if (viewBinding.searchView.isSearchOpen) {
             viewBinding.searchView.closeSearch()
@@ -173,7 +167,6 @@ class FakeManagerActivity : BaseActivity() {
         viewBinding.searchView.setMenuItem(item)
         return true
     }
-
 
     companion object {
         fun start(context: Context) {

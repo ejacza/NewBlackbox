@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
 public class NotificationRecord {
     public final Map<String, NotificationChannel> mNotificationChannels = new HashMap<>();
     public final Map<String, NotificationChannelGroup> mNotificationChannelGroups = new HashMap<>();

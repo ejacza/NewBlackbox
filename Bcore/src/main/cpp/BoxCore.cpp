@@ -1,7 +1,3 @@
-
-
-
-
 #include "BoxCore.h"
 #include "Log.h"
 #include "IO.h"
@@ -27,7 +23,6 @@ struct {
     jmethodID loadEmptyDexL;
     int api_level;
 } VMEnv;
-
 
 JNIEnv *getEnv() {
     JNIEnv *env;

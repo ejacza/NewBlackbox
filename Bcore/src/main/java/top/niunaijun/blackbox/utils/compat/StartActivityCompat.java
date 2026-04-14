@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 
-
 public class StartActivityCompat {
     private static int index = 0;
     private static int appThreadIndex;
@@ -115,7 +114,6 @@ public class StartActivityCompat {
         }
         return (Bundle) args[optionsIndex];
     }
-
 
     public static int getAppThreadIndex() {
         return appThreadIndex;

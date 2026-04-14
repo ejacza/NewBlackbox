@@ -5,12 +5,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-
 public class ReflectionClass {
     @SuppressWarnings("rawtypes")
     public static void print(String name) {
         try {
-            
+
             Class cl = Class.forName(name);
             Class supercl = cl.getSuperclass();
             Class[] interfaces = cl.getInterfaces();
@@ -19,7 +18,6 @@ public class ReflectionClass {
                 System.out.print(modifiers);
             }
 
-            
             if (!cl.isInterface()) {
                 System.out.print(" class ");
             }
@@ -57,7 +55,6 @@ public class ReflectionClass {
         }
     }
 
-    
     @SuppressWarnings("rawtypes")
     private static void printConstructors(Class cl) {
         Constructor[] constructors = cl.getDeclaredConstructors();
@@ -65,13 +62,12 @@ public class ReflectionClass {
         for (Constructor c : constructors) {
             String name = c.getName();
             System.out.print("    ");
-            
+
             String modifiers = Modifier.toString(c.getModifiers());
             if (modifiers.length() > 0) {
                 System.out.print(modifiers + " ");
             }
 
-            
             System.out.print(name.substring(name.lastIndexOf(".") + 1) + " (");
             Class[] paramTypes = c.getParameterTypes();
             for (int j = 0; j < paramTypes.length; j++) {
@@ -82,7 +78,6 @@ public class ReflectionClass {
             }
             System.out.print(")");
 
-            
             Class[] exceptions = c.getExceptionTypes();
             if (exceptions.length > 0) {
                 System.out.print(" throws ");
@@ -98,7 +93,6 @@ public class ReflectionClass {
         }
     }
 
-    
     @SuppressWarnings("rawtypes")
     private static void printMethods(Class cl) {
         Method[] methods = cl.getDeclaredMethods();
@@ -107,7 +101,7 @@ public class ReflectionClass {
             String name = m.getName();
 
             System.out.print("    ");
-            
+
             String modifiers = Modifier.toString(m.getModifiers());
             if (modifiers.length() > 0) {
                 System.out.print(modifiers + " ");
@@ -115,7 +109,6 @@ public class ReflectionClass {
             printType(retType);
             System.out.print(" " + name + "(");
 
-            
             Class[] paramTypes = m.getParameterTypes();
             for (int j = 0; j < paramTypes.length; j++) {
                 if (j > 0) {
@@ -126,7 +119,6 @@ public class ReflectionClass {
 
             System.out.print(")");
 
-            
             Class[] exceptions = m.getExceptionTypes();
             if (exceptions.length > 0) {
                 System.out.print(" throws ");
@@ -142,7 +134,6 @@ public class ReflectionClass {
         }
     }
 
-    
     @SuppressWarnings("rawtypes")
     private static void printFields(Class cl) {
         Field[] fields = cl.getDeclaredFields();
@@ -160,7 +151,6 @@ public class ReflectionClass {
         }
     }
 
-    
     @SuppressWarnings("rawtypes")
     private static void printType(Class type) {
         String name = type.getName();
@@ -190,7 +180,6 @@ public class ReflectionClass {
         }
     }
 
-    
     @SuppressWarnings("rawtypes")
     public static void printExtendsChain(Class cl) {
         System.out.print("\n\nExtends chain:\n    ");

@@ -6,7 +6,6 @@ import android.content.Context
 import android.util.Log
 import top.niunaijun.blackbox.BlackBoxCore
 
-
 class App : Application() {
 
     companion object {

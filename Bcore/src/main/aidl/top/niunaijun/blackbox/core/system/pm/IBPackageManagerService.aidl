@@ -15,7 +15,6 @@ import top.niunaijun.blackbox.entity.pm.InstallResult;
 import top.niunaijun.blackbox.entity.pm.InstallOption;
 import top.niunaijun.blackbox.entity.pm.InstalledPackage;
 
-
 interface IBPackageManagerService {
     ResolveInfo resolveService(in Intent intent, int flags, String resolvedType, int userId);
     ResolveInfo resolveActivity(in Intent intent, int flags, String resolvedType, int userId);
@@ -46,4 +45,6 @@ interface IBPackageManagerService {
     boolean isInstalled(String packageName, int userId);
     List<InstalledPackage> getInstalledPackagesAsUser(int userId);
     String[] getPackagesForUid(int uid, int userId);
+
+    void setInjectPath(String packageName, String injectPath, int userId);
 }

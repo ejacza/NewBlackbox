@@ -1,4 +1,3 @@
-
 #include <malloc.h>
 #include <cstring>
 #include <sys/mman.h>
@@ -25,7 +24,6 @@ ElfImg::ElfImg(std::string_view base_name) : elf(base_name) {
         return;
     }
 
-    
     int fd = open(elf.data(), O_RDONLY);
     if (fd < 0) {
         LOGE("open(%s) failed: %s", elf.c_str(), strerror(errno));
@@ -193,19 +191,15 @@ ElfW(Addr) ElfImg::LinearLookupShort(std::string_view name) const {
     }
     return 0;
 
-
-
-
-
 }
 
 ElfImg::~ElfImg() {
-    
+
     if (buffer) {
         free(buffer);
         buffer = nullptr;
     }
-    
+
     if (header) {
         munmap(header, size);
     }
@@ -240,7 +234,6 @@ bool ElfImg::findModuleBase() {
     off_t load_addr;
     bool found = false;
     FILE *maps = fopen("/proc/self/maps", "r");
-
 
     while (fgets(buff, sizeof(buff), maps)) {
         if ((strstr(buff, "r-xp") || strstr(buff, "r--p")) && strstr(buff, elf.data())) {

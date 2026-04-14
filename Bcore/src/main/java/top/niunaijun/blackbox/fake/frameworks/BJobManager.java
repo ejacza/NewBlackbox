@@ -8,7 +8,6 @@ import top.niunaijun.blackbox.core.system.ServiceManager;
 import top.niunaijun.blackbox.core.system.am.IBJobManagerService;
 import top.niunaijun.blackbox.entity.JobRecord;
 
-
 public class BJobManager extends BlackManager<IBJobManagerService> {
     private static final BJobManager sJobManager = new BJobManager();
 

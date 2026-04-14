@@ -1,6 +1,5 @@
 package top.niunaijun.blackbox.closecode;
 
-
 import java.io.File;
 
 import top.niunaijun.blackbox.app.configuration.AppLifecycleCallback;
@@ -47,7 +46,7 @@ public class Entry {
                     }
                 }
             }
-            
+
         });
         top.niunaijun.blackbox.utils.Slog.d(TAG, "Custom closed code initialized!");
     }

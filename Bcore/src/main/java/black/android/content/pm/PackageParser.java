@@ -23,21 +23,6 @@ public interface PackageParser {
     @BConstructor
     android.content.pm.PackageParser _new(String String0);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @BMethod
     void collectCertificates(android.content.pm.PackageParser.Package p, int flags);
 

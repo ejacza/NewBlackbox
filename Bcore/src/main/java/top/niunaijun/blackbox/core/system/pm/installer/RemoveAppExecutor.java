@@ -5,7 +5,6 @@ import top.niunaijun.blackbox.core.system.pm.BPackageSettings;
 import top.niunaijun.blackbox.entity.pm.InstallOption;
 import top.niunaijun.blackbox.utils.FileUtils;
 
-
 public class RemoveAppExecutor implements Executor {
     @Override
     public int exec(BPackageSettings ps, InstallOption option, int userId) {

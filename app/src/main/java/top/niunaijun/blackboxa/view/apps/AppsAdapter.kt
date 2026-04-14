@@ -18,13 +18,11 @@ import android.graphics.Color
 import android.view.ViewTreeObserver
 import androidx.recyclerview.widget.RecyclerView
 
-
-
 class AppsAdapter : RVHolderFactory() {
-    
+
     companion object {
         private const val TAG = "AppsAdapter"
-        private const val MAX_ICON_SIZE = 96 
+        private const val MAX_ICON_SIZE = 96
         private val DEFAULT_ICON_COLOR = Color.parseColor("#CCCCCC")
     }
 
@@ -33,7 +31,7 @@ class AppsAdapter : RVHolderFactory() {
             AppsVH(inflate(R.layout.item_app, parent))
         } catch (e: Exception) {
             Log.e(TAG, "Error creating ViewHolder: ${e.message}")
-            
+
             FallbackAppsVH(inflate(R.layout.item_app, parent))
         }
     }
@@ -45,10 +43,9 @@ class AppsAdapter : RVHolderFactory() {
 
         init {
             try {
-                
+
                 binding.icon.scaleType = ImageView.ScaleType.CENTER_CROP
-                
-                
+
                 itemView.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
                     override fun onPreDraw(): Boolean {
                         if (isAttached) {
@@ -64,22 +61,19 @@ class AppsAdapter : RVHolderFactory() {
 
         override fun setContent(item: AppInfo, isSelected: Boolean, payload: Any?) {
             try {
-                
+
                 setIconSafely(item.icon, item.packageName)
-                
-                
+
                 binding.name.text = item.name ?: "Unknown App"
-                
-                
+
                 if (item.isXpModule) {
                     binding.cornerLabel.visibility = View.VISIBLE
                 } else {
                     binding.cornerLabel.visibility = View.INVISIBLE
                 }
-                
-                
+
                 isAttached = true
-                
+
             } catch (e: Exception) {
                 Log.e(TAG, "Error setting content for ${item.packageName}: ${e.message}")
                 setSafeDefaults()
@@ -89,12 +83,12 @@ class AppsAdapter : RVHolderFactory() {
         private fun setIconSafely(icon: Drawable?, packageName: String) {
             try {
                 if (icon != null) {
-                    
+
                     val optimizedIcon = optimizeIcon(icon)
                     binding.icon.setImageDrawable(optimizedIcon)
                     currentIcon = optimizedIcon
                 } else {
-                    
+
                     binding.icon.setImageDrawable(createDefaultIcon())
                     currentIcon = null
                 }
@@ -107,11 +101,11 @@ class AppsAdapter : RVHolderFactory() {
 
         private fun optimizeIcon(icon: Drawable): Drawable {
             return try {
-                
+
                 if (icon is BitmapDrawable) {
                     val bitmap = icon.bitmap
                     if (bitmap.width > MAX_ICON_SIZE || bitmap.height > MAX_ICON_SIZE) {
-                        
+
                         val scaledBitmap = Bitmap.createScaledBitmap(
                             bitmap, MAX_ICON_SIZE, MAX_ICON_SIZE, true
                         )
@@ -148,13 +142,12 @@ class AppsAdapter : RVHolderFactory() {
         }
     }
 
-    
     class FallbackAppsVH(itemView: View) : RVHolder<AppInfo>(itemView) {
         val binding = ItemAppBinding.bind(itemView)
 
         override fun setContent(item: AppInfo, isSelected: Boolean, payload: Any?) {
             try {
-                
+
                 binding.icon.setImageDrawable(ColorDrawable(DEFAULT_ICON_COLOR))
                 binding.name.text = item.name ?: "Unknown App"
                 binding.cornerLabel.visibility = View.INVISIBLE

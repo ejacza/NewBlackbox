@@ -5,7 +5,6 @@ import android.content.pm.ActivityInfo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
 public class ReceiverData implements Parcelable {
     public Intent intent;
     public ActivityInfo activityInfo;

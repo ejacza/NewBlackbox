@@ -133,7 +133,6 @@ public class MethodParameterUtils {
         return result;
     }
 
-
     public static void getAllInterfaces(Class clazz, HashSet<Class<?>> interfaceCollection) {
         Class<?>[] classes = clazz.getInterfaces();
         if (classes.length != 0) {

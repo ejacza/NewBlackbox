@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.util.Log
 import top.niunaijun.blackboxa.view.main.BlackBoxLoader
 
-
 object AppManager {
     private const val TAG = "AppManager"
 
@@ -16,7 +15,7 @@ object AppManager {
         } catch (e: Exception) {
             Log.e(TAG, "Error creating BlackBoxLoader: ${e.message}")
 
-            BlackBoxLoader() 
+            BlackBoxLoader()
         }
     }
 
@@ -26,7 +25,7 @@ object AppManager {
             mBlackBoxLoader.getBlackBoxCore()
         } catch (e: Exception) {
             Log.e(TAG, "Error getting BlackBoxCore: ${e.message}")
-            throw e 
+            throw e
         }
     }
 
@@ -36,7 +35,7 @@ object AppManager {
             App.getContext().getSharedPreferences("UserRemark", Context.MODE_PRIVATE)
         } catch (e: Exception) {
             Log.e(TAG, "Error creating SharedPreferences: ${e.message}")
-            throw e 
+            throw e
         }
     }
 
@@ -46,7 +45,7 @@ object AppManager {
             mBlackBoxLoader.addLifecycleCallback()
         } catch (e: Exception) {
             Log.e(TAG, "Error in doAttachBaseContext: ${e.message}")
-            
+
         }
     }
 
@@ -56,14 +55,13 @@ object AppManager {
             initThirdService(context)
         } catch (e: Exception) {
             Log.e(TAG, "Error in doOnCreate: ${e.message}")
-            
+
         }
     }
 
     private fun initThirdService(context: Context) {
         try {
-            
-            
+
         } catch (e: Exception) {
             Log.e(TAG, "Error in initThirdService: ${e.message}")
         }

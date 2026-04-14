@@ -7,7 +7,6 @@ import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class LevelDbProxy extends ClassInvocationStub {
     public static final String TAG = "LevelDbProxy";
 
@@ -17,12 +16,12 @@ public class LevelDbProxy extends ClassInvocationStub {
 
     @Override
     protected Object getWho() {
-        return null; 
+        return null;
     }
 
     @Override
     protected void inject(Object baseInvocation, Object proxyInvocation) {
-        
+
     }
 
     @Override
@@ -30,7 +29,6 @@ public class LevelDbProxy extends ClassInvocationStub {
         return false;
     }
 
-    
     @ProxyMethod("open")
     public static class Open extends MethodHook {
         @Override
@@ -41,11 +39,11 @@ public class LevelDbProxy extends ClassInvocationStub {
                 String message = e.getMessage();
                 if (message != null && message.contains("lock") && message.contains("Try again")) {
                     Slog.w(TAG, "LevelDB lock error detected, returning null: " + message);
-                    
+
                     return null;
                 } else if (message != null && message.contains("IO error")) {
                     Slog.w(TAG, "LevelDB IO error detected, returning null: " + message);
-                    
+
                     return null;
                 }
                 throw e;
@@ -53,7 +51,6 @@ public class LevelDbProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("nativeOpen")
     public static class NativeOpen extends MethodHook {
         @Override
@@ -64,7 +61,7 @@ public class LevelDbProxy extends ClassInvocationStub {
                 String message = e.getMessage();
                 if (message != null && (message.contains("lock") || message.contains("IO error"))) {
                     Slog.w(TAG, "LevelDB native lock/IO error detected, returning null: " + message);
-                    
+
                     return null;
                 }
                 throw e;
@@ -72,7 +69,6 @@ public class LevelDbProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("get")
     public static class Get extends MethodHook {
         @Override
@@ -90,7 +86,6 @@ public class LevelDbProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("put")
     public static class Put extends MethodHook {
         @Override
@@ -108,7 +103,6 @@ public class LevelDbProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("delete")
     public static class Delete extends MethodHook {
         @Override

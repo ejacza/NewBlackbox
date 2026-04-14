@@ -1,7 +1,5 @@
 package top.niunaijun.blackreflection.utils;
 
-
-
 public class ClassUtils {
 
     public static String getPackage(String className) {

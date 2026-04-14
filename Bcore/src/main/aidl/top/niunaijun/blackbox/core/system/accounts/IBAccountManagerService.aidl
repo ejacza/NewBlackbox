@@ -10,7 +10,6 @@ import android.os.UserHandle;
 
 import java.util.Map;
 
-
 interface IBAccountManagerService {
     String getPassword(in Account account, int userId);
     String getUserData(in Account account, String key, int userId);

@@ -8,8 +8,6 @@ import top.niunaijun.blackboxa.R
 import top.niunaijun.blackboxa.bean.InstalledAppBean
 import top.niunaijun.blackboxa.databinding.ItemPackageBinding
 
-
-
 class ListAdapter : RVHolderFactory() {
 
     override fun createViewHolder(parent: ViewGroup?, viewType: Int, item: Any): RVHolder<out Any> {

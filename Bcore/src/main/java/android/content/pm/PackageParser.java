@@ -90,20 +90,16 @@ public class PackageParser {
         public final int installLocation;
         public final VerifierInfo[] verifiers;
 
-        
         public final String[] splitNames;
 
-        
         public final String codePath;
 
-        
         public final String baseCodePath;
-        
+
         public final String[] splitCodePaths;
 
-        
         public final int baseRevisionCode;
-        
+
         public final int[] splitRevisionCodes;
 
         public final boolean coreApp;
@@ -137,7 +133,6 @@ public class PackageParser {
         }
     }
 
-    
     public PackageParser() {
         throw new RuntimeException("Stub!");
     }
@@ -174,17 +169,14 @@ public class PackageParser {
         throw new RuntimeException("Stub!");
     }
 
-    
     public static PackageLite parsePackageLite(final File packageFile, final int flags) throws PackageParserException {
         throw new RuntimeException("Stub!");
     }
 
-    
     public Package parsePackage(final File packageFile, final int flags) throws PackageParserException {
         throw new RuntimeException("Stub!");
     }
 
-    
     public Package parsePackage(final File sourceFile, final String destCodePath, final DisplayMetrics metrics, final int flags) {
         throw new RuntimeException("Stub!");
     }
@@ -197,45 +189,34 @@ public class PackageParser {
         throw new RuntimeException("Stub!");
     }
 
-    
     public static ApkLite parseApkLite(final File apkFile, final int flags) throws PackageParserException {
         throw new RuntimeException("Stub!");
     }
 
-    
     public final static class Package {
 
         public String packageName;
 
-        
         public String[] splitNames;
-
-        
 
         public String volumeUuid;
 
-        
         public String codePath;
 
-        
         public String baseCodePath;
-        
+
         public String[] splitCodePaths;
 
-        
         public int baseRevisionCode;
-        
+
         public int[] splitRevisionCodes;
 
-        
         public int[] splitFlags;
 
-        
         public int[] splitPrivateFlags;
 
         public boolean baseHardwareAccelerated;
 
-        
         public ApplicationInfo applicationInfo = new ApplicationInfo();
 
         public final ArrayList<Permission> permissions = new ArrayList<Permission>(0);
@@ -261,80 +242,52 @@ public class PackageParser {
         public String mRealPackage = null;
         public ArrayList<String> mAdoptPermissions = null;
 
-        
         public Bundle mAppMetaData = null;
 
-        
         public int mVersionCode;
 
-        
         public String mVersionName;
 
-        
         public String mSharedUserId;
 
-        
         public int mSharedUserLabel;
 
-        
         public Signature[] mSignatures;
         public SigningDetails mSigningDetails;
         public Certificate[][] mCertificates;
 
-        
-        
         public int mPreferredOrder = 0;
 
-        
-
-
-        
         public long mLastPackageUsageTimeInMills;
 
-        
-        
-        
-        
-        
-
-        
         public Object mExtras;
 
-        
         public ArrayList<ConfigurationInfo> configPreferences = null;
 
-        
         public ArrayList<FeatureInfo> reqFeatures = null;
 
-        
         public ArrayList<FeatureGroupInfo> featureGroups = null;
 
         public int installLocation;
 
         public boolean coreApp;
 
-        
         public boolean mRequiredForAllUsers;
 
-        
         public String mRestrictedAccountType;
 
-        
         public String mRequiredAccountType;
 
-        
         public ManifestDigest manifestDigest;
 
         public String mOverlayTarget;
         public int mOverlayPriority;
         public boolean mTrustedOverlay;
 
-        
         public ArraySet<PublicKey> mSigningKeys;
         public ArraySet<String> mUpgradeKeySets;
         public ArrayMap<String, ArraySet<PublicKey>> mKeySetMapping;
 
-        
         public String cpuAbiOverride;
 
         public Package(String packageName) {
@@ -345,7 +298,6 @@ public class PackageParser {
             throw new RuntimeException("Stub!");
         }
 
-        
         public List<String> getAllCodePathsExcludingResourceOnly() {
             throw new RuntimeException("Stub!");
         }

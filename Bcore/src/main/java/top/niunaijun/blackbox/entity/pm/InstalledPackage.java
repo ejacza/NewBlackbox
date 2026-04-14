@@ -10,7 +10,6 @@ import java.util.Objects;
 
 import top.niunaijun.blackbox.BlackBoxCore;
 
-
 public class InstalledPackage implements Parcelable {
     public int userId;
     public String packageName;

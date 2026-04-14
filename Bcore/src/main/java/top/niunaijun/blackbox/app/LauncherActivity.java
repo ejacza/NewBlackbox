@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.animation.OvershootInterpolator;
 
-
 public class LauncherActivity extends Activity {
     public static final String TAG = "SplashScreen";
 
@@ -30,7 +29,7 @@ public class LauncherActivity extends Activity {
         try {
             Intent splash = new Intent();
             splash.setClass(BlackBoxCore.getContext(), LauncherActivity.class);
-            
+
             splash.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             splash.putExtra(LauncherActivity.KEY_INTENT, intent);
             splash.putExtra(LauncherActivity.KEY_PKG, intent.getPackage());
@@ -46,14 +45,14 @@ public class LauncherActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
-            
+
             Intent intent = getIntent();
             if (intent == null) {
                 Slog.w(TAG, "Intent is null, finishing activity");
                 finish();
                 return;
             }
-            
+
             Intent launchIntent = intent.getParcelableExtra(KEY_INTENT);
             String packageName = intent.getStringExtra(KEY_PKG);
             int userId = intent.getIntExtra(KEY_USER_ID, 0);
@@ -66,17 +65,15 @@ public class LauncherActivity extends Activity {
 
             Slog.d(TAG, "LauncherActivity.onCreate() for package: " + packageName + ", userId: " + userId);
 
-            
             PackageInfo packageInfo = getPackageInfoWithFallback(packageName, userId);
-            
+
             if (packageInfo == null) {
                 Slog.w(TAG, "Package info not available for " + packageName + ", but proceeding with launch");
-                
+
             } else {
                 Slog.d(TAG, "Successfully retrieved package info for " + packageName);
             }
-            
-            
+
             Drawable drawable = null;
             String appName = packageName;
             try {
@@ -120,38 +117,36 @@ public class LauncherActivity extends Activity {
                         .start())
                     .start();
             }
-            
-            
+
             launchAppAsync(launchIntent, userId);
-            
+
         } catch (Exception e) {
             Slog.e(TAG, "Critical error in LauncherActivity.onCreate()", e);
             finish();
         }
     }
 
-    
     private PackageInfo getPackageInfoWithFallback(String packageName, int userId) {
         try {
-            
+
             return BlackBoxCore.getBPackageManager().getPackageInfo(packageName, 0, userId);
         } catch (Exception e) {
             Slog.w(TAG, "Failed to get package info for " + packageName + " (attempt 1): " + e.getMessage());
-            
+
             try {
-                
-                return BlackBoxCore.getBPackageManager().getPackageInfo(packageName, 
+
+                return BlackBoxCore.getBPackageManager().getPackageInfo(packageName,
                     android.content.pm.PackageManager.GET_META_DATA, userId);
             } catch (Exception e2) {
                 Slog.w(TAG, "Failed to get package info for " + packageName + " (attempt 2): " + e2.getMessage());
-                
+
                 try {
-                    
+
                     android.content.pm.ApplicationInfo appInfo = BlackBoxCore.getBPackageManager()
                         .getApplicationInfo(packageName, 0, userId);
-                    
+
                     if (appInfo != null) {
-                        
+
                         PackageInfo fallbackInfo = new PackageInfo();
                         fallbackInfo.packageName = packageName;
                         fallbackInfo.applicationInfo = appInfo;
@@ -159,7 +154,7 @@ public class LauncherActivity extends Activity {
                         fallbackInfo.versionName = "1.0";
                         fallbackInfo.firstInstallTime = System.currentTimeMillis();
                         fallbackInfo.lastUpdateTime = System.currentTimeMillis();
-                        
+
                         Slog.d(TAG, "Created fallback PackageInfo for " + packageName);
                         return fallbackInfo;
                     }
@@ -168,30 +163,26 @@ public class LauncherActivity extends Activity {
                 }
             }
         }
-        
+
         return null;
     }
 
-    
     private void launchAppAsync(final Intent launchIntent, final int userId) {
         new Thread(() -> {
             try {
                 Slog.d(TAG, "Starting app launch in background thread");
-                
-                
+
                 Thread.sleep(100);
-                
-                
+
                 BlackBoxCore.getBActivityManager().startActivity(launchIntent, userId);
-                
+
                 Slog.d(TAG, "App launch initiated successfully");
             } catch (Exception e) {
                 Slog.e(TAG, "Error launching app", e);
-                
-                
+
                 runOnUiThread(() -> {
                     try {
-                        
+
                         Slog.e(TAG, "Failed to launch app: " + e.getMessage());
                     } catch (Exception uiException) {
                         Slog.e(TAG, "Error showing error message", uiException);

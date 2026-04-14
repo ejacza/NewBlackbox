@@ -34,7 +34,6 @@ import top.niunaijun.blackreflection.annotation.BClassName;
 import top.niunaijun.blackreflection.proxy.BlackReflectionInterfaceProxy;
 import top.niunaijun.blackreflection.proxy.BlackReflectionProxy;
 
-
 @AutoService(Processor.class)
 public class BlackReflectionProcessor extends AbstractProcessor {
 
@@ -43,7 +42,7 @@ public class BlackReflectionProcessor extends AbstractProcessor {
     private Map<String, String> mRealMaps = new HashMap<>();
 
     private Messager mMessager;
-    private Elements mElementUtils; 
+    private Elements mElementUtils;
     private Filer mFiler;
 
     @Override
@@ -153,7 +152,6 @@ public class BlackReflectionProcessor extends AbstractProcessor {
 
         getReflectionProxy(packageName, className, info);
 
-        
         getReflectionInterfaceProxy(packageName, className + "Context",
                 className);
         getReflectionInterfaceProxy(packageName, className + "Static",
@@ -163,11 +161,11 @@ public class BlackReflectionProcessor extends AbstractProcessor {
 
     private static TypeMirror getClass(BClass annotation) {
         try {
-            annotation.value(); 
+            annotation.value();
         } catch (MirroredTypeException mte) {
             return mte.getTypeMirror();
         }
-        return null; 
+        return null;
     }
 
     public BlackReflectionProxy getReflectionProxy(String packageName, String className, BlackReflectionInfo info) {

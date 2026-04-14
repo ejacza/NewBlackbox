@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 
 import top.niunaijun.jnihook.jni.JniHook;
 
-
 public class ReflectCore {
 
     public static void set(Class<?> clazz) {

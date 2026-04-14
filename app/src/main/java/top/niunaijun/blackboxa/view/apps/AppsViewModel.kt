@@ -6,7 +6,6 @@ import top.niunaijun.blackboxa.data.AppsRepository
 import top.niunaijun.blackboxa.view.base.BaseViewModel
 import android.util.Log
 
-
 class AppsViewModel(private val repo: AppsRepository) : BaseViewModel() {
 
     val appsLiveData = MutableLiveData<List<AppInfo>>()
@@ -15,7 +14,6 @@ class AppsViewModel(private val repo: AppsRepository) : BaseViewModel() {
 
     val launchLiveData = MutableLiveData<Boolean>()
 
-    
     val updateSortLiveData = MutableLiveData<Boolean>()
 
     fun getInstalledApps(userId: Int) {
@@ -23,29 +21,26 @@ class AppsViewModel(private val repo: AppsRepository) : BaseViewModel() {
             repo.getVmInstallList(userId, appsLiveData)
         }
     }
-    
-    
+
     fun getInstalledAppsWithRetry(userId: Int, maxRetries: Int = 3) {
         var retryCount = 0
-        
+
         fun attemptLoad() {
             launchOnUI {
                 repo.getVmInstallList(userId, appsLiveData)
-                
-                
+
                 val currentApps = appsLiveData.value
                 if ((currentApps == null || currentApps.isEmpty()) && retryCount < maxRetries) {
                     retryCount++
                     Log.d("AppsViewModel", "No apps loaded, retrying... (${retryCount}/${maxRetries})")
-                    
-                    
+
                     android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
                         attemptLoad()
-                    }, 1000) 
+                    }, 1000)
                 }
             }
         }
-        
+
         attemptLoad()
     }
 

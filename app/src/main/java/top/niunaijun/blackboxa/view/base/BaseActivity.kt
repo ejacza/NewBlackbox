@@ -3,7 +3,6 @@ package top.niunaijun.blackboxa.view.base
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
-
 open class BaseActivity : AppCompatActivity() {
 
     protected fun initToolbar(toolbar: Toolbar,title:Int, showBack: Boolean = false, onBack: (() -> Unit)? = null) {

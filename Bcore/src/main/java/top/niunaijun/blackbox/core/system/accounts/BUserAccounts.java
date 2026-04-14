@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class BUserAccounts implements Parcelable {
     public final Object lock = new Object();
 
@@ -43,7 +42,6 @@ public class BUserAccounts implements Parcelable {
         BAccount bAccount = getAccount(account);
         return accounts.remove(bAccount);
     }
-
 
     public Map<String, Integer> getVisibility(Account account) {
         BAccount bAccount = getAccount(account);
@@ -90,7 +88,6 @@ public class BUserAccounts implements Parcelable {
         }
         return -1;
     }
-
 
     @Override
     public int describeContents() {

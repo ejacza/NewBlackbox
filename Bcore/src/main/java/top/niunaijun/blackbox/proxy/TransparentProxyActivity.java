@@ -1,6 +1,5 @@
 package top.niunaijun.blackbox.proxy;
 
-
 public class TransparentProxyActivity extends ProxyActivity {
 
     public static class P0 extends TransparentProxyActivity {

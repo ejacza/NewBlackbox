@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-
 public class AppLifecycleCallback implements Application.ActivityLifecycleCallbacks {
     public static AppLifecycleCallback EMPTY = new AppLifecycleCallback() {
 
@@ -15,10 +14,9 @@ public class AppLifecycleCallback implements Application.ActivityLifecycleCallba
     public void beforeMainLaunchApk(String packageName, int userid) {
 
     }
-    
-    
+
     public boolean onStoragePermissionNeeded(String packageName, int userId) {
-        
+
         return false;
     }
 

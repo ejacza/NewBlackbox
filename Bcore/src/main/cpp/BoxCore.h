@@ -1,7 +1,3 @@
-
-
-
-
 #ifndef VIRTUALM_VMCORE_H
 #define VIRTUALM_VMCORE_H
 
@@ -19,5 +15,4 @@ public:
     static jlongArray loadEmptyDex(JNIEnv *env);
 };
 
-
-#endif 
+#endif

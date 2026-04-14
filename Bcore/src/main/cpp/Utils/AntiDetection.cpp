@@ -17,15 +17,10 @@ struct SpoofedProp {
     const char* value;
 };
 
-
 static int (*orig_system_property_get)(const char *name, char *value) = nullptr;
 
-
-
-
-
 static const char* blocked_files[] = {
-    
+
     "/system/xbin/su",
     "/system/bin/su",
     "/sbin/su",
@@ -43,8 +38,7 @@ static const char* blocked_files[] = {
     "/system/xbin/magisk",
     "/sbin/magisk",
     "/data/adb/magisk",
-    
-    
+
     "/data/virtual",
     "/data/data/com.benny.openlauncher",
     "/data/data/io.va.exposed",
@@ -56,8 +50,7 @@ static const char* blocked_files[] = {
     "/data/data/top.niunaijun.blackboxa",
     "/blackbox",
     "/virtual",
-    
-    
+
     "/dev/vboxguest",
     "/dev/vboxuser",
     "/dev/qemu_pipe",
@@ -78,20 +71,19 @@ static const char* blocked_files[] = {
     "/system/lib/libnoxspeedup.so",
     "/system/lib/libmemu.so",
     "/system/lib/libbluelog.so",
-    
-    
+
     "/system/xposed.prop",
     "/system/framework/XposedBridge.jar",
     "/data/data/de.robv.android.xposed.installer",
     "/data/data/org.meowcat.edxposed.manager",
     "/data/data/top.canyie.dreamland.manager",
-    
+
     nullptr
 };
 
 static const char* blocked_packages[] = {
     "com.noshufou.android.su",
-    "com.noshufou.android.su.elite", 
+    "com.noshufou.android.su.elite",
     "eu.chainfire.supersu",
     "com.koushikdutta.superuser",
     "com.thirdparty.superuser",
@@ -141,7 +133,6 @@ static bool is_blocked_package(const char* path) {
     return false;
 }
 
-
 static int (*orig_access)(const char *pathname, int mode) = nullptr;
 static int (*orig_stat)(const char *pathname, struct stat *buf) = nullptr;
 static int (*orig_lstat)(const char *pathname, struct stat *buf) = nullptr;
@@ -149,8 +140,6 @@ static FILE* (*orig_fopen)(const char *pathname, const char *mode) = nullptr;
 static int (*orig_open)(const char *pathname, int flags, ...) = nullptr;
 static ssize_t (*orig_readlink)(const char *pathname, char *buf, size_t bufsiz) = nullptr;
 static DIR* (*orig_opendir)(const char *name) = nullptr;
-
-
 
 static bool is_safe_path(const char* path) {
     if (!path) return false;
@@ -226,7 +215,6 @@ static DIR* my_opendir(const char *name) {
     return orig_opendir ? orig_opendir(name) : nullptr;
 }
 
-
 static void install_file_hooks() {
     void* handle = xdl_open("libc.so", XDL_DEFAULT);
     if (!handle) {
@@ -234,14 +222,12 @@ static void install_file_hooks() {
         return;
     }
 
-
     xdl_close(handle);
     LOGD("File system hooks installed");
 }
 
-
 __attribute__((constructor)) void install_antidetection_hooks() {
     LOGD("Installing anti-detection hooks...");
-    install_file_hooks(); 
+    install_file_hooks();
     LOGD("Anti-detection hooks installation complete");
 }

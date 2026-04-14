@@ -11,7 +11,6 @@ import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.MethodParameterUtils;
 
-
 public class IMediaRouterServiceProxy extends BinderInvocationStub {
 
     public IMediaRouterServiceProxy() {

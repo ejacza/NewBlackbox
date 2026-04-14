@@ -6,7 +6,6 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import top.niunaijun.blackbox.BlackBoxCore
 
-
 class ShortcutActivity:AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

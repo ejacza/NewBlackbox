@@ -1,7 +1,3 @@
-
-
-
-
 #ifndef VIRTUALM_FILESYSTEMHOOK_H
 #define VIRTUALM_FILESYSTEMHOOK_H
 
@@ -10,4 +6,4 @@ public:
     static void init();
 };
 
-#endif 
+#endif

@@ -5,7 +5,6 @@ android {
 
     compileSdk rootProject.ext.compileSdkVersion
 
-
     aidlPackagedList "android/app/IServiceConnection.aidl"
     aidlPackagedList "android/accounts/IAccountManagerResponse.aidl"
     buildFeatures {
@@ -19,13 +18,14 @@ android {
 
         consumerProguardFiles "consumer-rules.pro"
         ndk {
-            
+
             abiFilters 'arm64-v8a' , 'armeabi-v7a'
         }
     }
 
     buildTypes {
         release {
+            debuggable true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -42,8 +42,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_21
         targetCompatibility JavaVersion.VERSION_21
     }
-    
-    
+
     tasks.withType(JavaCompile) {
         options.compilerArgs << "-Xlint:-deprecation" << "-Xlint:-unchecked" << "-Xlint:-rawtypes"
         options.fork = true
@@ -71,13 +70,11 @@ android {
     }
 }
 
-
 tasks.withType(Javadoc) {
     options.addStringOption('Xdoclint:none', '-quiet')
     options.addStringOption('encoding', 'UTF-8')
     options.addStringOption('charSet', 'UTF-8')
 }
-
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar", "*.aar"])
@@ -91,7 +88,4 @@ dependencies {
     implementation 'com.github.tiann:FreeReflection:3.2.2'
     implementation 'com.bytedance.android:shadowhook:2.0.0'
 
-
-
-    
 }

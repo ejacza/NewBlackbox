@@ -61,7 +61,6 @@ class MainActivity : LoadingActivity() {
             initFab()
             initToolbarSubTitle()
 
-            
             checkStoragePermission()
 
             try {
@@ -71,7 +70,7 @@ class MainActivity : LoadingActivity() {
             }
         } catch (e: Exception) {
             Log.e(TAG, "Critical error in onCreate: ${e.message}")
-            
+
             showErrorDialog("Failed to initialize app: ${e.message}")
         }
     }
@@ -79,13 +78,13 @@ class MainActivity : LoadingActivity() {
     private fun checkStoragePermission() {
         try {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-                
+
                 if (!android.os.Environment.isExternalStorageManager()) {
                     Log.w(TAG, "MANAGE_EXTERNAL_STORAGE permission not granted")
                     showStoragePermissionDialog()
                 }
             } else {
-                
+
                 if (androidx.core.content.ContextCompat.checkSelfPermission(
                                 this,
                                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -171,7 +170,7 @@ class MainActivity : LoadingActivity() {
             }
         } catch (e: Exception) {
             Log.e(TAG, "Error opening storage settings: ${e.message}")
-            
+
             try {
                 val intent =
                         Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
@@ -213,7 +212,7 @@ class MainActivity : LoadingActivity() {
     private fun initToolbarSubTitle() {
         try {
             updateUserRemark(0)
-            
+
             viewBinding.toolbarLayout.toolbar.getChildAt(1)?.setOnClickListener {
                 try {
                     MaterialDialog(this).show {
@@ -382,7 +381,7 @@ class MainActivity : LoadingActivity() {
                     startActivity(intent)
                 }
                 R.id.fake_location -> {
-                    
+
                     val intent = Intent(this, FakeManagerActivity::class.java)
                     intent.putExtra("userID", 0)
                     startActivity(intent)

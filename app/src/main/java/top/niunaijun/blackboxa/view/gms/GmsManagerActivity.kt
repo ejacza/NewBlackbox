@@ -16,7 +16,6 @@ import top.niunaijun.blackboxa.util.inflate
 import top.niunaijun.blackboxa.util.toast
 import top.niunaijun.blackboxa.view.base.LoadingActivity
 
-
 class GmsManagerActivity : LoadingActivity() {
 
     private lateinit var viewModel: GmsViewModel
@@ -117,7 +116,6 @@ class GmsManagerActivity : LoadingActivity() {
             }
         }
     }
-
 
     companion object{
         fun start(context: Context){

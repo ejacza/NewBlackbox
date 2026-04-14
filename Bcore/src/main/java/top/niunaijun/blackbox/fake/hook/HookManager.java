@@ -91,8 +91,6 @@ import top.niunaijun.blackbox.fake.service.ISettingsProviderProxy;
 import top.niunaijun.blackbox.fake.service.FeatureFlagUtilsProxy;
 import top.niunaijun.blackbox.fake.service.WorkManagerProxy;
 
-
-
 public class HookManager {
     public static final String TAG = "HookManager";
 
@@ -160,8 +158,7 @@ public class HookManager {
         addInjector(new IContentProviderProxy());
         addInjector(new ISettingsSystemProxy());
         addInjector(new ISystemSensorManagerProxy());
-        
-        
+
         addInjector(new IXiaomiAttributionSourceProxy());
         addInjector(new IXiaomiSettingsProxy());
         addInjector(new IXiaomiMiuiServicesProxy());
@@ -169,55 +166,55 @@ public class HookManager {
             addInjector(new IMediaRouterServiceProxy());
             addInjector(new IPowerManagerProxy());
             addInjector(new IContextHubServiceProxy());
-            
+
             addInjector(new IVibratorServiceProxy());
             addInjector(new IPersistentDataBlockServiceProxy());
             addInjector(AppInstrumentation.get());
-            
+
             addInjector(new IWifiManagerProxy());
             addInjector(new IWifiScannerProxy());
             addInjector(new ApkAssetsProxy());
             addInjector(new ResourcesManagerProxy());
-            
+
             if (BuildCompat.isS()) {
                 addInjector(new IActivityClientProxy(null));
             }
-            
+
             if (BuildCompat.isS()) {
                 addInjector(new ISensitiveContentProtectionManagerProxy());
             }
-            
+
             if (BuildCompat.isR()) {
                 addInjector(new IPermissionManagerProxy());
             }
-            
+
             if (BuildCompat.isQ()) {
                 addInjector(new IActivityTaskManagerProxy());
             }
-            
+
             if (BuildCompat.isPie()) {
                 addInjector(new ISystemUpdateProxy());
             }
-            
+
             if (BuildCompat.isOreo()) {
                 addInjector(new IAutofillManagerProxy());
                 addInjector(new IDeviceIdentifiersPolicyProxy());
                 addInjector(new IStorageStatsManagerProxy());
             }
-            
+
             if (BuildCompat.isN_MR1()) {
                 addInjector(new IShortcutManagerProxy());
             }
-            
+
             if (BuildCompat.isN()) {
                 addInjector(new INetworkManagementServiceProxy());
             }
-            
+
             if (BuildCompat.isM()) {
                 addInjector(new IFingerprintManagerProxy());
                 addInjector(new IGraphicsStatsProxy());
             }
-            
+
             if (BuildCompat.isL()) {
                 addInjector(new IJobServiceProxy());
             }
@@ -254,29 +251,26 @@ public class HookManager {
                 value.injectHook();
             } catch (Exception e) {
                 Slog.d(TAG, "hook error: " + value);
-                
+
                 handleHookError(value, e);
             }
         }
     }
 
-    
     private void handleHookError(IInjectHook hook, Exception e) {
         String hookName = hook.getClass().getSimpleName();
-        
-        
+
         Slog.e(TAG, "Hook failed: " + hookName + " - " + e.getMessage(), e);
-        
-        
-        if (hookName.contains("ActivityManager") || 
+
+        if (hookName.contains("ActivityManager") ||
             hookName.contains("PackageManager") ||
             hookName.contains("WebView") ||
             hookName.contains("ContentProvider")) {
-            
+
             Slog.w(TAG, "Critical hook failed: " + hookName + ", attempting recovery");
-            
+
             try {
-                
+
                 if (hook.isBadEnv()) {
                     Slog.d(TAG, "Attempting to recover hook: " + hookName);
                     hook.injectHook();
@@ -287,15 +281,14 @@ public class HookManager {
         }
     }
 
-    
     public boolean areCriticalHooksInstalled() {
         String[] criticalHooks = {
             "IActivityManagerProxy",
-            "IPackageManagerProxy", 
+            "IPackageManagerProxy",
             "WebViewProxy",
             "IContentProviderProxy"
         };
-        
+
         for (String hookName : criticalHooks) {
             boolean found = false;
             for (Class<?> hookClass : mInjectors.keySet()) {
@@ -309,21 +302,18 @@ public class HookManager {
                 return false;
             }
         }
-        
+
         Slog.d(TAG, "All critical hooks are installed");
         return true;
     }
 
-    
     public void reinitializeHooks() {
         Slog.d(TAG, "Reinitializing all hooks");
-        
-        
+
         mInjectors.clear();
-        
-        
+
         init();
-        
+
         Slog.d(TAG, "Hook reinitialization completed");
     }
 }

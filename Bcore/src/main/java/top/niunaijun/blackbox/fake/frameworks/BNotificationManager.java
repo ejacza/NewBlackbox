@@ -12,7 +12,6 @@ import top.niunaijun.blackbox.app.BActivityThread;
 import top.niunaijun.blackbox.core.system.ServiceManager;
 import top.niunaijun.blackbox.core.system.notification.IBNotificationManagerService;
 
-
 public class BNotificationManager extends BlackManager<IBNotificationManagerService> {
     private static final BNotificationManager sNotificationManager = new BNotificationManager();
 

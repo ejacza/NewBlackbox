@@ -64,12 +64,10 @@ public interface LocationManager {
     @BClassName("android.location.LocationManager$GpsStatusListenerTransport")
     interface GpsStatusListenerTransportSumsungS5 {
 
-
     }
 
     @BClassName("android.location.LocationManager$GpsStatusListenerTransport")
     interface GpsStatusListenerTransportOPPO_R815T {
-
 
     }
 
@@ -93,13 +91,10 @@ public interface LocationManager {
         @BMethod
         void onNmeaReceived(long long0, String String1);
 
-
-
     }
 
     @BClassName("android.location.LocationManager$GnssStatusListenerTransport")
     interface GnssStatusListenerTransportO {
-
 
     }
 
@@ -122,8 +117,6 @@ public interface LocationManager {
 
         @BMethod
         void onNmeaReceived(long long0, String String1);
-
-
 
     }
 }

@@ -17,44 +17,38 @@ import top.niunaijun.blackbox.fake.hook.IInjectHook;
 import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 
-
 public class BResourcesManager implements IInjectHook {
     private static final String TAG = "BResourcesManager";
 
     @Override
     public void injectHook() {
-        
-        
+
         Log.d(TAG, "BResourcesManager hook initialized");
     }
 
     @Override
     public boolean isBadEnv() {
-        return false; 
+        return false;
     }
 
-    
     public static String safeLoadAppLabel(Object applicationInfo) {
         if (applicationInfo == null) {
             return "Unknown App";
         }
-        
-        
+
         String packageName = getPackageNameSafely(applicationInfo);
-        
-        
+
         if (packageName != null && !packageName.isEmpty()) {
             return packageName;
         }
-        
-        
+
         try {
-            
+
             Method getLabelResMethod = applicationInfo.getClass().getMethod("getLabelRes");
             Integer labelRes = (Integer) getLabelResMethod.invoke(applicationInfo);
-            
+
             if (labelRes != null && labelRes != 0) {
-                
+
                 Object packageManager = getPackageManager();
                 if (packageManager != null) {
                     Method getTextMethod = packageManager.getClass().getMethod("getText", String.class, int.class, android.content.pm.ApplicationInfo.class);
@@ -64,8 +58,7 @@ public class BResourcesManager implements IInjectHook {
                     }
                 }
             }
-            
-            
+
             Method loadLabelMethod = applicationInfo.getClass().getMethod("loadLabel", android.content.pm.PackageManager.class);
             Object packageManager = getPackageManager();
             if (packageManager != null) {
@@ -77,13 +70,12 @@ public class BResourcesManager implements IInjectHook {
         } catch (Exception e) {
             Log.w(TAG, "Failed to load app label: " + e.getMessage());
         }
-        
+
         return "Unknown App";
     }
-    
-    
+
     private static String getPackageNameSafely(Object applicationInfo) {
-        
+
         try {
             Field packageNameField = applicationInfo.getClass().getDeclaredField("packageName");
             packageNameField.setAccessible(true);
@@ -94,8 +86,7 @@ public class BResourcesManager implements IInjectHook {
         } catch (Exception e) {
             Log.w(TAG, "Failed to get package name via field: " + e.getMessage());
         }
-        
-        
+
         try {
             Method getPackageNameMethod = applicationInfo.getClass().getMethod("getPackageName");
             Object packageName = getPackageNameMethod.invoke(applicationInfo);
@@ -105,8 +96,7 @@ public class BResourcesManager implements IInjectHook {
         } catch (Exception e) {
             Log.w(TAG, "Failed to get package name via method: " + e.getMessage());
         }
-        
-        
+
         try {
             String toString = applicationInfo.toString();
             if (toString.contains("packageName=")) {
@@ -118,20 +108,19 @@ public class BResourcesManager implements IInjectHook {
         } catch (Exception e) {
             Log.w(TAG, "Failed to get package name via toString: " + e.getMessage());
         }
-        
+
         return null;
     }
 
-    
     public static Object safeLoadAppIcon(Object applicationInfo) {
         try {
             if (applicationInfo != null) {
-                
+
                 Method getIconMethod = applicationInfo.getClass().getMethod("getIcon");
                 Integer iconRes = (Integer) getIconMethod.invoke(applicationInfo);
-                
+
                 if (iconRes != null && iconRes != 0) {
-                    
+
                     Object packageManager = getPackageManager();
                     if (packageManager != null) {
                         try {
@@ -145,8 +134,7 @@ public class BResourcesManager implements IInjectHook {
                         }
                     }
                 }
-                
-                
+
                 Method loadIconMethod = applicationInfo.getClass().getMethod("loadIcon", android.content.pm.PackageManager.class);
                 Object packageManager = getPackageManager();
                 if (packageManager != null) {
@@ -158,14 +146,12 @@ public class BResourcesManager implements IInjectHook {
         }
         return null;
     }
-    
-    
+
     private static String getPackageName(Object applicationInfo) {
         String packageName = getPackageNameSafely(applicationInfo);
         return packageName != null ? packageName : "";
     }
 
-    
     private static Object getPackageManager() {
         try {
             Class<?> blackBoxCoreClass = Class.forName("top.niunaijun.blackbox.BlackBoxCore");
@@ -176,15 +162,13 @@ public class BResourcesManager implements IInjectHook {
             return null;
         }
     }
-    
-    
+
     public static Object createSafeResourceManager(Context context) {
         try {
-            
+
             Class<?> resourcesManagerClass = Class.forName("android.app.ResourcesManager");
             Object resourcesManager = resourcesManagerClass.newInstance();
-            
-            
+
             try {
                 Field disableOverlayField = resourcesManagerClass.getDeclaredField("mDisableOverlayLoading");
                 disableOverlayField.setAccessible(true);
@@ -192,15 +176,14 @@ public class BResourcesManager implements IInjectHook {
             } catch (Exception e) {
                 Log.w(TAG, "Could not set overlay loading flag: " + e.getMessage());
             }
-            
+
             return resourcesManager;
         } catch (Exception e) {
             Log.w(TAG, "Failed to create safe resource manager: " + e.getMessage());
             return null;
         }
     }
-    
-    
+
     public static boolean isProblematicOverlayPath(String path) {
         return path != null && path.contains("/data/resource-cache/") && path.contains(".frro");
     }

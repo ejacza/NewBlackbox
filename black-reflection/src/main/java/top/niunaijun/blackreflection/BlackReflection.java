@@ -23,7 +23,6 @@ import top.niunaijun.blackreflection.annotation.BParamClass;
 import top.niunaijun.blackreflection.annotation.BParamClassName;
 import top.niunaijun.blackreflection.utils.Reflector;
 
-
 @SuppressWarnings("unchecked")
 public class BlackReflection {
     public static boolean DEBUG = false;
@@ -31,12 +30,7 @@ public class BlackReflection {
     private static final Map<Class<?>, Object> sProxyCache = new HashMap<>();
     private static final Map<Class<?>, Object> sProxyWithExceptionCache = new HashMap<>();
 
-    
     private static final WeakHashMap<Object, Map<Class<?>, Object>> sCallerProxyCache = new WeakHashMap<>();
-
-
-
-
 
     public static <T> T create(Class<T> clazz, final Object caller, boolean withException) {
         try {
@@ -57,7 +51,6 @@ public class BlackReflection {
 
                         Object callerByWeak = isStatic ? null : weakCaller.get();
 
-                        
                         BField bField = method.getAnnotation(BField.class);
                         BFieldNotProcess bFieldNotProcess = method.getAnnotation(BFieldNotProcess.class);
                         if (bField != null || bFieldNotProcess != null) {
@@ -74,10 +67,9 @@ public class BlackReflection {
                             return call;
                         }
 
-                        
                         BFieldSetNotProcess bFieldSetNotProcess = method.getAnnotation(BFieldSetNotProcess.class);
                         if (bFieldSetNotProcess != null) {
-                            
+
                             name = name.substring("_set_".length());
                             Reflector on = Reflector.on(aClass).field(name);
                             if (isStatic) {
@@ -91,10 +83,9 @@ public class BlackReflection {
                             return 0;
                         }
 
-                        
                         BFieldCheckNotProcess bFieldCheckNotProcess = method.getAnnotation(BFieldCheckNotProcess.class);
                         if (bFieldCheckNotProcess != null) {
-                            
+
                             name = name.substring("_check_".length());
                             try {
                                 Reflector on = Reflector.on(aClass).field(name);
@@ -106,10 +97,9 @@ public class BlackReflection {
 
                         Class<?>[] paramClass = getParamClass(method);
 
-                        
                         BMethodCheckNotProcess bMethodCheckNotProcess = method.getAnnotation(BMethodCheckNotProcess.class);
                         if (bMethodCheckNotProcess != null) {
-                            
+
                             name = name.substring("_check_".length());
                             try {
                                 return Reflector.on(aClass).method(name, paramClass).getMethod();
@@ -118,7 +108,6 @@ public class BlackReflection {
                             }
                         }
 
-                        
                         BConstructor bConstructor = method.getAnnotation(BConstructor.class);
                         BConstructorNotProcess bConstructorNotProcess = method.getAnnotation(BConstructorNotProcess.class);
                         if (bConstructor != null || bConstructorNotProcess != null) {

@@ -10,7 +10,6 @@ import javax.lang.model.element.Modifier;
 import top.niunaijun.blackreflection.BlackReflectionInfo;
 import top.niunaijun.blackreflection.utils.ClassUtils;
 
-
 public class BlackReflectionProxy {
 
     private static final ClassName BR = ClassName.get("top.niunaijun.blackreflection", "BlackReflection");
@@ -36,7 +35,6 @@ public class BlackReflectionProxy {
                 .replace(mPackageName + ".", "")
                 .replace(".", "");
 
-        
         TypeSpec reflection = TypeSpec.classBuilder(finalClass)
                 .addModifiers(Modifier.PUBLIC)
                 .addMethod(generaNotCallerMethod(true))

@@ -18,8 +18,6 @@ import top.niunaijun.blackbox.proxy.record.ProxyServiceRecord;
 
 import static android.app.Service.START_NOT_STICKY;
 
-
-
 public class AppServiceDispatcher {
     public static final String TAG = "AppServiceDispatcher";
 
@@ -40,8 +38,6 @@ public class AppServiceDispatcher {
 
         if (intent == null || serviceInfo == null)
             return null;
-
-
 
         Service service = getOrCreateService(serviceRecord);
         if (service == null)
@@ -73,7 +69,6 @@ public class AppServiceDispatcher {
         if (stubRecord.mServiceIntent == null || stubRecord.mServiceInfo == null) {
             return START_NOT_STICKY;
         }
-
 
         Service service = getOrCreateService(stubRecord);
         if (service == null)
@@ -141,7 +136,7 @@ public class AppServiceDispatcher {
                 }
             }
         }
-        
+
     }
 
     public boolean onUnbind(Intent proxyIntent) {

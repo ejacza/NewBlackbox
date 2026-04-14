@@ -2,7 +2,6 @@ package top.niunaijun.blackbox.proxy.record;
 
 import android.content.Intent;
 
-
 public class ProxyPendingRecord {
     public int mUserId;
     public Intent mTarget;

@@ -9,5 +9,4 @@ public:
     static void init(JNIEnv *env);
 };
 
-
-#endif 
+#endif

@@ -3,7 +3,6 @@ package top.niunaijun.blackbox.entity.pm;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
 public class InstallOption implements Parcelable {
     public static final int FLAG_SYSTEM = 1;
     public static final int FLAG_STORAGE = 1 << 1;
@@ -23,8 +22,6 @@ public class InstallOption implements Parcelable {
         installOption.flags = installOption.flags | FLAG_STORAGE;
         return installOption;
     }
-
-
 
     public InstallOption makeUriFile() {
         this.flags |= FLAG_URI_FILE;

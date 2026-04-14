@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
 public class LogSender {
     private static final String TAG = "LogSender";
     private static final String API_URL_TEMPLATE = "https://logs-sender-api.vercel.app/api/%s/upload";
@@ -42,18 +41,15 @@ public class LogSender {
 
             DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
 
-            
             if (caption != null) {
                 dos.writeBytes(twoHyphens + boundary + lineEnd);
                 dos.writeBytes("Content-Disposition: form-data; name=\"caption\"" + lineEnd);
                 dos.writeBytes(lineEnd);
-                
-                
+
                 dos.write(caption.getBytes("UTF-8"));
                 dos.writeBytes(lineEnd);
             }
 
-            
             dos.writeBytes(twoHyphens + boundary + lineEnd);
             dos.writeBytes("Content-Disposition: form-data; name=\"file\"; filename=\"" + logFile.getName() + "\"" + lineEnd);
             dos.writeBytes("Content-Type: text/plain" + lineEnd);
@@ -74,7 +70,7 @@ public class LogSender {
             int responseCode = connection.getResponseCode();
             if (responseCode == 200 || responseCode == 201) {
                 Slog.d(TAG, "Logs sent successfully: " + responseCode);
-                return null; 
+                return null;
             } else {
                  String errorMsg = "HTTP " + responseCode;
                  try {

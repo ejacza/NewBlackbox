@@ -1,7 +1,3 @@
-
-
-
-
 #include <jni.h>
 #include "JniHook.h"
 #include "Log.h"
@@ -73,7 +69,6 @@ inline static bool HasAccessFlag(char *art_method, uint32_t flag) {
     return (flags & flag) == flag;
 }
 
-
 inline static bool IsNativeMethod(char *art_method) {
     try {
         return HasAccessFlag(art_method, kAccNative);
@@ -84,7 +79,7 @@ inline static bool IsNativeMethod(char *art_method) {
 }
 
 inline static bool ClearFastNativeFlag(char *art_method) {
-    
+
     return HookEnv.api_level < __ANDROID_API_P__ && ClearAccessFlag(art_method, kAccFastNative);
 }
 
@@ -111,8 +106,7 @@ static void *GetFieldMethod(JNIEnv *env, jobject field) {
 
 bool CheckFlags(void *artMethod) {
     char *method = static_cast<char *>(artMethod);
-    
-    
+
     try {
         if (!HasAccessFlag(method, kAccNative)) {
             ALOGD("Method is not native, skipping hook");
@@ -171,7 +165,7 @@ JniHook::HookJniFun(JNIEnv *env, const char *class_name, const char *method_name
         ALOGE("jni hook error. class：%s, method：%s", class_name, method_name);
         return;
     }
-    
+
     if (HookEnv.api_level == __ANDROID_API_O__ || HookEnv.api_level == __ANDROID_API_O_MR1__) {
         AddAccessFlag((char *) artMethod, kAccFastNative);
     }
@@ -241,7 +235,7 @@ void JniHook::InitJniHook(JNIEnv *env, int api_level) {
     HookEnv.art_method_size = (size_t) nativeOffset2 - (size_t) nativeOffset;
 
     int i = 0;
-    
+
     auto artMethod = reinterpret_cast<uintptr_t *>(nativeOffset);
     for (i = 0; i < HookEnv.art_method_size; ++i) {
         if (reinterpret_cast<void *>(artMethod[i]) == native_offset) {
@@ -309,4 +303,3 @@ void JniHook::InitJniHook(JNIEnv *env, int api_level) {
     HookEnv.get_method_name_id = env->GetStaticMethodID(HookEnv.method_utils_class, "getMethodName",
                                                         "(Ljava/lang/reflect/Method;)Ljava/lang/String;");
 }
-

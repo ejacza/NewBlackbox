@@ -11,7 +11,6 @@ import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.fake.hook.ScanClass;
 
-
 @ScanClass(IInputMethodManagerProxy.class)
 public class IInputMethodManagerProxy extends BinderInvocationStub {
     public static final String TAG = "IInputMethodManagerProxy";

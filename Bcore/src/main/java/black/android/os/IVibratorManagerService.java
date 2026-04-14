@@ -6,7 +6,6 @@ import android.os.IInterface;
 import top.niunaijun.blackreflection.annotation.BClassName;
 import top.niunaijun.blackreflection.annotation.BStaticMethod;
 
-
 @BClassName("android.os.IVibratorManagerService")
 public interface IVibratorManagerService {
 

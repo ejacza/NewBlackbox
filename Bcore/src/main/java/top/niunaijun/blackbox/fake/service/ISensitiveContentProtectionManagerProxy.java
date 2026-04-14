@@ -12,7 +12,6 @@ import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class ISensitiveContentProtectionManagerProxy extends BinderInvocationStub {
     public static final String TAG = "ISensitiveContentProtection";
 
@@ -55,7 +54,7 @@ public class ISensitiveContentProtectionManagerProxy extends BinderInvocationStu
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
             if (args != null && args.length > 0) {
-                
+
                 for (int i = 0; i < args.length; i++) {
                     if (args[i] instanceof String) {
                         String pkg = (String) args[i];

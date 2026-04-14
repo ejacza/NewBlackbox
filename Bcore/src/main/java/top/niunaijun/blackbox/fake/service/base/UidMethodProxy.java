@@ -6,7 +6,6 @@ import top.niunaijun.blackbox.BlackBoxCore;
 import top.niunaijun.blackbox.app.BActivityThread;
 import top.niunaijun.blackbox.fake.hook.MethodHook;
 
-
 public class UidMethodProxy extends MethodHook {
     private final int index;
     private final String name;

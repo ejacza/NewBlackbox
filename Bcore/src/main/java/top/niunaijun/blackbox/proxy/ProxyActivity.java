@@ -15,11 +15,9 @@ import top.niunaijun.blackbox.proxy.record.ProxyActivityRecord;
 import top.niunaijun.blackbox.proxy.record.ProxyPendingRecord;
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class ProxyActivity extends Activity {
     public static final String TAG = "ProxyActivity";
 
-    
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +25,6 @@ public class ProxyActivity extends Activity {
         finish();
 
         HookManager.get().checkEnv(HCallbackProxy.class);
-
 
         ProxyActivityRecord record = ProxyActivityRecord.create(getIntent());
         if (record.mTarget != null) {

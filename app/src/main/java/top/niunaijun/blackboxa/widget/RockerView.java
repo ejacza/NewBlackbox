@@ -20,8 +20,6 @@ import androidx.annotation.NonNull;
 
 import top.niunaijun.blackboxa.util.MathUtil;
 
-
-
 public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.Callback {
 
     private static final int DEFAULT_AREA_RADIUS = 100;
@@ -41,12 +39,9 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
 
     private Paint mPaint;
 
-    
     private Point mAreaPosition;
 
-    
     private Point mRockerPosition;
-
 
     private int mAreaRadius = -1;
     private int mRockerRadius = -1;
@@ -58,16 +53,12 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
 
     private boolean canMove = true;
 
-
     private RockerListener mListener;
     public static final int EVENT_ACTION = 1;
     public static final int EVENT_CLOCK = 2;
 
     private int mRefreshCycle = DEFAULT_REFRESH_CYCLE;
     private int mCallbackCycle = DEFAULT_CALLBACK_CYCLE;
-
-
-    
 
     public RockerView(Context context) {
         this(context, null);
@@ -80,20 +71,16 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
     public RockerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        
         initAttrs(context, attrs);
 
-        
         setPaint();
 
         if (isInEditMode()) {
             return;
         }
 
-        
         configSurfaceView();
 
-        
         configSurfaceHolder();
     }
 
@@ -111,16 +98,16 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
     }
 
     private void configSurfaceView() {
-        setKeepScreenOn(true);          
-        setFocusable(true);             
-        setFocusableInTouchMode(true);  
-        setZOrderOnTop(true);           
+        setKeepScreenOn(true);
+        setFocusable(true);
+        setFocusableInTouchMode(true);
+        setZOrderOnTop(true);
     }
 
     private void configSurfaceHolder() {
         mHolder = getHolder();
         mHolder.addCallback(this);
-        mHolder.setFormat(PixelFormat.TRANSPARENT); 
+        mHolder.setFormat(PixelFormat.TRANSPARENT);
     }
 
     @Override
@@ -129,18 +116,17 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
         int defaultWidth = (mAreaRadius + mRockerRadius) * 2;
         int defalutHeight = defaultWidth;
 
-        int widthsize = MeasureSpec.getSize(widthMeasureSpec);      
-        int widthmode = MeasureSpec.getMode(widthMeasureSpec);      
+        int widthsize = MeasureSpec.getSize(widthMeasureSpec);
+        int widthmode = MeasureSpec.getMode(widthMeasureSpec);
 
-        int heightsize = MeasureSpec.getSize(heightMeasureSpec);    
-        int heightmode = MeasureSpec.getMode(heightMeasureSpec);    
+        int heightsize = MeasureSpec.getSize(heightMeasureSpec);
+        int heightmode = MeasureSpec.getMode(heightMeasureSpec);
 
         if (widthmode == MeasureSpec.AT_MOST || widthmode == MeasureSpec.UNSPECIFIED || widthsize < 0) {
             measureWidth = defaultWidth;
         } else {
             measureWidth = widthsize;
         }
-
 
         if (heightmode == MeasureSpec.AT_MOST || heightmode == MeasureSpec.UNSPECIFIED || heightsize < 0) {
             measureHeight = defalutHeight;
@@ -158,7 +144,6 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
         mAreaPosition = new Point(w / 2, h / 2);
         mRockerPosition = new Point(mAreaPosition);
 
-        
         int tempRadius = Math.min(w - getPaddingLeft() - getPaddingRight(), h - getPaddingTop() - getPaddingBottom());
         tempRadius /= 2;
         if (mAreaRadius == -1)
@@ -176,7 +161,6 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
             mCallbackThread = new Thread(() -> {
                 while (mCallbackOk) {
 
-                    
                     listenerCallback();
 
                     try {
@@ -215,15 +199,13 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
         }
     }
 
-    
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         try {
             int len = MathUtil.getDistance(mAreaPosition.x, mAreaPosition.y, event.getX(), event.getY());
 
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                
+
                 if (len > mAreaRadius) {
                     return true;
                 }
@@ -231,11 +213,11 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
 
             if (event.getAction() == MotionEvent.ACTION_MOVE) {
                 if (len <= mAreaRadius) {
-                    
+
                     mRockerPosition.set((int) event.getX(), (int) event.getY());
 
                 } else {
-                    
+
                     mRockerPosition = MathUtil.getPointByCutLength(mAreaPosition,
                             new Point((int) event.getX(), (int) event.getY()), mAreaRadius);
                 }
@@ -246,7 +228,7 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
                     mListener.callback(EVENT_ACTION, angle, distance);
                 }
             }
-            
+
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 mRockerPosition = new Point(mAreaPosition);
                 if (mListener != null) {
@@ -258,9 +240,6 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
         }
         return true;
     }
-
-
-    
 
     @Override
     public void run() {
@@ -280,7 +259,7 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
                     drawArea(canvas);
                     drawRocker(canvas);
                 }
-                Thread.sleep(mRefreshCycle);    
+                Thread.sleep(mRefreshCycle);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -338,12 +317,10 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
         }
     }
 
-    
     private float getAngleConvert(float radian) {
         return 90 + Math.round(radian / Math.PI * 180);
     }
 
-    
     @Override
     protected void onDraw(Canvas canvas) {
         if (isInEditMode()) {
@@ -352,8 +329,6 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
             drawRocker(canvas);
         }
     }
-
-    
 
     public void setCanMove(boolean isMove) {
         this.canMove = isMove;
@@ -429,12 +404,8 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
         mListener = listener;
     }
 
-    
-
-    
     public interface RockerListener {
 
-        
         void callback(int eventType, float currentAngle, float currentDistance);
     }
 

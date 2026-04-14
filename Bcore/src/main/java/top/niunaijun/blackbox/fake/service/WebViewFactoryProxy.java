@@ -13,7 +13,6 @@ import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class WebViewFactoryProxy extends ClassInvocationStub {
     public static final String TAG = "WebViewFactoryProxy";
 
@@ -23,12 +22,12 @@ public class WebViewFactoryProxy extends ClassInvocationStub {
 
     @Override
     protected Object getWho() {
-        return null; 
+        return null;
     }
 
     @Override
     protected void inject(Object baseInvocation, Object proxyInvocation) {
-        
+
     }
 
     @Override
@@ -36,15 +35,14 @@ public class WebViewFactoryProxy extends ClassInvocationStub {
         return false;
     }
 
-    
     @ProxyMethod("getWebViewProviderClass")
     public static class GetWebViewProviderClass extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
             Slog.d(TAG, "WebViewFactory: getWebViewProviderClass called");
-            
+
             try {
-                
+
                 Object result = method.invoke(who, args);
                 if (result != null) {
                     Slog.d(TAG, "WebViewFactory: Successfully got WebView provider class");
@@ -53,8 +51,7 @@ public class WebViewFactoryProxy extends ClassInvocationStub {
             } catch (Exception e) {
                 Slog.w(TAG, "WebViewFactory: Failed to get WebView provider class", e);
             }
-            
-            
+
             try {
                 Class<?> webViewClass = WebView.class;
                 Slog.d(TAG, "WebViewFactory: Returning default WebView class: " + webViewClass.getName());
@@ -66,15 +63,14 @@ public class WebViewFactoryProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("getWebViewProviderPackage")
     public static class GetWebViewProviderPackage extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
             Slog.d(TAG, "WebViewFactory: getWebViewProviderPackage called");
-            
+
             try {
-                
+
                 Object result = method.invoke(who, args);
                 if (result != null) {
                     Slog.d(TAG, "WebViewFactory: Successfully got WebView provider package");
@@ -83,23 +79,21 @@ public class WebViewFactoryProxy extends ClassInvocationStub {
             } catch (Exception e) {
                 Slog.w(TAG, "WebViewFactory: Failed to get WebView provider package", e);
             }
-            
-            
+
             String defaultPackage = "com.google.android.webview";
             Slog.d(TAG, "WebViewFactory: Returning default WebView package: " + defaultPackage);
             return defaultPackage;
         }
     }
 
-    
     @ProxyMethod("getWebViewProviderInfo")
     public static class GetWebViewProviderInfo extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
             Slog.d(TAG, "WebViewFactory: getWebViewProviderInfo called");
-            
+
             try {
-                
+
                 Object result = method.invoke(who, args);
                 if (result != null) {
                     Slog.d(TAG, "WebViewFactory: Successfully got WebView provider info");
@@ -108,32 +102,29 @@ public class WebViewFactoryProxy extends ClassInvocationStub {
             } catch (Exception e) {
                 Slog.w(TAG, "WebViewFactory: Failed to get WebView provider info", e);
             }
-            
-            
+
             Slog.d(TAG, "WebViewFactory: Returning null to use system default");
             return null;
         }
     }
 
-    
     @ProxyMethod("isWebViewSupported")
     public static class IsWebViewSupported extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
             Slog.d(TAG, "WebViewFactory: isWebViewSupported called, returning true");
-            return true; 
+            return true;
         }
     }
 
-    
     @ProxyMethod("getWebViewPackage")
     public static class GetWebViewPackage extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
             Slog.d(TAG, "WebViewFactory: getWebViewPackage called");
-            
+
             try {
-                
+
                 Object result = method.invoke(who, args);
                 if (result != null) {
                     Slog.d(TAG, "WebViewFactory: Successfully got WebView package");
@@ -142,23 +133,21 @@ public class WebViewFactoryProxy extends ClassInvocationStub {
             } catch (Exception e) {
                 Slog.w(TAG, "WebViewFactory: Failed to get WebView package", e);
             }
-            
-            
+
             String defaultPackage = "com.google.android.webview";
             Slog.d(TAG, "WebViewFactory: Returning default WebView package: " + defaultPackage);
             return defaultPackage;
         }
     }
 
-    
     @ProxyMethod("getWebViewProviderClassLoader")
     public static class GetWebViewProviderClassLoader extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
             Slog.d(TAG, "WebViewFactory: getWebViewProviderClassLoader called");
-            
+
             try {
-                
+
                 Object result = method.invoke(who, args);
                 if (result != null) {
                     Slog.d(TAG, "WebViewFactory: Successfully got WebView provider class loader");
@@ -167,8 +156,7 @@ public class WebViewFactoryProxy extends ClassInvocationStub {
             } catch (Exception e) {
                 Slog.w(TAG, "WebViewFactory: Failed to get WebView provider class loader", e);
             }
-            
-            
+
             try {
                 ClassLoader classLoader = WebView.class.getClassLoader();
                 Slog.d(TAG, "WebViewFactory: Returning current class loader: " + classLoader);
@@ -180,15 +168,14 @@ public class WebViewFactoryProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("getWebViewProviderPackageInfo")
     public static class GetWebViewProviderPackageInfo extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
             Slog.d(TAG, "WebViewFactory: getWebViewProviderPackageInfo called");
-            
+
             try {
-                
+
                 Object result = method.invoke(who, args);
                 if (result != null) {
                     Slog.d(TAG, "WebViewFactory: Successfully got WebView provider package info");
@@ -197,14 +184,12 @@ public class WebViewFactoryProxy extends ClassInvocationStub {
             } catch (Exception e) {
                 Slog.w(TAG, "WebViewFactory: Failed to get WebView provider package info", e);
             }
-            
-            
+
             Slog.d(TAG, "WebViewFactory: Returning null to use system default");
             return null;
         }
     }
 
-    
     @ProxyMethod("getWebViewProviderClass")
     public static class GetWebViewProviderClassWithPackage extends MethodHook {
         @Override
@@ -213,9 +198,9 @@ public class WebViewFactoryProxy extends ClassInvocationStub {
                 String packageName = (String) args[0];
                 Slog.d(TAG, "WebViewFactory: getWebViewProviderClass called for package: " + packageName);
             }
-            
+
             try {
-                
+
                 Object result = method.invoke(who, args);
                 if (result != null) {
                     Slog.d(TAG, "WebViewFactory: Successfully got WebView provider class");
@@ -224,8 +209,7 @@ public class WebViewFactoryProxy extends ClassInvocationStub {
             } catch (Exception e) {
                 Slog.w(TAG, "WebViewFactory: Failed to get WebView provider class", e);
             }
-            
-            
+
             try {
                 Class<?> webViewClass = WebView.class;
                 Slog.d(TAG, "WebViewFactory: Returning default WebView class: " + webViewClass.getName());
@@ -237,7 +221,6 @@ public class WebViewFactoryProxy extends ClassInvocationStub {
         }
     }
 
-    
     @ProxyMethod("getWebViewProviderClassLoader")
     public static class GetWebViewProviderClassLoaderWithPackage extends MethodHook {
         @Override
@@ -246,9 +229,9 @@ public class WebViewFactoryProxy extends ClassInvocationStub {
                 String packageName = (String) args[0];
                 Slog.d(TAG, "WebViewFactory: getWebViewProviderClassLoader called for package: " + packageName);
             }
-            
+
             try {
-                
+
                 Object result = method.invoke(who, args);
                 if (result != null) {
                     Slog.d(TAG, "WebViewFactory: Successfully got WebView provider class loader");
@@ -257,8 +240,7 @@ public class WebViewFactoryProxy extends ClassInvocationStub {
             } catch (Exception e) {
                 Slog.w(TAG, "WebViewFactory: Failed to get WebView provider class loader", e);
             }
-            
-            
+
             try {
                 ClassLoader classLoader = WebView.class.getClassLoader();
                 Slog.d(TAG, "WebViewFactory: Returning current class loader: " + classLoader);

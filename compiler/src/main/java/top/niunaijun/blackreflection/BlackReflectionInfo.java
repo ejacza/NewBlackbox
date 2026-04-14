@@ -1,10 +1,9 @@
 package top.niunaijun.blackreflection;
 
-
 public class BlackReflectionInfo {
-    
+
     private String realClass;
-    
+
     private String className;
 
     public String getClassName() {

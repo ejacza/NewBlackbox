@@ -9,7 +9,6 @@ public final class LocationRequest implements Parcelable {
         return null;
     }
 
-
     public static final Creator<LocationRequest> CREATOR = new Creator<LocationRequest>() {
         @Override
         public LocationRequest createFromParcel(Parcel in) {

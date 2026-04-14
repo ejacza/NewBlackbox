@@ -22,7 +22,6 @@ import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.MethodParameterUtils;
 
-
 public class ILocationManagerProxy extends BinderInvocationStub {
     public static final String TAG = "ILocationManagerProxy";
 
@@ -49,19 +48,18 @@ public class ILocationManagerProxy extends BinderInvocationStub {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
         MethodParameterUtils.replaceFirstAppPkg(args);
-        
-        
+
         String packageName = BActivityThread.getAppPackageName();
         if (packageName != null && packageName.equals("com.google.android.gms")) {
-            
-            if (method.getName().equals("getLastLocation") || 
+
+            if (method.getName().equals("getLastLocation") ||
                 method.getName().equals("getLastKnownLocation") ||
                 method.getName().equals("requestLocationUpdates")) {
                 Log.w(TAG, "Blocking location request from Google Play Services to prevent crash");
                 return null;
             }
         }
-        
+
         return super.invoke(proxy, method, args);
     }
 
@@ -70,7 +68,7 @@ public class ILocationManagerProxy extends BinderInvocationStub {
 
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
-            
+
             return true;
         }
     }
@@ -83,8 +81,7 @@ public class ILocationManagerProxy extends BinderInvocationStub {
             if (BLocationManager.isFakeLocationEnable()) {
                 return BLocationManager.get().getLocation(BActivityThread.getUserId(), BActivityThread.getAppPackageName()).convert2SystemLocation();
             }
-            
-            
+
             try {
                 return method.invoke(who, args);
             } catch (Exception e) {
@@ -105,8 +102,7 @@ public class ILocationManagerProxy extends BinderInvocationStub {
             if (BLocationManager.isFakeLocationEnable()) {
                 return BLocationManager.get().getLocation(BActivityThread.getUserId(), BActivityThread.getAppPackageName()).convert2SystemLocation();
             }
-            
-            
+
             try {
                 return method.invoke(who, args);
             } catch (Exception e) {
@@ -131,8 +127,7 @@ public class ILocationManagerProxy extends BinderInvocationStub {
                     return 0;
                 }
             }
-            
-            
+
             try {
                 return method.invoke(who, args);
             } catch (Exception e) {
@@ -180,7 +175,7 @@ public class ILocationManagerProxy extends BinderInvocationStub {
 
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
-            
+
             return 0;
         }
     }

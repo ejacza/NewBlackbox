@@ -16,7 +16,6 @@ import top.niunaijun.blackbox.core.system.pm.BPackageManagerService;
 
 import top.niunaijun.blackbox.core.system.user.BUserManagerService;
 
-
 public class ServiceManager {
     private static ServiceManager sServiceManager = null;
     public static final String ACTIVITY_MANAGER = "activity_manager";

@@ -2,6 +2,7 @@ package top.niunaijun.blackboxa.view.apps
 
 import android.graphics.Point
 import android.os.Bundle
+import android.content.Context
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
@@ -31,7 +32,11 @@ import top.niunaijun.blackboxa.view.main.MainActivity
 import java.util.*
 import kotlin.math.abs
 
-
+import androidx.activity.result.contract.ActivityResultContracts
+import android.net.Uri
+import java.io.File
+import java.io.FileOutputStream
+import top.niunaijun.blackbox.fake.frameworks.BPackageManager
 
 class AppsFragment : Fragment() {
 
@@ -45,9 +50,40 @@ class AppsFragment : Fragment() {
 
     private var popupMenu: PopupMenu? = null
 
+    private var currentPackageName: String? = null
+
+    private val pickLibraryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        uri?.let {
+            currentPackageName?.let { packageName ->
+                try {
+                    val inputStream = requireContext().getContentResolver().openInputStream(it)
+                    val injectDir = File(requireContext().filesProject, "inject")
+                    if (!injectDir.exists()) {
+                        injectDir.mkdirs()
+                    }
+                    val destFile = File(injectDir, "${packageName}.so")
+                    val outputStream = FileOutputStream(destFile)
+                    inputStream?.use { input ->
+                        outputStream.use { output ->
+                            input.copyTo(output)
+                        }
+                    }
+                    BPackageManager.get().setInjectPath(packageName, destFile.absolutePath, userID)
+                    requireContext().toast("Injected library for $packageName")
+                } catch (e: Exception) {
+                    Log.e(TAG, "Error injecting library: ${e.message}")
+                    requireContext().toast("Failed to inject library")
+                }
+            }
+        }
+    }
+
+    private val Context.filesProject: File
+        get() = this.getExternalFilesDir(null) ?: this.filesDir
+
     companion object {
         private const val TAG = "AppsFragment"
-        
+
         fun newInstance(userID:Int): AppsFragment {
             val fragment = AppsFragment()
             val bundle = bundleOf("userID" to userID)
@@ -79,49 +115,42 @@ class AppsFragment : Fragment() {
                 RVAdapter<AppInfo>(requireContext(), AppsAdapter()).bind(viewBinding.recyclerView)
 
             viewBinding.recyclerView.adapter = mAdapter
-            
-            
+
             val layoutManager = GridLayoutManager(requireContext(), 4)
             layoutManager.isItemPrefetchEnabled = true
             layoutManager.initialPrefetchItemCount = 8
             viewBinding.recyclerView.layoutManager = layoutManager
-            
-            
+
             viewBinding.recyclerView.setItemViewCacheSize(20)
             viewBinding.recyclerView.setHasFixedSize(true)
-            
-            
+
             viewBinding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     try {
                         super.onScrollStateChanged(recyclerView, newState)
                         when (newState) {
                             RecyclerView.SCROLL_STATE_IDLE -> {
-                                
+
                                 MemoryManager.optimizeMemoryForRecyclerView()
                             }
                             RecyclerView.SCROLL_STATE_DRAGGING -> {
-                                
-                                
+
                             }
                             RecyclerView.SCROLL_STATE_SETTLING -> {
-                                
-                                
+
                             }
                         }
                     } catch (e: Exception) {
                         Log.e(TAG, "Error in scroll state change: ${e.message}")
                     }
                 }
-                
+
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     try {
                         super.onScrolled(recyclerView, dx, dy)
-                        
+
                         if (Math.abs(dy) > 100) {
-                            
-                            
-                            
+
                             if (MemoryManager.isMemoryCritical()) {
                                 Log.w(TAG, "Memory critical during fast scrolling, forcing GC")
                                 MemoryManager.forceGarbageCollectionIfNeeded()
@@ -160,7 +189,7 @@ class AppsFragment : Fragment() {
             return viewBinding.root
         } catch (e: Exception) {
             Log.e(TAG, "Error in onCreateView: ${e.message}")
-            
+
             return View(requireContext())
         }
     }
@@ -177,45 +206,42 @@ class AppsFragment : Fragment() {
     override fun onStart() {
         try {
             super.onStart()
-            
-            
+
             try {
                 BlackBoxCore.get().addServiceAvailableCallback {
                     Log.d(TAG, "Services became available, refreshing app list")
-                    
+
                     viewModel.getInstalledAppsWithRetry(userID)
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "Error registering service available callback: ${e.message}")
             }
-            
+
             viewModel.getInstalledAppsWithRetry(userID)
         } catch (e: Exception) {
             Log.e(TAG, "Error in onStart: ${e.message}")
         }
     }
 
-    
     private fun interceptTouch() {
         try {
             val point = Point()
             var isScrolling = false
             var scrollStartTime = 0L
-            
+
             viewBinding.recyclerView.setOnTouchListener { _, e ->
                 try {
                     when (e.action) {
                         MotionEvent.ACTION_DOWN -> {
-                            
+
                             isScrolling = false
                             scrollStartTime = System.currentTimeMillis()
                             point.set(0, 0)
                         }
-                        
+
                         MotionEvent.ACTION_UP -> {
                             val scrollDuration = System.currentTimeMillis() - scrollStartTime
-                            
-                            
+
                             if (!isScrolling && !isMove(point, e) && scrollDuration < 500) {
                                 try {
                                     popupMenu?.show()
@@ -223,7 +249,7 @@ class AppsFragment : Fragment() {
                                     Log.e(TAG, "Error showing popup menu: ${e.message}")
                                 }
                             }
-                            
+
                             popupMenu = null
                             point.set(0, 0)
                             isScrolling = false
@@ -234,14 +260,12 @@ class AppsFragment : Fragment() {
                                 point.x = e.rawX.toInt()
                                 point.y = e.rawY.toInt()
                             }
-                            
-                            
+
                             if (isMove(point, e)) {
                                 isScrolling = true
                                 popupMenu?.dismiss()
                             }
-                            
-                            
+
                             isDownAndUp(point, e)
                         }
                     }
@@ -291,14 +315,14 @@ class AppsFragment : Fragment() {
 
     private fun onItemMove(fromPosition: Int, toPosition: Int) {
         try {
-            
+
             val items = mAdapter.getItems()
-            if (fromPosition < 0 || toPosition < 0 || 
+            if (fromPosition < 0 || toPosition < 0 ||
                 fromPosition >= items.size || toPosition >= items.size) {
                 Log.w(TAG, "Invalid positions for move: from=$fromPosition, to=$toPosition, size=${items.size}")
                 return
             }
-            
+
             if (fromPosition < toPosition) {
                 for (i in fromPosition until toPosition) {
                     try {
@@ -318,12 +342,12 @@ class AppsFragment : Fragment() {
                     }
                 }
             }
-            
+
             try {
                 mAdapter.notifyItemMoved(fromPosition, toPosition)
             } catch (e: Exception) {
                 Log.e(TAG, "Error notifying item moved: ${e.message}")
-                
+
                 mAdapter.notifyDataSetChanged()
             }
         } catch (e: Exception) {
@@ -359,6 +383,11 @@ class AppsFragment : Fragment() {
                                     R.id.app_shortcut -> {
                                         ShortcutUtil.createShortcut(requireContext(), userID, data)
                                     }
+
+                                    R.id.app_inject_lib -> {
+                                        currentPackageName = data.packageName
+                                        pickLibraryLauncher.launch("*/*")
+                                    }
                                 }
                                 return@setOnMenuItemClickListener true
                             } catch (e: Exception) {
@@ -376,7 +405,7 @@ class AppsFragment : Fragment() {
             Log.e(TAG, "Error in setOnLongClick: ${e.message}")
         }
     }
-    
+
     private fun initData() {
         try {
             viewBinding.stateView.showLoading()
@@ -467,7 +496,6 @@ class AppsFragment : Fragment() {
         }
     }
 
-    
     private fun stopApk(info: AppInfo) {
         try {
             MaterialDialog(requireContext()).show {
@@ -488,7 +516,6 @@ class AppsFragment : Fragment() {
         }
     }
 
-    
     private fun clearApk(info: AppInfo) {
         try {
             MaterialDialog(requireContext()).show {

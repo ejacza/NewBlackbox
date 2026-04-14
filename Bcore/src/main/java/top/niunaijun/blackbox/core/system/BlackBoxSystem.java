@@ -29,7 +29,6 @@ import top.niunaijun.blackbox.utils.FileUtils;
 
 import top.niunaijun.blackbox.core.system.JarManager;
 
-
 public class BlackBoxSystem {
     private static BlackBoxSystem sBlackBoxSystem;
     private final List<ISystemService> mServices = new ArrayList<>();
@@ -77,10 +76,8 @@ public class BlackBoxSystem {
             } catch (PackageManager.NameNotFoundException ignored) {
             }
         }
-        
+
         JarManager.getInstance().initializeAsync();
-        
-        
-     
+
     }
 }

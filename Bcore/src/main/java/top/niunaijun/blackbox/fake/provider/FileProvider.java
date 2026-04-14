@@ -30,7 +30,6 @@ import java.util.Map;
 import static org.xmlpull.v1.XmlPullParser.END_DOCUMENT;
 import static org.xmlpull.v1.XmlPullParser.START_TAG;
 
-
 public class FileProvider extends ContentProvider {
     private static final String[] COLUMNS = {
             OpenableColumns.DISPLAY_NAME, OpenableColumns.SIZE };
@@ -55,18 +54,15 @@ public class FileProvider extends ContentProvider {
 
     private PathStrategy mStrategy;
 
-    
     @Override
     public boolean onCreate() {
         return true;
     }
 
-    
     @Override
     public void attachInfo(Context context, ProviderInfo info) {
         super.attachInfo(context, info);
 
-        
         if (info.exported) {
             throw new SecurityException("Provider must not be exported");
         }
@@ -77,7 +73,6 @@ public class FileProvider extends ContentProvider {
         mStrategy = getPathStrategy(context, info.authority);
     }
 
-    
     public static Uri getUriForFile(Context context, String authority,
                                     File file) {
         final PathStrategy strategy = getPathStrategy(context, authority);
@@ -90,12 +85,11 @@ public class FileProvider extends ContentProvider {
         return strategy.getFileForUri(uri);
     }
 
-    
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs,
                         String sortOrder) {
-        
+
         final File file = mStrategy.getFileForUri(uri);
 
         if (projection == null) {
@@ -123,10 +117,9 @@ public class FileProvider extends ContentProvider {
         return cursor;
     }
 
-    
     @Override
     public String getType(Uri uri) {
-        
+
         final File file = mStrategy.getFileForUri(uri);
 
         final int lastDot = file.getName().lastIndexOf('.');
@@ -141,39 +134,34 @@ public class FileProvider extends ContentProvider {
         return "application/octet-stream";
     }
 
-    
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         throw new UnsupportedOperationException("No external inserts");
     }
 
-    
     @Override
     public int update(Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
         throw new UnsupportedOperationException("No external updates");
     }
 
-    
     @Override
     public int delete(Uri uri, String selection,
                       String[] selectionArgs) {
-        
+
         final File file = mStrategy.getFileForUri(uri);
         return file.delete() ? 1 : 0;
     }
 
-    
     @Override
     public ParcelFileDescriptor openFile(Uri uri, String mode)
             throws FileNotFoundException {
-        
+
         final File file = mStrategy.getFileForUri(uri);
         final int fileMode = modeToMode(mode);
         return ParcelFileDescriptor.open(file, fileMode);
     }
 
-    
     private static PathStrategy getPathStrategy(Context context, String authority) {
         PathStrategy strat;
         synchronized (sCache) {
@@ -194,7 +182,6 @@ public class FileProvider extends ContentProvider {
         return strat;
     }
 
-    
     private static PathStrategy parsePathStrategy(Context context, String authority)
             throws IOException, XmlPullParserException {
         final SimplePathStrategy strat = new SimplePathStrategy(authority);
@@ -229,7 +216,7 @@ public class FileProvider extends ContentProvider {
                 } else if (TAG_CACHE_PATH.equals(tag)) {
                     target = context.getCacheDir();
                 } else if (TAG_EXTERNAL.equals(tag)) {
-                    
+
                     target = context.getExternalFilesDir(null);
                 } else if (TAG_EXTERNAL_FILES.equals(tag)) {
                     File[] externalFilesDirs = ContextCompat.getExternalFilesDirs(context, null);
@@ -258,16 +245,13 @@ public class FileProvider extends ContentProvider {
         return strat;
     }
 
-    
     interface PathStrategy {
-        
+
         Uri getUriForFile(File file);
 
-        
         File getFileForUri(Uri uri);
     }
 
-    
     static class SimplePathStrategy implements PathStrategy {
         private final String mAuthority;
         private final HashMap<String, File> mRoots = new HashMap<String, File>();
@@ -276,14 +260,13 @@ public class FileProvider extends ContentProvider {
             mAuthority = authority;
         }
 
-        
         void addRoot(String name, File root) {
             if (TextUtils.isEmpty(name)) {
                 throw new IllegalArgumentException("Name must not be empty");
             }
 
             try {
-                
+
                 root = root.getCanonicalFile();
             } catch (IOException e) {
                 throw new IllegalArgumentException(
@@ -302,7 +285,6 @@ public class FileProvider extends ContentProvider {
                 throw new IllegalArgumentException("Failed to resolve canonical path for " + file);
             }
 
-            
             Map.Entry<String, File> mostSpecific = null;
             for (Map.Entry<String, File> root : mRoots.entrySet()) {
                 final String rootPath = root.getValue().getPath();
@@ -317,7 +299,6 @@ public class FileProvider extends ContentProvider {
                         "Failed to find configured root that contains " + path);
             }
 
-            
             final String rootPath = mostSpecific.getValue().getPath();
             if (rootPath.endsWith("/")) {
                 path = path.substring(rootPath.length());
@@ -325,7 +306,6 @@ public class FileProvider extends ContentProvider {
                 path = path.substring(rootPath.length() + 1);
             }
 
-            
             path = Uri.encode(mostSpecific.getKey()) + '/' + Uri.encode(path, "/");
             return new Uri.Builder().scheme("content")
                     .authority(mAuthority).encodedPath(path).build();
@@ -359,7 +339,6 @@ public class FileProvider extends ContentProvider {
         }
     }
 
-    
     private static int modeToMode(String mode) {
         int modeBits;
         if ("r".equals(mode)) {

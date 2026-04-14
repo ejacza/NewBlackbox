@@ -15,7 +15,6 @@ import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.compat.BuildCompat;
 
-
 public class IStorageManagerProxy extends BinderInvocationStub {
 
     public IStorageManagerProxy() {

@@ -43,7 +43,6 @@ import top.niunaijun.blackbox.utils.compat.ActivityManagerCompat;
 
 import static android.content.pm.PackageManager.GET_ACTIVITIES;
 
-
 @SuppressWarnings({"deprecation", "unchecked"})
 public class ActivityStack {
     public static final String TAG = "ActivityStack";
@@ -137,11 +136,10 @@ public class ActivityStack {
                 break;
         }
 
-        
         if (taskRecord == null || taskRecord.needNewTask()) {
             return startActivityInNewTaskLocked(userId, intent, activityInfo, resultTo, launchModeFlags);
         }
-        
+
         mAms.moveTaskToFront(taskRecord.id, 0);
 
         boolean notStartToFront = false;
@@ -163,7 +161,7 @@ public class ActivityStack {
 
         if (clearTop) {
             if (targetActivityRecord != null) {
-                
+
                 synchronized (targetActivityRecord.task.activities) {
                     for (int i = targetActivityRecord.task.activities.size() - 1; i >= 0; i--) {
                         ActivityRecord next = targetActivityRecord.task.activities.get(i);
@@ -174,7 +172,7 @@ public class ActivityStack {
                             if (singleTop) {
                                 newIntentRecord = targetActivityRecord;
                             } else {
-                                
+
                                 targetActivityRecord.finished = true;
                             }
                             break;
@@ -191,7 +189,7 @@ public class ActivityStack {
                 synchronized (mLaunchingActivities) {
                     for (ActivityRecord launchingActivity : mLaunchingActivities) {
                         if (!launchingActivity.finished && launchingActivity.component.equals(intent.getComponent())) {
-                            
+
                             ignore = true;
                         }
                     }
@@ -205,9 +203,9 @@ public class ActivityStack {
             } else {
                 ActivityRecord record = findActivityRecordByComponentName(userId, ComponentUtils.toComponentName(activityInfo));
                 if (record != null) {
-                    
+
                     newIntentRecord = record;
-                    
+
                     synchronized (taskRecord.activities) {
                         for (int i = taskRecord.activities.size() - 1; i >= 0; i--) {
                             ActivityRecord next = taskRecord.activities.get(i);
@@ -226,17 +224,15 @@ public class ActivityStack {
             newIntentRecord = topActivityRecord;
         }
 
-        
         if (clearTask && newTask) {
             for (ActivityRecord activity : taskRecord.activities) {
                 activity.finished = true;
             }
             finishAllActivity(userId);
         }
-        
 
         if (newIntentRecord != null) {
-            
+
             deliverNewIntentLocked(newIntentRecord, intent);
             return 0;
         } else if (ignore) {

@@ -12,7 +12,6 @@ import java.util.Map;
 import black.android.app.BRIServiceConnectionO;
 import top.niunaijun.blackbox.utils.compat.BuildCompat;
 
-
 public class ServiceConnectionDelegate extends IServiceConnection.Stub {
     private static final Map<IBinder, ServiceConnectionDelegate> sServiceConnectDelegate = new HashMap<>();
     private final IServiceConnection mConn;

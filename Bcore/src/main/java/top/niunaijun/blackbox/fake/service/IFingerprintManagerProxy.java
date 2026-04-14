@@ -8,7 +8,6 @@ import black.android.view.BRIGraphicsStatsStub;
 import top.niunaijun.blackbox.fake.hook.BinderInvocationStub;
 import top.niunaijun.blackbox.fake.service.base.PkgMethodProxy;
 
-
 public class IFingerprintManagerProxy extends BinderInvocationStub {
     public IFingerprintManagerProxy() {
         super(BRServiceManager.get().getService(Context.FINGERPRINT_SERVICE));

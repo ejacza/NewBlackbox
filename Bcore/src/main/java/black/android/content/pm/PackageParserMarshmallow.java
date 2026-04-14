@@ -14,21 +14,6 @@ public interface PackageParserMarshmallow {
     @BConstructor
     PackageParser _new();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @BMethod
     void collectCertificates(Package p, int flags);
 

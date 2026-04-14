@@ -9,13 +9,9 @@ import top.niunaijun.blackboxa.view.fake.FakeLocationFactory
 import top.niunaijun.blackboxa.view.gms.GmsFactory
 import top.niunaijun.blackboxa.view.list.ListFactory
 
-
-
 object InjectionUtil {
 
     private val appsRepository = AppsRepository()
-
-
 
     private val gmsRepository = GmsRepository()
 
@@ -28,7 +24,6 @@ object InjectionUtil {
     fun getListFactory(): ListFactory {
         return ListFactory(appsRepository)
     }
-
 
     fun getGmsFactory():GmsFactory{
         return GmsFactory(gmsRepository)

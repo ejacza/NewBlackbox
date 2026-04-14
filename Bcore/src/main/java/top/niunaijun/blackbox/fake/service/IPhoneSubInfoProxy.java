@@ -8,7 +8,6 @@ import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.MethodParameterUtils;
 
-
 public class IPhoneSubInfoProxy extends ClassInvocationStub {
     public static final String TAG = "IPhoneSubInfoProxy";
 
@@ -41,7 +40,6 @@ public class IPhoneSubInfoProxy extends ClassInvocationStub {
     public boolean isBadEnv() {
         return false;
     }
-
 
     @ProxyMethod("getLine1NumberForSubscriber")
     public static class getLine1NumberForSubscriber extends MethodHook {

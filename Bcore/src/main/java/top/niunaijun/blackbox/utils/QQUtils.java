@@ -5,7 +5,6 @@ import android.util.Log;
 
 import java.lang.reflect.Field;
 
-
 public class QQUtils {
     public static void hackLog(Context context) {
         try {

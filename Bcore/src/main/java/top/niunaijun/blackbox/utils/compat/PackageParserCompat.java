@@ -25,7 +25,6 @@ public class PackageParserCompat {
     private static final int API_LEVEL = Build.VERSION.SDK_INT;
     private static final int myUserId = 0;
 
-
     public static PackageParser createParser(File packageFile) {
         if (API_LEVEL >= M) {
             return BRPackageParserMarshmallow.get()._new();

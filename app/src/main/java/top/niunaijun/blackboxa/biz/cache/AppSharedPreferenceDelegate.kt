@@ -6,7 +6,6 @@ import androidx.core.content.edit
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-
 open class AppSharedPreferenceDelegate<Data>(
         context: Context,
         private val default: Data,

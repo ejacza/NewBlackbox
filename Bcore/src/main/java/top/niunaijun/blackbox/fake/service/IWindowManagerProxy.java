@@ -11,7 +11,6 @@ import top.niunaijun.blackbox.fake.hook.BinderInvocationStub;
 import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 
-
 public class IWindowManagerProxy extends BinderInvocationStub {
     public static final String TAG = "WindowManagerStub";
 

@@ -13,7 +13,6 @@ import top.niunaijun.blackbox.fake.service.base.ValueMethodProxy;
 import top.niunaijun.blackbox.utils.Reflector;
 import top.niunaijun.blackbox.utils.compat.BuildCompat;
 
-
 public class IPermissionManagerProxy extends BinderInvocationStub {
     public static final String TAG = "IPermissionManagerProxy";
 
@@ -32,7 +31,7 @@ public class IPermissionManagerProxy extends BinderInvocationStub {
     protected void inject(Object baseInvocation, Object proxyInvocation) {
         replaceSystemService("permissionmgr");
         BRActivityThread.getWithException()._set_sPermissionManager(proxyInvocation);
-        
+
     }
 
     @Override

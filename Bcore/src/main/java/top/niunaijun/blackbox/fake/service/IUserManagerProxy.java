@@ -14,7 +14,6 @@ import top.niunaijun.blackbox.fake.hook.BinderInvocationStub;
 import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 
-
 public class IUserManagerProxy extends BinderInvocationStub {
     public IUserManagerProxy() {
         super(BRServiceManager.get().getService(Context.USER_SERVICE));

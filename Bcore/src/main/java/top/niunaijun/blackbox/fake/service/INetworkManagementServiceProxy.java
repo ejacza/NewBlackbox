@@ -13,7 +13,6 @@ import top.niunaijun.blackbox.fake.service.base.UidMethodProxy;
 import top.niunaijun.blackbox.utils.MethodParameterUtils;
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class INetworkManagementServiceProxy extends BinderInvocationStub {
     public static final String NAME = "network_management";
 

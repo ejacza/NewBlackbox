@@ -9,7 +9,6 @@ import top.niunaijun.blackbox.BlackBoxCore;
 import top.niunaijun.blackbox.entity.am.PendingResultData;
 import top.niunaijun.blackbox.proxy.record.ProxyBroadcastRecord;
 
-
 public class ProxyBroadcastReceiver extends BroadcastReceiver {
     public static final String TAG = "ProxyBroadcastReceiver";
 

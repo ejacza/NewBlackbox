@@ -11,7 +11,6 @@ import top.niunaijun.blackbox.BlackBoxCore;
 import top.niunaijun.blackbox.app.BActivityThread;
 import top.niunaijun.blackbox.utils.compat.BuildCompat;
 
-
 public class FileProviderHandler {
 
     public static Uri convertFileUri(Context context, Uri uri) {

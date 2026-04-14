@@ -14,7 +14,6 @@ import black.android.content.BroadcastReceiverPendingResultContext;
 import black.android.content.BroadcastReceiverPendingResultMContext;
 import top.niunaijun.blackbox.utils.compat.BuildCompat;
 
-
 public class PendingResultData implements Parcelable {
     public int mType;
     public boolean mOrderedHint;
@@ -64,7 +63,6 @@ public class PendingResultData implements Parcelable {
             return BRBroadcastReceiverPendingResult.get()._new(mResultCode, mResultData, mResultExtras, mType, mOrderedHint, mInitialStickyHint, mToken, mSendingUser);
         }
     }
-
 
     @Override
     public int describeContents() {

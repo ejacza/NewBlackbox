@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-
 public class BLocationConfig implements Parcelable {
 
     public int pattern;
@@ -33,7 +32,6 @@ public class BLocationConfig implements Parcelable {
         this.neighboringCellInfo = in.createTypedArrayList(BCell.CREATOR);
         this.location = in.readParcelable(BLocation.class.getClassLoader());
     }
-
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {

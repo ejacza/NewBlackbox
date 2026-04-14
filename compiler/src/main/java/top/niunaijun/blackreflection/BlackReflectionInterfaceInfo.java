@@ -2,11 +2,10 @@ package top.niunaijun.blackreflection;
 
 import javax.lang.model.element.ExecutableElement;
 
-
 public class BlackReflectionInterfaceInfo {
-    
+
     private ExecutableElement executableElement;
-    
+
     private boolean isField;
 
     public boolean isField() {

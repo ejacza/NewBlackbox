@@ -13,21 +13,6 @@ public interface PackageParserLollipop {
     @BConstructor
     android.content.pm.PackageParser _new();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @BMethod
     void collectCertificates(Package p, int flags);
 

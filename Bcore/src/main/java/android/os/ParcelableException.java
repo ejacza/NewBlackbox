@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 
 import java.io.IOException;
 
-
 @TargetApi(Build.VERSION_CODES.O)
 public final class ParcelableException extends RuntimeException implements Parcelable {
     public ParcelableException(Throwable t) {

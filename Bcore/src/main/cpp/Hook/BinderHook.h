@@ -1,10 +1,5 @@
-
-
-
-
 #ifndef BLACKBOX_BINDERHOOK_H
 #define BLACKBOX_BINDERHOOK_H
-
 
 #include "BaseHook.h"
 
@@ -13,4 +8,4 @@ public:
     static void init(JNIEnv *env);
 };
 
-#endif 
+#endif

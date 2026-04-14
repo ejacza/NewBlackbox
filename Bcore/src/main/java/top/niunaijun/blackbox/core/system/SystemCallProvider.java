@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import top.niunaijun.blackbox.utils.Slog;
 import top.niunaijun.blackbox.utils.compat.BundleCompat;
 
-
 public class SystemCallProvider extends ContentProvider {
     public static final String TAG = "SystemCallProvider";
 
@@ -63,7 +62,7 @@ public class SystemCallProvider extends ContentProvider {
             return super.call(method, arg, extras);
         } catch (Exception e) {
             Slog.e(TAG, "Error in SystemCallProvider call method: " + method, e);
-            
+
             Bundle errorBundle = new Bundle();
             errorBundle.putString("error", e.getMessage());
             return errorBundle;

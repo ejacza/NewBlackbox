@@ -12,47 +12,34 @@ public class ShellUtils {
     public static final String COMMAND_EXIT = "exit\n";
     public static final String COMMAND_LINE_END = "\n";
 
-
     private ShellUtils() {
         throw new AssertionError();
     }
 
-
-    
     public static boolean checkRootPermission() {
         return execCommand("echo root", true, false).result == 0;
     }
 
-
-    
     public static CommandResult execCommand(String command, boolean isRoot) {
         return execCommand(new String[]{command}, isRoot, true);
     }
 
-
-    
     public static CommandResult execCommand(List<String> commands, boolean isRoot) {
         return execCommand(commands == null ? null : commands.toArray(new String[]{}), isRoot, true);
     }
 
-    
     public static CommandResult execCommand(String[] commands, boolean isRoot) {
         return execCommand(commands, isRoot, true);
     }
 
-
-    
     public static CommandResult execCommand(String command, boolean isRoot, boolean isNeedResultMsg) {
         return execCommand(new String[]{command}, isRoot, isNeedResultMsg);
     }
 
-
-    
     public static CommandResult execCommand(List<String> commands, boolean isRoot, boolean isNeedResultMsg) {
         return execCommand(commands == null ? null : commands.toArray(new String[]{}), isRoot, isNeedResultMsg);
     }
 
-    
     public static CommandResult execCommand(String[] commands, boolean isRoot, boolean isNeedResultMsg) {
         int result = -1;
         if (commands == null || commands.length == 0) {
@@ -106,22 +93,15 @@ public class ShellUtils {
         return new CommandResult(result, successMsg == null ? null : successMsg.toString());
     }
 
-
-    
     public static class CommandResult {
 
-
-        
         public int result;
-        
+
         public String successMsg;
-
-
 
         public CommandResult(int result) {
             this.result = result;
         }
-
 
         public CommandResult(int result, String successMsg) {
             this.result = result;

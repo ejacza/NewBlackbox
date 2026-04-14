@@ -5,7 +5,6 @@ import android.content.Intent;
 import java.util.LinkedList;
 import java.util.List;
 
-
 public class TaskRecord {
     public int id;
     public int userId;

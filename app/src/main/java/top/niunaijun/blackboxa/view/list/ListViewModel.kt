@@ -5,7 +5,6 @@ import top.niunaijun.blackboxa.bean.InstalledAppBean
 import top.niunaijun.blackboxa.data.AppsRepository
 import top.niunaijun.blackboxa.view.base.BaseViewModel
 
-
 class ListViewModel(private val repo: AppsRepository) : BaseViewModel() {
 
     val appsLiveData = MutableLiveData<List<InstalledAppBean>>()

@@ -4,7 +4,6 @@ import android.accounts.Account;
 
 import java.util.Objects;
 
-
 public class TokenCache {
     public int userId;
     public Account account;

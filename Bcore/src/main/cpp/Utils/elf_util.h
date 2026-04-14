@@ -1,4 +1,3 @@
-
 #ifndef SANDHOOK_ELF_UTIL_H
 #define SANDHOOK_ELF_UTIL_H
 
@@ -29,11 +28,6 @@ namespace SandHook {
                 return 0;
             }
         }
-
-
-
-
-
 
         bool isValid() const {
             return base != nullptr;
@@ -117,4 +111,4 @@ namespace SandHook {
     }
 }
 
-#endif 
+#endif

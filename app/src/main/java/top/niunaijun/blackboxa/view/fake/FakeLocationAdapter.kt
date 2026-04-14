@@ -10,8 +10,6 @@ import top.niunaijun.blackboxa.bean.FakeLocationBean
 import top.niunaijun.blackboxa.databinding.ItemFakeBinding
 import top.niunaijun.blackboxa.util.getString
 
-
-
 class FakeLocationAdapter : RVHolderFactory() {
 
     override fun createViewHolder(parent: ViewGroup?, viewType: Int, item: Any): RVHolder<out Any> {

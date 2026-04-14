@@ -16,7 +16,6 @@ import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.MethodParameterUtils;
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class IAppOpsManagerProxy extends BinderInvocationStub {
     public IAppOpsManagerProxy() {
         super(BRServiceManager.get().getService(Context.APP_OPS_SERVICE));
@@ -44,34 +43,30 @@ public class IAppOpsManagerProxy extends BinderInvocationStub {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         String methodName = method.getName();
-        
-        
-        
-        if (methodName.startsWith("check") || 
-            methodName.startsWith("note") || 
+
+        if (methodName.startsWith("check") ||
+            methodName.startsWith("note") ||
             methodName.startsWith("start")) {
             Slog.d(TAG, "AppOps invoke: Bypassing system for " + methodName + ", allowing operation");
             return AppOpsManager.MODE_ALLOWED;
         }
-        
-        
+
         if (methodName.startsWith("finish")) {
             Slog.d(TAG, "AppOps invoke: Bypassing system for " + methodName);
             return null;
         }
-        
-        
+
         try {
             MethodParameterUtils.replaceFirstAppPkg(args);
             MethodParameterUtils.replaceLastUid(args);
             return super.invoke(proxy, method, args);
         } catch (SecurityException e) {
-            
+
             Slog.w(TAG, "AppOps invoke: SecurityException caught for " + methodName + ", allowing operation", e);
             return AppOpsManager.MODE_ALLOWED;
         } catch (Exception e) {
             Slog.e(TAG, "AppOps invoke: Error in method " + methodName, e);
-            
+
             return AppOpsManager.MODE_ALLOWED;
         }
     }
@@ -93,7 +88,7 @@ public class IAppOpsManagerProxy extends BinderInvocationStub {
     public static class CheckPackage extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
-            
+
             return AppOpsManager.MODE_ALLOWED;
         }
     }
@@ -102,19 +97,17 @@ public class IAppOpsManagerProxy extends BinderInvocationStub {
     public static class CheckOperation extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
-            
-            
+
             Slog.d(TAG, "AppOps CheckOperation: Bypassing system check, allowing operation");
             return AppOpsManager.MODE_ALLOWED;
         }
     }
 
-    
     @ProxyMethod("checkOperationForDevice")
     public static class CheckOperationForDevice extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
-            
+
             Slog.d(TAG, "AppOps CheckOperationForDevice: Bypassing system check, allowing operation");
             return AppOpsManager.MODE_ALLOWED;
         }
@@ -124,7 +117,7 @@ public class IAppOpsManagerProxy extends BinderInvocationStub {
     public static class NoteOperation extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
-            
+
             Slog.d(TAG, "AppOps NoteOperation: Bypassing system check, allowing operation");
             return AppOpsManager.MODE_ALLOWED;
         }
@@ -134,18 +127,17 @@ public class IAppOpsManagerProxy extends BinderInvocationStub {
     public static class CheckOpNoThrow extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
-            
+
             Slog.d(TAG, "AppOps CheckOpNoThrow: Bypassing system check, allowing operation");
             return AppOpsManager.MODE_ALLOWED;
         }
     }
 
-    
     @ProxyMethod("startOp")
     public static class StartOp extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
-            
+
             Slog.d(TAG, "AppOps StartOp: Bypassing system check, allowing operation");
             return AppOpsManager.MODE_ALLOWED;
         }
@@ -155,13 +147,12 @@ public class IAppOpsManagerProxy extends BinderInvocationStub {
     public static class StartOpNoThrow extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
-            
+
             Slog.d(TAG, "AppOps StartOpNoThrow: Bypassing system check, allowing operation");
             return AppOpsManager.MODE_ALLOWED;
         }
     }
 
-    
     @ProxyMethod("finishOp")
     public static class FinishOp extends MethodHook {
         @Override
@@ -178,7 +169,6 @@ public class IAppOpsManagerProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("noteOp")
     public static class NoteOp extends MethodHook {
         @Override
@@ -196,7 +186,6 @@ public class IAppOpsManagerProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("noteOpNoThrow")
     public static class NoteOpNoThrow extends MethodHook {
         @Override
@@ -216,7 +205,7 @@ public class IAppOpsManagerProxy extends BinderInvocationStub {
 
     private static boolean isMediaStorageOrAudioOp(String opPublicNameOrStr) {
         if (opPublicNameOrStr == null) return false;
-        
+
         String n = opPublicNameOrStr.toUpperCase();
         return n.contains("READ_MEDIA")
                 || n.contains("READ_EXTERNAL_STORAGE")
@@ -241,7 +230,7 @@ public class IAppOpsManagerProxy extends BinderInvocationStub {
 
     private static String getOpPublicName(int op) {
         try {
-            
+
             java.lang.reflect.Method m = AppOpsManager.class.getMethod("opToPublicName", int.class);
             Object name = m.invoke(null, op);
             return name != null ? name.toString() : null;

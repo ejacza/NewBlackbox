@@ -14,8 +14,6 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-
-
 public class NativeUtils {
     public static final String TAG = "VirtualM";
 
@@ -34,7 +32,6 @@ public class NativeUtils {
             Log.d(TAG, "Done! +" + (System.currentTimeMillis() - startTime) + "ms");
         }
     }
-
 
     private static boolean findAndCopyNativeLib(ZipFile zipfile, String cpuArch, File nativeLibDir) throws Exception {
         Log.d(TAG, "Try to copy plugin's cup arch: " + cpuArch);
@@ -64,10 +61,6 @@ public class NativeUtils {
 
             String libName = entryName.substring(entryName.lastIndexOf('/') + 1);
             Log.d(TAG, "verify so " + libName);
-
-
-
-
 
             File libFile = new File(nativeLibDir, libName);
             if (libFile.exists() && libFile.length() == entry.getSize()) {

@@ -1,7 +1,3 @@
-
-
-
-
 #ifndef VIRTUALM_IO_H
 #define VIRTUALM_IO_H
 
@@ -31,5 +27,4 @@ public:
     static const char *redirectPath(const char *__path);
 };
 
-
-#endif 
+#endif

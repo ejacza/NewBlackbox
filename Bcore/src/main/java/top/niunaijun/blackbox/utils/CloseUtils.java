@@ -3,7 +3,6 @@ package top.niunaijun.blackbox.utils;
 import java.io.Closeable;
 import java.io.IOException;
 
-
 public class CloseUtils {
     public static void close(Closeable... closeables) {
         if (closeables == null) {

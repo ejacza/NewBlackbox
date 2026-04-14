@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class BCell implements Parcelable {
-    
 
     public int MCC;
     public int MNC;
@@ -12,25 +11,25 @@ public class BCell implements Parcelable {
     public int CID;
     public int TYPE;
     public static final int NETWORK_TYPE_UNKNOWN = 0;
-    
+
     public static final int NETWORK_TYPE_GPRS = 1;
-    
+
     public static final int NETWORK_TYPE_EDGE = 2;
-    
+
     public static final int NETWORK_TYPE_UMTS = 3;
-    
+
     public static final int NETWORK_TYPE_CDMA = 4;
-    
+
     public static final int NETWORK_TYPE_EVDO_0 = 5;
-    
+
     public static final int NETWORK_TYPE_EVDO_A = 6;
-    
+
     public static final int NETWORK_TYPE_1xRTT = 7;
-    
+
     public static final int PHONE_TYPE_NONE = 0;
-    
+
     public static final int PHONE_TYPE_GSM = 1;
-    
+
     public static final int PHONE_TYPE_CDMA = 2;
 
     @Override
@@ -76,4 +75,3 @@ public class BCell implements Parcelable {
         }
     };
 }
-

@@ -12,7 +12,6 @@ import top.niunaijun.blackbox.app.BActivityThread;
 import top.niunaijun.blackbox.core.system.ServiceManager;
 import top.niunaijun.blackbox.core.system.accounts.IBAccountManagerService;
 
-
 public class BAccountManager extends BlackManager<IBAccountManagerService> {
     private static final BAccountManager sBAccountManager = new BAccountManager();
 
@@ -33,7 +32,6 @@ public class BAccountManager extends BlackManager<IBAccountManagerService> {
         }
         return null;
     }
-
 
     public String getUserData(Account account, String key) {
         try {
@@ -88,7 +86,7 @@ public class BAccountManager extends BlackManager<IBAccountManagerService> {
             e.printStackTrace();
         }
     }
-    
+
     public void getAccountsByFeatures(IAccountManagerResponse response, String accountType,
                                String[] features) {
         try {
@@ -158,7 +156,6 @@ public class BAccountManager extends BlackManager<IBAccountManagerService> {
             e.printStackTrace();
         }
     }
-
 
     public void setPassword(Account account, String password) {
         try {
@@ -267,7 +264,6 @@ public class BAccountManager extends BlackManager<IBAccountManagerService> {
         }
     }
 
-    
     public Map getPackagesAndVisibilityForAccount(Account account) {
         try {
             return getService().getPackagesAndVisibilityForAccount(account, BActivityThread.getUserId());
@@ -302,11 +298,10 @@ public class BAccountManager extends BlackManager<IBAccountManagerService> {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        
+
         return 3;
     }
 
-    
     public Map getAccountsAndVisibilityForPackage(String packageName, String accountType) {
         try {
             return getService().getAccountsAndVisibilityForPackage(packageName, accountType, BActivityThread.getUserId());

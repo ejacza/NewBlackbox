@@ -19,36 +19,33 @@ import java.lang.reflect.Field;
 public class Resolution {
     private static final String TAG = "UtilsScreen";
 
-    
     public static int getScreenWidth(Context context) {
         return getScreenSize(context, null).x;
     }
 
-    
     public static int getScreenHeight(Context context) {
         return getScreenSize(context, null).y;
     }
 
-    
     @SuppressLint("NewApi")
     public static Point getScreenSize(Context context, Point outSize) {
         WindowManager wm = (WindowManager) context
                 .getSystemService(Context.WINDOW_SERVICE);
         Point ret = outSize == null ? new Point() : outSize;
-        
+
         if (Build.VERSION.SDK_INT >= 30) {
-            
+
             android.view.WindowMetrics windowMetrics = wm.getCurrentWindowMetrics();
             android.graphics.Rect bounds = windowMetrics.getBounds();
             ret.x = bounds.width();
             ret.y = bounds.height();
         } else if (Build.VERSION.SDK_INT >= 13) {
-            
+
             @SuppressWarnings("deprecation")
             final Display defaultDisplay = wm.getDefaultDisplay();
             defaultDisplay.getSize(ret);
         } else {
-            
+
             @SuppressWarnings("deprecation")
             final Display defaultDisplay = wm.getDefaultDisplay();
             ret.x = defaultDisplay.getWidth();
@@ -57,7 +54,6 @@ public class Resolution {
         return ret;
     }
 
-    
     public static float convertDpToPixel(float dp, Context context) {
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
@@ -65,7 +61,6 @@ public class Resolution {
         return px;
     }
 
-    
     public static float convertPixelsToDp(float px, Context context) {
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
@@ -73,9 +68,6 @@ public class Resolution {
         return dp;
     }
 
-    
-
-    
     public static float getDensity(Context context) {
         float density = 0f;
         if (context== null) {
@@ -89,7 +81,6 @@ public class Resolution {
         return density;
     }
 
-    
     public static boolean checkPix(Activity context, int width, int height) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
             DisplayMetrics metrics = new DisplayMetrics();
@@ -100,34 +91,28 @@ public class Resolution {
         }
     }
 
-    
     public static int getScreenPixWidth(Context context) {
         return context.getResources().getDisplayMetrics().widthPixels;
     }
 
-    
     public static int getScreenPixHeight(Context context) {
         return context.getResources().getDisplayMetrics().heightPixels;
     }
 
-    
     public static int dipToPx(Context context, int dip) {
         return (int) (dip * context.getResources().getDisplayMetrics().density + 0.5f);
     }
 
-    
     public static int pxToDip(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
 
-    
     public static int sp2px(Context context, float spValue) {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
 
-    
     public static void hideInputMethod(View view) {
         InputMethodManager imm = (InputMethodManager) view.getContext()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -136,7 +121,6 @@ public class Resolution {
         }
     }
 
-    
     public static void showInputMethod(View view) {
         InputMethodManager imm = (InputMethodManager) view.getContext()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -145,9 +129,8 @@ public class Resolution {
         }
     }
 
-    
     public static void showInputMethod(final View view, long delayMillis) {
-        
+
         new Handler().postDelayed(new Runnable() {
 
             @Override
@@ -158,7 +141,6 @@ public class Resolution {
         }, delayMillis);
     }
 
-    
     public static boolean isScreenLocked(Context c) {
         KeyguardManager mKeyguardManager = (KeyguardManager) c
                 .getSystemService(Context.KEYGUARD_SERVICE);
@@ -185,44 +167,34 @@ public class Resolution {
         return sbar;
     }
 
-    
-    
     public static Point getNavigationBarSize(Context context) {
         Point appUsableSize = getScreenSize(context, null);
         Point realScreenSize = getRealScreenSize(context);
 
-
-
-
-
-
-        
         if (appUsableSize.y < realScreenSize.y) {
             return new Point(appUsableSize.x, realScreenSize.y - appUsableSize.y);
         }
 
-        
         return new Point();
     }
-
 
     public static Point getRealScreenSize(Context context) {
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Point size = new Point();
 
         if (Build.VERSION.SDK_INT >= 30) {
-            
+
             android.view.WindowMetrics windowMetrics = windowManager.getCurrentWindowMetrics();
             android.graphics.Rect bounds = windowMetrics.getBounds();
             size.x = bounds.width();
             size.y = bounds.height();
         } else if (Build.VERSION.SDK_INT >= 17) {
-            
+
             @SuppressWarnings("deprecation")
             Display display = windowManager.getDefaultDisplay();
             display.getRealSize(size);
         } else if (Build.VERSION.SDK_INT >= 14) {
-            
+
             @SuppressWarnings("deprecation")
             Display display = windowManager.getDefaultDisplay();
             try {

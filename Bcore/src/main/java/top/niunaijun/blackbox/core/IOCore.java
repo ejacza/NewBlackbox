@@ -22,7 +22,6 @@ import top.niunaijun.blackbox.core.env.BEnvironment;
 import top.niunaijun.blackbox.utils.FileUtils;
 import top.niunaijun.blackbox.utils.TrieTree;
 
-
 @SuppressLint("SdCardPath")
 public class IOCore {
     public static final String TAG = "IOCore";
@@ -38,11 +37,10 @@ public class IOCore {
         return sIOCore;
     }
 
-    
     public void addRedirect(String origPath, String redirectPath) {
         if (TextUtils.isEmpty(origPath) || TextUtils.isEmpty(redirectPath) || mRedirectMap.get(origPath) != null)
             return;
-        
+
         mTrieTree.add(origPath);
         mRedirectMap.put(origPath, redirectPath);
         File redirectFile = new File(redirectPath);
@@ -68,7 +66,6 @@ public class IOCore {
         if (!TextUtils.isEmpty(search))
             return search;
 
-        
         String key = mTrieTree.search(path);
         if (!TextUtils.isEmpty(key))
             path = path.replace(key, Objects.requireNonNull(mRedirectMap.get(key)));
@@ -87,7 +84,6 @@ public class IOCore {
         if (TextUtils.isEmpty(path))
             return path;
 
-        
         String key = mTrieTree.search(path);
         if (!TextUtils.isEmpty(key))
             path = path.replace(key, Objects.requireNonNull(rule.get(key)));
@@ -101,8 +97,6 @@ public class IOCore {
         String pathStr = path.getAbsolutePath();
         return new File(redirectPath(pathStr, rule));
     }
-
-    
 
     public void enableRedirect(Context context) {
         Map<String, String> rule = new LinkedHashMap<>();
@@ -118,10 +112,9 @@ public class IOCore {
             rule.put(String.format("/data/data/%s", packageName), packageInfo.dataDir);
             rule.put(String.format("/data/user/%d/%s", systemUserId, packageName), packageInfo.dataDir);
 
-            
             File profilesRoot = new File(BEnvironment.getVirtualRoot(), "profiles");
             FileUtils.mkdirs(profilesRoot.getAbsolutePath());
-            
+
             rule.put("/data/misc/profiles", profilesRoot.getAbsolutePath());
 
             File profilesCurDir = new File(profilesRoot, String.format("cur/%d/%s", BlackBoxCore.getUserId(), packageName));
@@ -134,7 +127,6 @@ public class IOCore {
             if (BlackBoxCore.getContext().getExternalCacheDir() != null && context.getExternalCacheDir() != null) {
                 File external = BEnvironment.getExternalUserDir(BlackBoxCore.getUserId());
 
-                
                 rule.put("/sdcard", external.getAbsolutePath());
                 rule.put(String.format("/storage/emulated/%d", systemUserId), external.getAbsolutePath());
 

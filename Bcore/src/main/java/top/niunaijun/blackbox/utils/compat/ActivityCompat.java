@@ -1,6 +1,5 @@
 package top.niunaijun.blackbox.utils.compat;
 
-
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.WallpaperManager;
@@ -20,11 +19,10 @@ import top.niunaijun.blackbox.BlackBoxCore;
 import top.niunaijun.blackbox.app.BActivityThread;
 import top.niunaijun.blackbox.utils.DrawableUtils;
 
-
 public class ActivityCompat {
 
     public static void fix(Activity activity) {
-        
+
         BRActivity.get(activity).mActivityInfo();
 
         Context baseContext = activity.getBaseContext();

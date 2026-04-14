@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
 
-
 open class BaseViewModel : ViewModel() {
 
     fun launchOnUI(block: suspend CoroutineScope.() -> Unit) {
@@ -19,7 +18,6 @@ open class BaseViewModel : ViewModel() {
             }
         }
     }
-
 
     override fun onCleared() {
         super.onCleared()

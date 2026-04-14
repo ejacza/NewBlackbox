@@ -8,8 +8,6 @@ import android.os.IBinder;
 
 import top.niunaijun.blackbox.core.system.ProcessRecord;
 
-
-
 public class ActivityRecord extends Binder {
     public TaskRecord task;
     public IBinder token;
@@ -30,6 +28,5 @@ public class ActivityRecord extends Binder {
         record.userId = userId;
         return record;
     }
-
 
 }

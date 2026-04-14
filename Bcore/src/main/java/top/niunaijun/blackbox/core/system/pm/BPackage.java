@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import top.niunaijun.blackbox.entity.pm.InstallOption;
 import top.niunaijun.blackbox.utils.compat.BuildCompat;
 
-
 public class BPackage implements Parcelable {
     public ArrayList<Activity> activities = new ArrayList<Activity>(0);
     public ArrayList<Activity> receivers = new ArrayList<Activity>(0);
@@ -47,9 +46,9 @@ public class BPackage implements Parcelable {
     public String baseCodePath;
 
     public int mSharedUserLabel;
-    
+
     public ArrayList<ConfigurationInfo> configPreferences = null;
-    
+
     public ArrayList<FeatureInfo> reqFeatures = null;
 
     public InstallOption installOption;
@@ -124,7 +123,7 @@ public class BPackage implements Parcelable {
             this.mSignatures = aPackage.mSignatures;
         }
         this.mAppMetaData = aPackage.mAppMetaData;
-        
+
         this.packageName = aPackage.packageName;
         this.mPreferredOrder = aPackage.mPreferredOrder;
         this.mSharedUserId = aPackage.mSharedUserId;

@@ -16,7 +16,6 @@ import top.niunaijun.blackbox.entity.pm.InstallOption;
 import top.niunaijun.blackbox.utils.CloseUtils;
 import top.niunaijun.blackbox.utils.FileUtils;
 
-
 public class BPackageSettings implements Parcelable {
     public BPackage pkg;
     public int appId;
@@ -69,7 +68,6 @@ public class BPackageSettings implements Parcelable {
             state = new BPackageUserState();
         }
         state = new BPackageUserState(state);
-        
 
         if (userId == BUserHandle.USER_ALL) {
             state.installed = true;

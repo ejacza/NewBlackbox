@@ -1,10 +1,5 @@
-
-
-
-
 #ifndef BLACKBOX_VMCLASSLOADERHOOK_H
 #define BLACKBOX_VMCLASSLOADERHOOK_H
-
 
 #include "BaseHook.h"
 #include <jni.h>
@@ -15,5 +10,4 @@ public:
     static void init(JNIEnv *env);
 };
 
-
-#endif 
+#endif

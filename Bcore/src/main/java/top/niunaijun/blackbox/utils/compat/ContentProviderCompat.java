@@ -28,7 +28,6 @@ public class ContentProviderCompat {
         }
     }
 
-
     private static ContentProviderClient acquireContentProviderClient(Context context, Uri uri) {
         try {
             if (VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -46,15 +45,15 @@ public class ContentProviderCompat {
         if (client == null) {
             int retry = 0;
             long startTime = System.currentTimeMillis();
-            long timeout = 2000; 
-            
+            long timeout = 2000;
+
             while (retry < retryCount && client == null) {
-                
+
                 if (System.currentTimeMillis() - startTime > timeout) {
                     break;
                 }
-                
-                SystemClock.sleep(200); 
+
+                SystemClock.sleep(200);
                 retry++;
                 client = acquireContentProviderClient(context, uri);
             }
@@ -67,15 +66,15 @@ public class ContentProviderCompat {
         if (client == null) {
             int retry = 0;
             long startTime = System.currentTimeMillis();
-            long timeout = 2000; 
-            
+            long timeout = 2000;
+
             while (retry < retryCount && client == null) {
-                
+
                 if (System.currentTimeMillis() - startTime > timeout) {
                     break;
                 }
-                
-                SystemClock.sleep(200); 
+
+                SystemClock.sleep(200);
                 retry++;
                 client = acquireContentProviderClient(context, name);
             }

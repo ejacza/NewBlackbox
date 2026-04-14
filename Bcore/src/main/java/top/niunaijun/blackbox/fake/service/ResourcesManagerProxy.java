@@ -8,7 +8,6 @@ import top.niunaijun.blackbox.fake.hook.ClassInvocationStub;
 import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 
-
 public class ResourcesManagerProxy extends ClassInvocationStub {
     public static final String TAG = "ResourcesManagerProxy";
 
@@ -24,12 +23,12 @@ public class ResourcesManagerProxy extends ClassInvocationStub {
 
     @Override
     protected Object getWho() {
-        return null; 
+        return null;
     }
 
     @Override
     protected void inject(Object baseInvocation, Object proxyInvocation) {
-        
+
     }
 
     @Override
@@ -47,19 +46,17 @@ public class ResourcesManagerProxy extends ClassInvocationStub {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
             String path = (String) args[0];
-            
-            
-            if (path != null && (path.contains("resource-cache") || 
-                                path.contains("@idmap") || 
+
+            if (path != null && (path.contains("resource-cache") ||
+                                path.contains("@idmap") ||
                                 path.contains(".frro") ||
                                 path.contains("systemui") ||
                                 path.contains("data@resource-cache@"))) {
                 Log.d(TAG, "Blocking problematic ApkAssets load: " + path);
-                
+
                 return null;
             }
-            
-            
+
             return method.invoke(who, args);
         }
     }
@@ -69,19 +66,17 @@ public class ResourcesManagerProxy extends ClassInvocationStub {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
             String path = (String) args[0];
-            
-            
-            if (path != null && (path.contains("resource-cache") || 
-                                path.contains("@idmap") || 
+
+            if (path != null && (path.contains("resource-cache") ||
+                                path.contains("@idmap") ||
                                 path.contains(".frro") ||
                                 path.contains("systemui") ||
                                 path.contains("data@resource-cache@"))) {
                 Log.d(TAG, "Blocking problematic overlay path: " + path);
-                
+
                 return null;
             }
-            
-            
+
             return method.invoke(who, args);
         }
     }

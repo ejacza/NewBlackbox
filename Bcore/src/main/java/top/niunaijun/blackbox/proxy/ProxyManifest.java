@@ -4,7 +4,6 @@ import java.util.Locale;
 
 import top.niunaijun.blackbox.BlackBoxCore;
 
-
 public class ProxyManifest {
     public static final int FREE_COUNT = 50;
 

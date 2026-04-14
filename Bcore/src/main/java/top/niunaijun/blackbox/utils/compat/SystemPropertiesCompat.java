@@ -4,7 +4,6 @@ import android.text.TextUtils;
 
 import top.niunaijun.blackbox.utils.Reflector;
 
-
 public class SystemPropertiesCompat {
 
     public static String get(String key, String def) {

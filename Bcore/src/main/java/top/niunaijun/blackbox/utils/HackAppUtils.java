@@ -2,7 +2,6 @@ package top.niunaijun.blackbox.utils;
 
 public class HackAppUtils {
 
-    
     public static void enableQQLogOutput(String packageName, ClassLoader classLoader) {
         if ("com.tencent.mobileqq".equals(packageName)) {
             try {
@@ -11,7 +10,7 @@ public class HackAppUtils {
                         .set(100);
             } catch (Exception e) {
                 e.printStackTrace();
-                
+
             }
         }
     }

@@ -6,7 +6,6 @@ import android.os.IBinder;
 
 import top.niunaijun.blackbox.utils.compat.BundleCompat;
 
-
 public class ProxyServiceRecord {
     public Intent mServiceIntent;
     public ServiceInfo mServiceInfo;

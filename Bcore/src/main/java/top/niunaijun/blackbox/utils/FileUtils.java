@@ -86,14 +86,13 @@ public class FileUtils {
         return in;
     }
 
-    
     public static void chmod(String path, int mode) throws Exception {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             try {
                 Os.chmod(path, mode);
                 return;
             } catch (Exception e) {
-                
+
             }
         }
 
@@ -112,7 +111,7 @@ public class FileUtils {
                 Os.link(oldPath, newPath);
                 return;
             } catch (Throwable e) {
-                
+
             }
         }
         Runtime.getRuntime().exec("ln -s " + oldPath + " " + newPath).waitFor();
@@ -167,7 +166,7 @@ public class FileUtils {
             try {
                 link = isSymlink(dir);
             } catch (Exception e) {
-                
+
             }
             if (!link) {
                 String[] children = dir.list();
@@ -230,7 +229,7 @@ public class FileUtils {
             }
             outputStream.flush();
         } catch (Throwable e) {
-            
+
         } finally {
             closeQuietly(inputStream);
             closeQuietly(outputStream);
@@ -297,12 +296,10 @@ public class FileUtils {
         }
     }
 
-    
     public static boolean isValidExtFilename(String name) {
         return (name != null) && name.equals(buildValidExtFilename(name));
     }
 
-    
     public static String buildValidExtFilename(String name) {
         if (TextUtils.isEmpty(name) || ".".equals(name) || "..".equals(name)) {
             return "(invalid)";
@@ -355,7 +352,6 @@ public class FileUtils {
                 | MODE_IROTH | MODE_IXOTH;
     }
 
-    
     public static class FileLock {
         private static FileLock singleton;
         private Map<String, FileLockCount> mRefCountMap = new ConcurrentHashMap<String, FileLockCount>();
@@ -420,7 +416,6 @@ public class FileUtils {
             }
         }
 
-        
         public void unLock(File targetFile) {
 
             File lockFile = new File(targetFile.getParentFile().getAbsolutePath().concat("/lock"));

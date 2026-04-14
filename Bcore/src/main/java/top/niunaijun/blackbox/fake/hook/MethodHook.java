@@ -4,7 +4,6 @@ import java.lang.reflect.Method;
 
 import top.niunaijun.blackbox.BlackBoxCore;
 
-
 public abstract class MethodHook {
     protected String getMethodName() {
         return null;

@@ -24,7 +24,6 @@ import top.niunaijun.blackbox.fake.service.context.providers.ContentProviderStub
 import top.niunaijun.blackbox.fake.service.context.providers.SystemProviderStub;
 import top.niunaijun.blackbox.utils.compat.BuildCompat;
 
-
 public class ContentProviderDelegate {
     public static final String TAG = "ContentProviderDelegate";
     private static Set<String> sInjected = new HashSet<>();

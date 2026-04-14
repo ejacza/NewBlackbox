@@ -12,7 +12,6 @@ import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class GmsProxy extends BinderInvocationStub {
     public static final String TAG = "GmsProxy";
 
@@ -54,17 +53,16 @@ public class GmsProxy extends BinderInvocationStub {
         return false;
     }
 
-    
     @ProxyMethod("getService")
     public static class GetService extends MethodHook {
         @Override
         protected Object hook(Object who, Method method, Object[] args) throws Throwable {
             try {
-                
+
                 if (args != null && args.length > 0) {
                     String callingPackage = (String) args[0];
                     if ("com.google.android.gms".equals(callingPackage)) {
-                        
+
                         args[0] = BlackBoxCore.getHostPkg();
                         Slog.d(TAG, "GmsProxy: Fixed calling package from com.google.android.gms to " + BlackBoxCore.getHostPkg());
                     }
@@ -72,13 +70,12 @@ public class GmsProxy extends BinderInvocationStub {
                 return method.invoke(who, args);
             } catch (Exception e) {
                 Slog.e(TAG, "GmsProxy: Error in getService", e);
-                
+
                 return null;
             }
         }
     }
 
-    
     @ProxyMethod("getServiceBroker")
     public static class GetServiceBroker extends MethodHook {
         @Override
@@ -87,13 +84,12 @@ public class GmsProxy extends BinderInvocationStub {
                 return method.invoke(who, args);
             } catch (Exception e) {
                 Slog.e(TAG, "GmsProxy: Error in getServiceBroker", e);
-                
+
                 return null;
             }
         }
     }
 
-    
     @ProxyMethod("authenticate")
     public static class Authenticate extends MethodHook {
         @Override
@@ -103,13 +99,12 @@ public class GmsProxy extends BinderInvocationStub {
                 return method.invoke(who, args);
             } catch (Exception e) {
                 Slog.w(TAG, "GmsProxy: Authentication error, returning success", e);
-                
+
                 return createMockAuthResult();
             }
         }
     }
 
-    
     @ProxyMethod("getAccount")
     public static class GetAccount extends MethodHook {
         @Override
@@ -124,7 +119,6 @@ public class GmsProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("getToken")
     public static class GetToken extends MethodHook {
         @Override
@@ -139,7 +133,6 @@ public class GmsProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("invalidateToken")
     public static class InvalidateToken extends MethodHook {
         @Override
@@ -154,7 +147,6 @@ public class GmsProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("clearToken")
     public static class ClearToken extends MethodHook {
         @Override
@@ -169,10 +161,9 @@ public class GmsProxy extends BinderInvocationStub {
         }
     }
 
-    
     private static Object createMockAuthResult() {
         try {
-            
+
             Class<?> bundleClass = Class.forName("android.os.Bundle");
             return bundleClass.newInstance();
         } catch (Exception e) {

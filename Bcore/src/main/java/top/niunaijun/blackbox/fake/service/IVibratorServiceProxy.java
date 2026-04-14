@@ -12,7 +12,6 @@ import top.niunaijun.blackbox.fake.hook.BinderInvocationStub;
 import top.niunaijun.blackbox.utils.MethodParameterUtils;
 import top.niunaijun.blackbox.utils.compat.BuildCompat;
 
-
 public class IVibratorServiceProxy extends BinderInvocationStub {
     private static String NAME;
     static {

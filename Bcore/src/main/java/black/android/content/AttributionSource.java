@@ -4,7 +4,6 @@ import top.niunaijun.blackreflection.annotation.BClassName;
 import top.niunaijun.blackreflection.annotation.BField;
 import top.niunaijun.blackreflection.annotation.BMethod;
 
-
 @BClassName("android.content.AttributionSource")
 public interface AttributionSource {
     @BField

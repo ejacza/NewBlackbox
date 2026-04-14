@@ -12,7 +12,6 @@ import top.niunaijun.blackboxa.app.App
 import top.niunaijun.blackboxa.app.rocker.RockerManager
 import top.niunaijun.blackboxa.biz.cache.AppSharedPreferenceDelegate
 
-
 class BlackBoxLoader {
 
     private var mHideRoot by AppSharedPreferenceDelegate(App.getContext(), false)
@@ -168,9 +167,7 @@ class BlackBoxLoader {
                                                 TAG,
                                                 "Storage permission needed for launching: $packageName"
                                         )
-                                        
-                                        
-                                        
+
                                         val intent =
                                                 android.content.Intent(
                                                         "top.niunaijun.blackboxa.REQUEST_STORAGE_PERMISSION"
@@ -179,11 +176,7 @@ class BlackBoxLoader {
                                         intent.putExtra("user_id", userId)
                                         intent.setPackage(App.getContext().packageName)
                                         App.getContext().sendBroadcast(intent)
-                                        
-                                        
-                                        
-                                        
-                                        
+
                                         return false
                                     } catch (e: Exception) {
                                         Log.e(
@@ -273,12 +266,10 @@ class BlackBoxLoader {
         try {
             BlackBoxCore.get().doCreate()
 
-            
             try {
                 BlackBoxCore.get().addServiceAvailableCallback {
                     Log.d(TAG, "Services became available, triggering app list refresh")
-                    
-                    
+
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "Error registering service available callback: ${e.message}")

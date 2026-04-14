@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.jar.Attributes;
 
-
 public class ManifestDigest implements Parcelable {
 
     ManifestDigest(final byte[] digest) {

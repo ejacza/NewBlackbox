@@ -6,8 +6,6 @@ import android.content.pm.ServiceInfo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
-
 public class JobRecord implements Parcelable {
 
     public JobInfo mJobInfo;

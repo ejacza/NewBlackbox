@@ -12,7 +12,6 @@ import top.niunaijun.blackbox.fake.hook.MethodHook;
 import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.MethodParameterUtils;
 
-
 public class IDevicePolicyManagerProxy extends BinderInvocationStub {
     public IDevicePolicyManagerProxy() {
         super(BRServiceManager.get().getService(Context.DEVICE_POLICY_SERVICE));

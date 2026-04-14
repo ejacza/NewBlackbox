@@ -5,7 +5,6 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import top.niunaijun.blackboxa.app.App
 
-
 var toastImpl:Toast? = null
 
 fun Context.toast(msg:String){

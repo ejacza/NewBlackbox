@@ -11,7 +11,6 @@ import java.util.Map;
 
 import top.niunaijun.blackbox.utils.MethodParameterUtils;
 
-
 public abstract class ClassInvocationStub implements InvocationHandler, IInjectHook {
     public static final String TAG = ClassInvocationStub.class.getSimpleName();
 
@@ -43,7 +42,7 @@ public abstract class ClassInvocationStub implements InvocationHandler, IInjectH
     @Override
     public void injectHook() {
         mBase = getWho();
-        
+
         if (mBase == null) {
             return;
         }
@@ -102,16 +101,6 @@ public abstract class ClassInvocationStub implements InvocationHandler, IInjectH
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-
-
-
-
-
-
-
-
-
-
 
         MethodHook methodHook = mMethodHookMap.get(method.getName());
         if (methodHook == null || !methodHook.isEnable()) {

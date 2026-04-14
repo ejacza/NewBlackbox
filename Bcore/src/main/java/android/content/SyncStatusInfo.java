@@ -25,9 +25,7 @@ public class SyncStatusInfo implements Parcelable {
     public long initialFailureTime;
     public boolean pending;
     public boolean initialize;
-    
-  
-  
+
   private ArrayList<Long> periodicSyncTimes;
 
     private static final String TAG = "Sync";
@@ -129,8 +127,7 @@ public class SyncStatusInfo implements Parcelable {
     }
 
     public void setPeriodicSyncTime(int index, long when) {
-        
-        
+
         ensurePeriodicSyncTimeSize(index);
         periodicSyncTimes.set(index, when);
     }

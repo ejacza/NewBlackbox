@@ -15,7 +15,6 @@ import androidx.core.app.NotificationCompat;
 import top.niunaijun.blackbox.BlackBoxCore;
 import top.niunaijun.blackbox.utils.compat.BuildCompat;
 
-
 public class DaemonService extends Service {
     public static final String TAG = "DaemonService";
     private static final int NOTIFY_ID = BlackBoxCore.getHostPkg().hashCode();
@@ -32,8 +31,7 @@ public class DaemonService extends Service {
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "DaemonService onCreate");
-        
-        
+
         if (BuildCompat.isOreo()) {
             createNotificationChannel();
         }
@@ -42,26 +40,25 @@ public class DaemonService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG, "DaemonService onStartCommand");
-        
+
         try {
-            
+
             Intent innerIntent = new Intent(this, DaemonInnerService.class);
             startService(innerIntent);
-            
-            
+
             if (BuildCompat.isOreo()) {
                 if (!startForegroundService()) {
                     Log.w(TAG, "Failed to start foreground service, falling back to regular service");
                     return START_STICKY;
                 }
             }
-            
+
             Log.d(TAG, "DaemonService started successfully");
             return START_STICKY;
-            
+
         } catch (Exception e) {
             Log.e(TAG, "Error starting DaemonService: " + e.getMessage(), e);
-            
+
             return START_STICKY;
         }
     }
@@ -72,7 +69,6 @@ public class DaemonService extends Service {
         super.onDestroy();
     }
 
-    
     private void createNotificationChannel() {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -85,7 +81,7 @@ public class DaemonService extends Service {
                 channel.setShowBadge(false);
                 channel.setSound(null, null);
                 channel.enableVibration(false);
-                
+
                 NotificationManager notificationManager = getSystemService(NotificationManager.class);
                 if (notificationManager != null) {
                     notificationManager.createNotificationChannel(channel);
@@ -97,7 +93,6 @@ public class DaemonService extends Service {
         }
     }
 
-    
     private boolean startForegroundService() {
         try {
             Notification notification = createNotification();
@@ -115,7 +110,6 @@ public class DaemonService extends Service {
         }
     }
 
-    
     private Notification createNotification() {
         try {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
@@ -125,7 +119,7 @@ public class DaemonService extends Service {
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .setOngoing(true)
                 .setAutoCancel(false);
-            
+
             return builder.build();
         } catch (Exception e) {
             Log.e(TAG, "Failed to create notification: " + e.getMessage(), e);
@@ -133,7 +127,6 @@ public class DaemonService extends Service {
         }
     }
 
-    
     public static class DaemonInnerService extends Service {
         @Override
         public void onCreate() {
@@ -144,19 +137,18 @@ public class DaemonService extends Service {
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
             Log.i(TAG, "DaemonInnerService -> onStartCommand");
-            
+
             try {
-                
+
                 NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 if (nm != null) {
                     nm.cancel(NOTIFY_ID);
                     Log.d(TAG, "Notification cancelled successfully");
                 }
-                
-                
+
                 stopSelf();
                 return START_NOT_STICKY;
-                
+
             } catch (Exception e) {
                 Log.e(TAG, "Error in DaemonInnerService: " + e.getMessage(), e);
                 stopSelf();

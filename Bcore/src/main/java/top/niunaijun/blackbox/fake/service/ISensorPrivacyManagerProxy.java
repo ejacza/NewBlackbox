@@ -11,7 +11,6 @@ import top.niunaijun.blackbox.fake.hook.ProxyMethod;
 import top.niunaijun.blackbox.utils.Reflector;
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class ISensorPrivacyManagerProxy extends BinderInvocationStub {
     public static final String TAG = "SensorPrivacyProxy";
 
@@ -22,24 +21,21 @@ public class ISensorPrivacyManagerProxy extends BinderInvocationStub {
     @Override
     protected Object getWho() {
         try {
-            
+
             Object stub = null;
-            
-            
+
             try {
                 stub = Reflector.on("android.hardware.ISensorPrivacyManager$Stub")
                         .call("asInterface", BRServiceManager.get().getService("sensor_privacy"));
             } catch (Exception e1) {
                 Slog.d(TAG, "Failed Android 16+ path, trying alternative: " + e1.getMessage());
-                
-                
+
                 try {
                     stub = Reflector.on("android.hardware.ISensorPrivacyManager")
                             .call("asInterface", BRServiceManager.get().getService("sensor_privacy"));
                 } catch (Exception e2) {
                     Slog.d(TAG, "Failed alternative path: " + e2.getMessage());
-                    
-                    
+
                     try {
                         Class<?> stubClass = Class.forName("android.hardware.ISensorPrivacyManager$Stub");
                         Method asInterfaceMethod = stubClass.getMethod("asInterface", android.os.IBinder.class);
@@ -50,7 +46,7 @@ public class ISensorPrivacyManagerProxy extends BinderInvocationStub {
                     }
                 }
             }
-            
+
             if (stub != null) {
                 Slog.d(TAG, "Successfully obtained ISensorPrivacyManager interface");
                 return (IInterface) stub;
@@ -58,7 +54,7 @@ public class ISensorPrivacyManagerProxy extends BinderInvocationStub {
                 Slog.e(TAG, "Reflection succeeded but returned null interface");
                 return null;
             }
-            
+
         } catch (Exception e) {
             Slog.e(TAG, "Failed to get ISensorPrivacyManager interface", e);
             return null;
@@ -75,7 +71,6 @@ public class ISensorPrivacyManagerProxy extends BinderInvocationStub {
         return false;
     }
 
-    
     @ProxyMethod("isSensorPrivacyEnabled")
     public static class IsSensorPrivacyEnabled extends MethodHook {
         @Override
@@ -85,7 +80,6 @@ public class ISensorPrivacyManagerProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("isSensorPrivacyEnabledForUser")
     public static class IsSensorPrivacyEnabledForUser extends MethodHook {
         @Override
@@ -95,7 +89,6 @@ public class ISensorPrivacyManagerProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("isSensorPrivacyEnabledForProfile")
     public static class IsSensorPrivacyEnabledForProfile extends MethodHook {
         @Override
@@ -105,7 +98,6 @@ public class ISensorPrivacyManagerProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("setSensorPrivacy")
     public static class SetSensorPrivacy extends MethodHook {
         @Override
@@ -115,7 +107,6 @@ public class ISensorPrivacyManagerProxy extends BinderInvocationStub {
         }
     }
 
-    
     @ProxyMethod("setSensorPrivacyForProfile")
     public static class SetSensorPrivacyForProfile extends MethodHook {
         @Override
@@ -125,5 +116,3 @@ public class ISensorPrivacyManagerProxy extends BinderInvocationStub {
         }
     }
 }
-
-

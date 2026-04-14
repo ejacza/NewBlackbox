@@ -5,14 +5,12 @@ import java.util.List;
 
 public class TrieTree {
 
-    
     private final TrieNode root = new TrieNode();
 
-    
     private static class TrieNode {
         char content;
         String word;
-        boolean isEnd = false; 
+        boolean isEnd = false;
         List<TrieNode> children = new LinkedList<>();
 
         public TrieNode() {}
@@ -21,7 +19,6 @@ public class TrieTree {
             this.content = content;
             this.word    = word;
         }
-
 
         @Override
         public boolean equals(Object object) {

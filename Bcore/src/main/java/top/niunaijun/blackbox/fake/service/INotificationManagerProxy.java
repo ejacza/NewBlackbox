@@ -22,7 +22,6 @@ import top.niunaijun.blackbox.utils.MethodParameterUtils;
 import top.niunaijun.blackbox.utils.compat.BuildCompat;
 import top.niunaijun.blackbox.utils.compat.ParceledListSliceCompat;
 
-
 public class INotificationManagerProxy extends BinderInvocationStub {
     public static final String TAG = "INotificationManagerProxy";
 
@@ -95,7 +94,6 @@ public class INotificationManagerProxy extends BinderInvocationStub {
             return getTagIndex() + 1;
         }
     }
-
 
     @ProxyMethod("enqueueNotificationWithTag")
     public static class EnqueueNotificationWithTag extends MethodHook {

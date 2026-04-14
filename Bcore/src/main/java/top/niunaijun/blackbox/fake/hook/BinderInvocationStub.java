@@ -13,7 +13,6 @@ import java.util.Map;
 
 import black.android.os.BRServiceManager;
 
-
 public abstract class BinderInvocationStub extends ClassInvocationStub implements IBinder {
     private IBinder mBaseBinder;
 
@@ -71,7 +70,6 @@ public abstract class BinderInvocationStub extends ClassInvocationStub implement
     public boolean unlinkToDeath(@NonNull DeathRecipient recipient, int flags) {
         return mBaseBinder.unlinkToDeath(recipient, flags);
     }
-
 
     protected void replaceSystemService(String name) {
         Map<String, IBinder> services = BRServiceManager.get().sCache();

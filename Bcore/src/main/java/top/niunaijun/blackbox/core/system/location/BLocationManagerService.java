@@ -30,7 +30,6 @@ import top.niunaijun.blackbox.utils.CloseUtils;
 import top.niunaijun.blackbox.utils.FileUtils;
 import top.niunaijun.blackbox.utils.Slog;
 
-
 public class BLocationManagerService extends IBLocationManagerService.Stub implements ISystemService {
     public static final String TAG = "BLocationManagerService";
 

@@ -4,7 +4,6 @@ import top.niunaijun.blackreflection.annotation.BClass;
 import top.niunaijun.blackreflection.annotation.BClassName;
 import top.niunaijun.blackreflection.annotation.BClassNameNotProcess;
 
-
 public class ClassUtil {
     public static Class<?> classReady(Class<?> clazz) {
         BClassNameNotProcess bClassNameNotProcess = clazz.getAnnotation(BClassNameNotProcess.class);

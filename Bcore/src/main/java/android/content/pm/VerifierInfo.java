@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.security.PublicKey;
 
-
 public class VerifierInfo implements Parcelable {
 
     public static final Parcelable.Creator<VerifierInfo> CREATOR = new Parcelable.Creator<VerifierInfo>() {

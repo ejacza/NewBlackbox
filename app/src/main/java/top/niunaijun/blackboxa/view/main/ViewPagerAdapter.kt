@@ -5,8 +5,6 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import top.niunaijun.blackboxa.view.apps.AppsFragment
 
-
-
 class ViewPagerAdapter(appCompatActivity: AppCompatActivity) : FragmentStateAdapter(appCompatActivity) {
 
     private var fragmentList = mutableListOf<AppsFragment>()

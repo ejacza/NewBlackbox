@@ -1,6 +1,5 @@
 package top.niunaijun.blackbox.core.system.location;
 
-
 public class LocationRecord {
     public String packageName;
     public int userId;

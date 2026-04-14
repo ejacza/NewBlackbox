@@ -1,10 +1,7 @@
-
-
 package top.niunaijun.blackbox.core.system.pm;
 
 import java.util.AbstractSet;
 import java.util.Iterator;
-
 
 public final class FastImmutableArraySet<T> extends AbstractSet<T> {
     FastIterator<T> mIterator;

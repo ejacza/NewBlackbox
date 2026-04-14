@@ -28,7 +28,6 @@ import top.niunaijun.blackbox.entity.am.RunningServiceInfo;
 import top.niunaijun.blackbox.proxy.ProxyManifest;
 import top.niunaijun.blackbox.proxy.record.ProxyServiceRecord;
 
-
 @SuppressLint("NewApi")
 public class ActiveServices {
     public static final String TAG = "ActiveServices";
@@ -268,10 +267,10 @@ public class ActiveServices {
     }
 
     public static class RunningServiceRecord extends IEmpty.Stub {
-        
+
         private final AtomicInteger mStartId = new AtomicInteger(1);
         private final AtomicInteger mBindCount = new AtomicInteger(0);
-        
+
         private ConnectedServiceRecord mConnectedServiceRecord;
 
         private ServiceInfo mServiceInfo;

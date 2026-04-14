@@ -1,5 +1,3 @@
-
-
 package top.niunaijun.blackbox.core.system.pm;
 
 import android.content.Intent;
@@ -23,7 +21,6 @@ import java.util.List;
 import java.util.Set;
 
 import top.niunaijun.blackbox.utils.Slog;
-
 
 public abstract class IntentResolver<F extends BPackage.IntentInfo, R extends Object> {
     final private static String TAG = "IntentResolver";
@@ -112,14 +109,14 @@ public abstract class IntentResolver<F extends BPackage.IntentInfo, R extends Ob
 
     public ArrayList<F> findFilters(IntentFilter matching) {
         if (matching.countDataSchemes() == 1) {
-            
+
             return collectFilters(mSchemeToFilter.get(matching.getDataScheme(0)), matching);
         } else if (matching.countDataTypes() != 0 && matching.countActions() == 1) {
-            
+
             return collectFilters(mTypedActionToFilter.get(matching.getAction(0)), matching);
         } else if (matching.countDataTypes() == 0 && matching.countDataSchemes() == 0
                 && matching.countActions() == 1) {
-            
+
             return collectFilters(mActionToFilter.get(matching.getAction(0)), matching);
         } else {
             ArrayList<F> res = null;
@@ -251,12 +248,10 @@ public abstract class IntentResolver<F extends BPackage.IntentInfo, R extends Ob
 
     }
 
-    
     public Iterator<F> filterIterator() {
         return new IteratorWrapper(mFilters.iterator());
     }
 
-    
     public Set<F> filterSet() {
         return Collections.unmodifiableSet(mFilters);
     }
@@ -298,8 +293,6 @@ public abstract class IntentResolver<F extends BPackage.IntentInfo, R extends Ob
         F[] thirdTypeCut = null;
         F[] schemeCut = null;
 
-        
-        
         if (resolvedType != null) {
             int slashpos = resolvedType.indexOf('/');
             if (slashpos > 0) {
@@ -307,46 +300,36 @@ public abstract class IntentResolver<F extends BPackage.IntentInfo, R extends Ob
                 if (!baseType.equals("*")) {
                     if (resolvedType.length() != slashpos+2
                             || resolvedType.charAt(slashpos+1) != '*') {
-                        
-                        
+
                         firstTypeCut = mTypeToFilter.get(resolvedType);
                         if (debug) Slog.v(TAG, "First type cut: " + Arrays.toString(firstTypeCut));
                         secondTypeCut = mWildTypeToFilter.get(baseType);
                         if (debug) Slog.v(TAG, "Second type cut: "
                                 + Arrays.toString(secondTypeCut));
                     } else {
-                        
+
                         firstTypeCut = mBaseTypeToFilter.get(baseType);
                         if (debug) Slog.v(TAG, "First type cut: " + Arrays.toString(firstTypeCut));
                         secondTypeCut = mWildTypeToFilter.get(baseType);
                         if (debug) Slog.v(TAG, "Second type cut: "
                                 + Arrays.toString(secondTypeCut));
                     }
-                    
-                    
+
                     thirdTypeCut = mWildTypeToFilter.get("*");
                     if (debug) Slog.v(TAG, "Third type cut: " + Arrays.toString(thirdTypeCut));
                 } else if (intent.getAction() != null) {
-                    
-                    
-                    
+
                     firstTypeCut = mTypedActionToFilter.get(intent.getAction());
                     if (debug) Slog.v(TAG, "Typed Action list: " + Arrays.toString(firstTypeCut));
                 }
             }
         }
 
-        
-        
-        
         if (scheme != null) {
             schemeCut = mSchemeToFilter.get(scheme);
             if (debug) Slog.v(TAG, "Scheme list: " + Arrays.toString(schemeCut));
         }
 
-        
-        
-        
         if (resolvedType == null && scheme == null && intent.getAction() != null) {
             firstTypeCut = mActionToFilter.get(intent.getAction());
             if (debug) Slog.v(TAG, "Action list: " + Arrays.toString(firstTypeCut));
@@ -371,7 +354,6 @@ public abstract class IntentResolver<F extends BPackage.IntentInfo, R extends Ob
         }
         filterResults(finalList);
 
-
         if (debug) {
             Slog.v(TAG, "Final result list:");
             for (int i=0; i<finalList.size(); i++) {
@@ -381,17 +363,14 @@ public abstract class IntentResolver<F extends BPackage.IntentInfo, R extends Ob
         return finalList;
     }
 
-    
     protected boolean allowFilterResult(F filter, List<R> dest) {
         return true;
     }
 
-    
     protected boolean isFilterStopped(F filter, int userId) {
         return false;
     }
 
-    
     protected abstract boolean isPackageForFilter(String packageName, F filter);
 
     protected abstract F[] newArray(int size);
@@ -406,7 +385,6 @@ public abstract class IntentResolver<F extends BPackage.IntentInfo, R extends Ob
         Collections.sort(results, mResolvePrioritySorter);
     }
 
-    
     protected void filterResults(List<R> results) {
     }
 
@@ -581,8 +559,6 @@ public abstract class IntentResolver<F extends BPackage.IntentInfo, R extends Ob
         final Uri data = intent.getData();
         final String packageName = intent.getPackage();
 
-
-
         final int N = src != null ? src.length : 0;
         boolean hasNonDefaults = false;
         int i;
@@ -591,14 +567,6 @@ public abstract class IntentResolver<F extends BPackage.IntentInfo, R extends Ob
             int match;
             if (debug) Slog.v(TAG, "Matching against filter " + filter);
 
-
-
-
-
-
-
-
-            
             if (packageName != null && !isPackageForFilter(packageName, filter)) {
                 if (debug) {
                     Slog.v(TAG, "  Filter is not from package " + packageName + "; skipping");
@@ -606,7 +574,6 @@ public abstract class IntentResolver<F extends BPackage.IntentInfo, R extends Ob
                 continue;
             }
 
-            
             if (!allowFilterResult(filter, dest)) {
                 if (debug) {
                     Slog.v(TAG, "  Filter's target already added");
@@ -652,7 +619,6 @@ public abstract class IntentResolver<F extends BPackage.IntentInfo, R extends Ob
         }
     }
 
-    
     @SuppressWarnings("rawtypes")
     private static final Comparator mResolvePrioritySorter = new Comparator() {
         public int compare(Object o1, Object o2) {
@@ -662,24 +628,17 @@ public abstract class IntentResolver<F extends BPackage.IntentInfo, R extends Ob
         }
     };
 
-    
     private final HashSet<F> mFilters = new HashSet<>();
 
-    
     private final ArrayMap<String, F[]> mTypeToFilter = new ArrayMap<String, F[]>();
 
-    
     private final ArrayMap<String, F[]> mBaseTypeToFilter = new ArrayMap<String, F[]>();
 
-    
     private final ArrayMap<String, F[]> mWildTypeToFilter = new ArrayMap<String, F[]>();
 
-    
     private final ArrayMap<String, F[]> mSchemeToFilter = new ArrayMap<String, F[]>();
 
-    
     private final ArrayMap<String, F[]> mActionToFilter = new ArrayMap<String, F[]>();
 
-    
     private final ArrayMap<String, F[]> mTypedActionToFilter = new ArrayMap<String, F[]>();
 }

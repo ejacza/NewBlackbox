@@ -1,13 +1,11 @@
 package top.niunaijun.blackbox.utils;
 
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-
 
 public class Reflector {
     public static final String LOG_TAG = "Reflector";
@@ -17,7 +15,6 @@ public class Reflector {
     protected Constructor mConstructor;
     protected Field mField;
     protected Method mMethod;
-
 
     public static Reflector on(String name) throws Exception {
         return on(name, true, Reflector.class.getClassLoader());
@@ -122,7 +119,7 @@ public class Reflector {
                 try {
                     return cls.getDeclaredField(name);
                 } catch (NoSuchFieldException ex) {
-                    
+
                 }
             }
             throw e;
@@ -178,7 +175,7 @@ public class Reflector {
                 try {
                     return cls.getDeclaredMethod(name, parameterTypes);
                 } catch (NoSuchMethodException ex) {
-                    
+
                 }
             }
             throw e;
