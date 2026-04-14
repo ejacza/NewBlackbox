@@ -55,6 +55,8 @@ android {
         jniLibs {
             useLegacyPackaging true
         }
+        pickFirst '**/libshadowhook.so'
+        pickFirst '**/libshadowhook_nothing.so'
     }
     kotlinOptions {
         jvmTarget = '21'
