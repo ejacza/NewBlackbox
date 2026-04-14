@@ -51,6 +51,12 @@ android {
     buildFeatures {
         viewBinding true
     }
+    packagingOptions {
+        jniLibs {
+            pickFirst '**/libshadowhook.so'
+            pickFirst '**/libshadowhook_nothing.so'
+        }
+    }
     kotlinOptions {
         jvmTarget = '21'
     }
