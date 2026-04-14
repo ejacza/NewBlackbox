@@ -48,6 +48,7 @@ LOCAL_ARM_MODE := arm
 LOCAL_CPP_FEATURES := exceptions
 LOCAL_STATIC_LIBRARIES := xdl shadowhook
 LOCAL_LDLIBS := -llog -landroid -lz
+LOCAL_LDFLAGS += -L$(NDK_GRADLE_INJECTED_IMPORT_PATH)/shadowhook/libs/$(TARGET_ARCH_ABI) -l:libshadowhook.a
 include $(BUILD_SHARED_LIBRARY)
 
 $(call import-module,prefab/shadowhook)
