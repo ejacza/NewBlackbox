@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#3F3F3F</color>
-    <color name="primary_dark">#3F3F3F</color>
-    <color name="primary_light">#3F3F3F</color>
-    <color name="accent">#ffffff</color>
-    <color name="primary_text">#212121</color>
-    <color name="secondary_text">#757575</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="primary">#008080</color>
+    <color name="primary_container">#004D40</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_primary_container">#B2DFDB</color>
+    
+    <color name="secondary">#00CED1</color>
+    <color name="secondary_container">#006064</color>
+    <color name="on_secondary">#000000</color>
+    <color name="on_secondary_container">#B2EBF2</color>
+    
+    <color name="tertiary">#4DB6AC</color>
+    <color name="tertiary_container">#004D40</color>
+    <color name="on_tertiary">#000000</color>
+    <color name="on_tertiary_container">#B2DFDB</color>
+    
+    <color name="background">#000000</color>
+    <color name="on_background">#E0F2F1</color>
+    
+    <color name="surface">#121212</color>
+    <color name="on_surface">#E0F2F1</color>
+    <color name="surface_variant">#1A2421</color>
+    <color name="on_surface_variant">#B2DFDB</color>
+    
+    <color name="outline">#4D615C</color>
+    
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="teal_200">#80CBC4</color>
+    <color name="teal_700">#00796B</color>
 </resources>

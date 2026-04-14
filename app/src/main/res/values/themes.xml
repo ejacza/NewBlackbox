@@ -1,32 +1,38 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    
-    <style name="Theme.BlackBox" parent="Theme.MaterialComponents.Light.NoActionBar">
-        
+    <style name="Theme.BlackBox" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryVariant">@color/primary_dark</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
         
-        <item name="colorSecondary">@color/primary_light</item>
-        <item name="colorSecondaryVariant">@color/primary</item>
-        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
         
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiary_container</item>
+        <item name="colorOnTertiary">@color/on_tertiary</item>
+        <item name="colorOnTertiaryContainer">@color/on_tertiary_container</item>
         
-
-        <item name="actionMenuTextColor">@color/primary_text</item>
-
-        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorOnBackground">@color/on_background</item>
+        
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+        
+        <item name="colorOutline">@color/outline</item>
+        
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:navigationBarColor">@color/background</item>
+        <item name="android:windowBackground">@color/background</item>
     </style>
 
-    <style name="ToolBarColorStyle" parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="actionMenuTextColor">@color/white</item>
-        <item name="colorControlNormal">@color/white</item>
-
-        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
-    </style>
-
-    <style name="WelcomeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="WelcomeTheme" parent="Theme.BlackBox">
         <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
-
 </resources>
