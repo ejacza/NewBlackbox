@@ -15,6 +15,7 @@
 #include <Hook/RuntimeHook.h>
 #include "Utils/HexDump.h"
 #include "hidden_api.h"
+#include <shadowhook.h>
 
 struct {
     JavaVM *vm;
@@ -170,6 +171,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
     if (vm->GetEnv(reinterpret_cast<void **>(&env), JNI_VERSION_1_6) != JNI_OK) {
         return JNI_EVERSION;
     }
+    shadowhook_init(SHADOWHOOK_MODE_UNIQUE, false);
     registerMethod(env);
     return JNI_VERSION_1_6;
 }

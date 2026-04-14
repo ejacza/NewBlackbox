@@ -3,7 +3,7 @@
 #include "./xdl.h"
 #include <android/log.h>
 #include <dlfcn.h>
-#include "Dobby/dobby.h"
+#include <shadowhook.h>
 
 
 #define LOG_TAG "VirtualSpoof"
@@ -59,10 +59,10 @@ void install_property_get_hook() {
     void* handle = xdl_open("libc.so", XDL_DEFAULT);
     void* target = xdl_dsym(handle, "__system_property_get", nullptr);
     if (target) {
-        if (DobbyHook(target, (void*)my_system_property_get, (void**)&orig_system_property_get) == 0) {
+        if (shadowhook_hook_func_addr(target, (void*)my_system_property_get, (void**)&orig_system_property_get) != nullptr) {
             LOGD("Spoof installed successfully");
         } else {
-            LOGD("Spoof hook failed");
+            LOGD("Spoof hook failed: %d", shadowhook_get_errno());
         }
         xdl_close(handle);
     } else{
