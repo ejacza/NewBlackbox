@@ -46,8 +46,7 @@ LOCAL_LDFLAGS += -Wl,--gc-sections,--strip-all,-z,max-page-size=16384
 LOCAL_ARM_MODE := arm
 
 LOCAL_CPP_FEATURES := exceptions
-LOCAL_STATIC_LIBRARIES := xdl
-LOCAL_SHARED_LIBRARIES := shadowhook
+LOCAL_STATIC_LIBRARIES := xdl shadowhook
 LOCAL_LDLIBS := -llog -landroid -lz
 include $(BUILD_SHARED_LIBRARY)
 
