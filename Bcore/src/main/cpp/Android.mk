@@ -50,4 +50,4 @@ LOCAL_WHOLE_STATIC_LIBRARIES := xdl shadowhook
 LOCAL_LDLIBS := -llog -landroid -lz
 include $(BUILD_SHARED_LIBRARY)
 
-$(call import-module,prefab/shadowhook)
+$(call import-module,shadowhook)
