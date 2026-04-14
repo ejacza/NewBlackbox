@@ -44,6 +44,12 @@ jobs:
           RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
         run: ./gradlew assembleRelease
 
+      - name: Debug Library Locations
+        if: always()
+        run: |
+          find Bcore/build -name "*.a" -o -name "*.so"
+          find /home/runner/.gradle/caches -name "*.a" -o -name "*.so" | grep shadowhook || true
+
       - name: Find APK paths
         id: apk_paths
         run: |
