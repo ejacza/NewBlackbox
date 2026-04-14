@@ -29,4 +29,7 @@
     <color name="white">#FFFFFF</color>
     <color name="teal_200">#80CBC4</color>
     <color name="teal_700">#00796B</color>
+
+    <color name="primary_text">@color/on_background</color>
+    <color name="secondary_text">@color/on_surface_variant</color>
 </resources>
