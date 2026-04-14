@@ -622,6 +622,18 @@ public class BPackageManagerService extends IBPackageManagerService.Stub impleme
         }
     }
 
+    @Override
+    public String getInjectPath(String packageName, int userId) {
+        synchronized (mPackages) {
+            BPackageSettings ps = mPackages.get(packageName);
+            if (ps != null) {
+                BPackageUserState state = ps.readUserState(userId);
+                return state.injectPath;
+            }
+            return null;
+        }
+    }
+
     private InstallResult installPackageAsUserLocked(String file, InstallOption option, int userId) {
         long l = System.currentTimeMillis();
         InstallResult result = new InstallResult();

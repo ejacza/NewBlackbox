@@ -647,6 +647,15 @@ public class BPackageManager extends BlackManager<IBPackageManagerService> {
         }
     }
 
+    public String getInjectPath(String packageName, int userId) {
+        try {
+            return getService().getInjectPath(packageName, userId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private void crash(Throwable e) {
         e.printStackTrace();
     }

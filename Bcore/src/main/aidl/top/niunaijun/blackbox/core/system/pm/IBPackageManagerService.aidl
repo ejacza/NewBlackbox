@@ -47,4 +47,5 @@ interface IBPackageManagerService {
     String[] getPackagesForUid(int uid, int userId);
 
     void setInjectPath(String packageName, String injectPath, int userId);
+    String getInjectPath(String packageName, int userId);
 }
