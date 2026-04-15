@@ -1108,13 +1108,18 @@ public class BActivityThread extends IBActivityThread.Stub {
             try {
                 File injectFile = new File(mAppConfig.injectPath);
                 if (injectFile.exists()) {
-                    Slog.d(TAG, "Injecting library: " + mAppConfig.injectPath);
-                    System.load(mAppConfig.injectPath);
+                    if (injectFile.canRead()) {
+                        Slog.d(TAG, "Injecting library: " + mAppConfig.injectPath + " (size: " + injectFile.length() + ")");
+                        System.load(mAppConfig.injectPath);
+                        Slog.d(TAG, "Successfully injected library: " + mAppConfig.injectPath);
+                    } else {
+                        Slog.e(TAG, "Inject library file not readable: " + mAppConfig.injectPath);
+                    }
                 } else {
-                    Slog.e(TAG, "Inject library not found: " + mAppConfig.injectPath);
+                    Slog.e(TAG, "Inject library not found: " + mAppConfig.injectPath + " (Package: " + packageName + ", Process: " + processName + ")");
                 }
             } catch (Throwable e) {
-                Slog.e(TAG, "Failed to inject library: " + mAppConfig.injectPath, e);
+                Slog.e(TAG, "Failed to inject library: " + mAppConfig.injectPath + " (Error: " + e.getMessage() + ")", e);
             }
         }
         for (AppLifecycleCallback appLifecycleCallback : BlackBoxCore.get().getAppLifecycleCallbacks()) {

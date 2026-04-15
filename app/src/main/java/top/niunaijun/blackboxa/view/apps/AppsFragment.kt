@@ -57,7 +57,7 @@ class AppsFragment : Fragment() {
             currentPackageName?.let { packageName ->
                 try {
                     val inputStream = requireContext().getContentResolver().openInputStream(it)
-                    val injectDir = File(requireContext().filesProject, "inject")
+                    val injectDir = File(requireContext().filesDir, "inject")
                     if (!injectDir.exists()) {
                         injectDir.mkdirs()
                     }
@@ -66,6 +66,7 @@ class AppsFragment : Fragment() {
                     inputStream?.use { input ->
                         outputStream.use { output ->
                             input.copyTo(output)
+                            output.flush()
                         }
                     }
                     BPackageManager.get().setInjectPath(packageName, destFile.absolutePath, userID)
@@ -77,9 +78,6 @@ class AppsFragment : Fragment() {
             }
         }
     }
-
-    private val Context.filesProject: File
-        get() = this.getExternalFilesDir(null) ?: this.filesDir
 
     companion object {
         private const val TAG = "AppsFragment"
