@@ -51,6 +51,7 @@ class AppsFragment : Fragment() {
     private var popupMenu: PopupMenu? = null
 
     private var currentPackageName: String? = null
+    private var currentAppName: String? = null
 
     private val pickLibraryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
@@ -70,7 +71,7 @@ class AppsFragment : Fragment() {
                         }
                     }
                     BPackageManager.get().setInjectPath(packageName, destFile.absolutePath, userID)
-                    requireContext().toast("Injected library for $packageName")
+                    requireContext().toast("Inject library ${currentAppName ?: packageName}")
                 } catch (e: Exception) {
                     Log.e(TAG, "Error injecting library: ${e.message}")
                     requireContext().toast("Failed to inject library")
@@ -384,6 +385,7 @@ class AppsFragment : Fragment() {
 
                                     R.id.app_inject_lib -> {
                                         currentPackageName = data.packageName
+                                        currentAppName = data.name
                                         pickLibraryLauncher.launch("*/*")
                                     }
                                 }
